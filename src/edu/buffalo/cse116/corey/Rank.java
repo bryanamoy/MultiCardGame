@@ -1,4 +1,4 @@
-package edu.buffalo.cse116
+package edu.buffalo.cse116;
 
 public enum Rank {
     ACE(1), TWO(2), THREE(3), FOUR(4), 
@@ -6,7 +6,7 @@ public enum Rank {
     NINE(9), TEN(10), JACK(11), QUEEN(12),
     KING(13);  
   
-    private final int rank;
+    private int rank;
  
     Rank(int rank) {
       this.rank = rank;

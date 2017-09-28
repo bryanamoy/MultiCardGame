@@ -4,7 +4,7 @@ public enum Suite {
     CLUBS(1), DIAMONDS(2),
     HEARTS(3), SPADES(4);
 
-    private final int suite;
+    private int suite;
 
     Suite(int suite) {
       this.suite = suite;
