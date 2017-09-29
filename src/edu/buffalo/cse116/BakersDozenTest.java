@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class BakersDozenTest {
-	// Tests for Tableau
 	BakersDozen test = new BakersDozen();
 	@Test // Making sure tableau piles holds 4 cards
 	public void testTableauPiles() {
@@ -44,6 +43,7 @@ public class BakersDozenTest {
 	public void testRemoveFromTableau() {
 		boolean removeTest = test.removalIllegal();
 		test.remove();
+		boolean removeTest2 = test.remove();
 		int sizeCheck = test.getTableauSize();
 		assertFalse("Should be an illegal removal but returned" + removeTest,removeTest);
 		assertTrue("Should be an legal removal but returned" + removeTest2,removeTest2);
