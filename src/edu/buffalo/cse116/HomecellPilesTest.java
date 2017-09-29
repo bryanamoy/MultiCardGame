@@ -2,6 +2,8 @@ package edu.buffalo.cse116;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class HomecellPilesTest {
@@ -11,7 +13,7 @@ public class HomecellPilesTest {
  */
 	@Test
 	public void freecellInitial() {
-		ArrayList<Homecell> homecell = freecell.getHomecell();
+		ArrayList<HomecellPiles> homecell = Freecell.getHomecell();
 		assertEquals(0, getHomecell.size());
 //	Homecell intialsetupFC = new Homecell.intial();
 //	assertEquals(0, intialsetupFC.size());
@@ -22,7 +24,7 @@ public class HomecellPilesTest {
 	 */
 	@Test 
 	public void bakersdozenIntial(){
-		ArrayList<Homecell> homecell = bakersdozen.getHomecell();
+		ArrayList<HomecellPiles> homecell = BakersDozen.getHomecell();
 		assertEquals(0, getHomecell.size());
 //		Homecell intialsetupBD = new Homecell.intial();
 //		assertEquals(0, intialsetupBD, 0.1);
@@ -35,13 +37,13 @@ public class HomecellPilesTest {
 	 */
 	@Test
 	public void homecelladdFC(){
-		Homecell homecell = freecell.getHomecell().get(0);
+		HomecellPiles homecell = Freecell.getHomecell().get(0);
 		Card first = new Card("Diamond", 1);
 		Card second = new Card("Spade", 8);
 		homecell.add(first);
 		homecell.add(second);
-		assertTrue("legal", homecell.add(first, homecell));
-		assertFalse("illegal", homecell.add(second, homecell));
+		assertTrue("legal", homecell.canAdd(first, homecell));
+		assertFalse("illegal", homecell.canAdd(second, homecell));
 	}
 	/*
 	 * This Test case checks if adding to an empty homecell pile in baker's dozen is legal.  If the homecell pile is 
@@ -50,13 +52,13 @@ public class HomecellPilesTest {
 	 */
 	@Test 
 	public void homecelladdBD(){
-		Homecell homecell = bakersdozen.getHomecell().get(0);
+		HomecellPiles homecell = BakersDozen.getHomecell().get(0);
 		Card first = new Card("Diamond", 1);
 		Card second = new Card("Spade", 8);
 		homecell.add(first);
 		homecell.add(second);
-		assertTrue("legal", homecell.add(first, bakersdozen));
-		assertFalse("illegal", homecell.add(second, bakersdozen));
+		assertTrue("legal", homecell.canAdd(first, bakersdozen));
+		assertFalse("illegal", homecell.canAdd(second, bakersdozen));
 	}
 	/*
 	 * This test case checks if removing a card from the homecell pile in freecell is legal.
@@ -64,7 +66,7 @@ public class HomecellPilesTest {
 	 */
 	@Test
 	public void homecellremoveFC{
-		Homecell homecell = freecell.getHomecell().get(1);
+		HomecellPiles homecell = Freecell.getHomecell().get(1);
 		assertFalse("illegal", homecell.remove(homecell));
 		
 	}
@@ -74,7 +76,7 @@ public class HomecellPilesTest {
 	 */
 	@Test
 	public void homecellremoveBD{
-		Homecell homecell = bakersdozen.getHomecell().get(1);
+		HomecellPiles homecell = BakersDozen.getHomecell().get(1);
 		assertFalse("illegal", homecell.remove(homecell));
 }
 	/*
@@ -84,7 +86,7 @@ public class HomecellPilesTest {
 	 */
 	@Test
 	public void homecelltopFC{
-		Homecell homecell = freecell.getHomecell().get(2);
+		HomecellPiles homecell = Freecell.getHomecell().get(2);
 		Card first = new Card("Diamond", 1);
 		Card second = new Card("Diamond", 2);
 		homecell.add(first);
@@ -102,7 +104,7 @@ public class HomecellPilesTest {
 	 */
 	@Test
 	public void homecelltopBD{
-		Homecell homecell = bakersdozen.getHomecell().get(2);
+		HomecellPiles homecell = BakersDozen.getHomecell().get(2);
 		Card first = new Card("Diamond", 1);
 		Card second = new Card("Diamond", 2);
 		homecell.add(first);
