@@ -1,16 +1,16 @@
 package edu.buffalo.cse116;
 
-public enum Suite {
+public enum Suit {
     CLUBS(1), DIAMONDS(2),
-    HEARTS(3), SPADES(4);
+    SPADES(3) HEARTS(4);
 
-    private int suite;
+    private int suit;
 
-    Suite(int suite) {
-      this.suite = suite;
+    Suite(int suit) {
+      this.suit = suit;
     }
 
-    public int getSuite() {
-      return suite;
+    public int getSuit() {
+      return suit;
     }
   }

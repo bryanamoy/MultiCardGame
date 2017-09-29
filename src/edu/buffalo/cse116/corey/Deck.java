@@ -14,7 +14,7 @@ import java.util.ArrayList;
 */
 public abstract class Deck {
     private Card card;
-    private Suite suite;
+    private suit suit;
     private Rank rank;
 
     private ArrayList<Card> deck;
@@ -22,9 +22,9 @@ public abstract class Deck {
     //The Deck() constructor takes an arrayList an already defined and makes a deck.
     public Deck() {
         this.deck = new ArrayList<Card>();
-        for(Suite suite : suite.values()) {
+        for(suit suit : suit.values()) {
             for(Rank rank : rank.values()) {
-                card = new Card(suite, rank); //{@code} This part is interesting. s.values() loops through s. s.values()[i]. It
+                card = new Card(suit, rank); //{@code} This part is interesting. s.values() loops through s. s.values()[i]. It
                 this.deck.add(card); 
             }
         }
