@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class BakersDozenTest {
+	// Tests for Tableau
 	BakersDozen test = new BakersDozen();
 	@Test // Making sure tableau piles holds 4 cards
 	public void testTableauPiles() {
