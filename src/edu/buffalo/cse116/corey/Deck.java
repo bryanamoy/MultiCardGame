@@ -19,7 +19,7 @@ public abstract class Deck {
 
     private ArrayList<Card> deck;
     
-    //The Deck() constructor takes an arrayList an already defined and makes a deck.
+    //The Deck() constructor takes an arrayList an already defined and makes a deck. HashMap boi
     public Deck() {
         this.deck = new ArrayList<Card>();
         for(suit suit : suit.values()) {
