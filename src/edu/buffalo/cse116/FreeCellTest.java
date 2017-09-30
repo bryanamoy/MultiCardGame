@@ -3,6 +3,7 @@ package edu.buffalo.cse116;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import java.util.ArrayList;
 
 public class FreeCellTest {
 
@@ -50,5 +51,57 @@ public class FreeCellTest {
  			assertEquals("Number of cards should be decreased by 1",sizeCheck,3);
  		}
 
+ 		/* (Bryan's code)
+ 		 * This Test case checks the initial homecell pile in freecell.  The initial size of the 
+ 		 * homecell pile should equal to zero..
+ 		 */
+ 			@Test
+ 			public void freecellInitial() {
+ 				ArrayList<HomecellPiles> homecell = Freecell.getHomecell();
+ 				assertEquals(0, getHomecell.size());
 	
+ 				/*
+ 				 * This Test case checks if adding to an empty homecell pile in freecell is legal when the
+ 				 * pile is empty.  The card should only be able to be added when the pile is empty if the card is an ace.
+ 				 * If the card is not an ace and the pile is empty, then it should be illegal.
+ 				 */
+ 				@Test
+ 				public void homecelladdFC(){
+ 					HomecellPiles homecell = Freecell.getHomecell().get(0);
+ 					Card first = new Card("Diamond", 1);
+ 					Card second = new Card("Spade", 8);
+ 					homecell.add(first);
+ 					homecell.add(second);
+ 					assertTrue("legal", homecell.canAdd(first, homecell));
+ 					assertFalse("illegal", homecell.canAdd(second, homecell));
+ 				}
+ 				/*
+ 				 * This test case checks if removing a card from the homecell pile in freecell is legal.
+ 				 * In freecell you cannot remove a card from the homecell pile, so it is illegal.
+ 				 */
+ 				@Test
+ 				public void homecellremoveFC{
+ 					HomecellPiles homecell = Freecell.getHomecell().get(1);
+ 					assertFalse("illegal", homecell.remove(homecell));
+ 					
+ 				}
+ 				/*
+ 				 * This test case checks the function of adding cards on top of each other in freecell game.  The card added to the pile
+ 				 * will be the new top card.  Essentially, the card top card number ranking should be equivalent to the 
+ 				 * number of elements in the pile (size()).
+ 				 */
+ 				@Test
+ 				public void homecelltopFC{
+ 					HomecellPiles homecell = Freecell.getHomecell().get(2);
+ 					Card first = new Card("Diamond", 1);
+ 					Card second = new Card("Diamond", 2);
+ 					homecell.add(first);
+ 					assertEquals("new top card", homecell.top(), first);
+ 					assertEquals("size of pile", homecell.size(), 1);
+ 					homecell.add(second);
+ 					assertEquals("new top card", homecell.top(), second);
+ 					assertEquals("size of pile", homecell.size(), 2);
+ 					
+ 				}
+ 				
 	}
