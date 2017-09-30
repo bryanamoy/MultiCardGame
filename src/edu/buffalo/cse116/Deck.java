@@ -35,7 +35,10 @@ public abstract class Deck {
     }
 
     abstract void initialSetup();
+
     abstract void removeCard();
+
+
     abstract void addACard();
 
 }
