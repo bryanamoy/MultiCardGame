@@ -42,6 +42,7 @@ public class BakersDozenTest {
 	@Test // If removing card is legal or illegal and decreases number of cards in tableau pile
 	public void testRemoveFromTableau() {
 		boolean removeTest = test.removalIllegal();
+		test.remove();
 		boolean removeTest2 = test.remove();
 		int sizeCheck = test.getTableauSize();
 		assertFalse("Should be an illegal removal but returned" + removeTest,removeTest);
