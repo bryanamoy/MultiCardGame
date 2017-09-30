@@ -13,11 +13,25 @@ public class Card {
  * Make it so that can get and set both instances for suite and rank.
  */
 
-  private Suit suit;
-  private Rank rank;
+    private Suit suit;
+    private Rank rank;
 
-  public Card(Suit suit, Rank rank) {
-    this.suit = suit;
-    this.rank = rank;
-  }
+    public Card(Suit suit, Rank rank) {
+        this.suit = suit;
+        this.rank = rank;
+    }
+
+
+    public Suit getSuit() {
+        return this.suit;
+    }
+
+    public Rank getRank() {
+        return this.rank;
+    }
+
+    public void changeValue(Card card) {
+//        this.suit.setSuit();
+//        this.rank.setRank();        
+    } 
 }

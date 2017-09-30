@@ -21,7 +21,6 @@ public class Freecell extends Deck {
     }
     public ArrayList<Card> getDeck() {
         return super.getDeck();
-      
     }
 
     
