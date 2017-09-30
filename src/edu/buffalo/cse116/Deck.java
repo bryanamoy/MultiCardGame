@@ -14,7 +14,7 @@ import java.util.ArrayList;
 */
 public abstract class Deck {
     private Card card;
-    private suit suit;
+    private Suit suit;
     private Rank rank;
 
     private ArrayList<Card> deck;
@@ -22,10 +22,11 @@ public abstract class Deck {
     //The Deck() constructor takes an arrayList an already defined and makes a deck. HashMap boi
     public Deck() {
         this.deck = new ArrayList<Card>();
-        for(suit suit : suit.values()) {
+        for(Suit suit : suit.values()) {
             for(Rank rank : rank.values()) {
                 card = new Card(suit, rank); //{@code} This part is interesting. s.values() loops through s. s.values()[i]. It
-                this.deck.add(card); 
+                this.deck.add(card);
+                System.out.println("The suit is " + suit.getSuit() + " and rank is " + rank.getRank()); 
             }
         }
     }
@@ -34,12 +35,16 @@ public abstract class Deck {
         Collections.shuffle(deck);       
     }
 
-    abstract void initialSetup();
+    public ArrayList<Card> getDeck() {
+        return deck;
+    }
 
-    abstract void removeCard();
+    public abstract void initialSetup();
+
+    public abstract void removeCard();
 
 
-    abstract void addACard();
+    public abstract void addCard();
 
 }
 
