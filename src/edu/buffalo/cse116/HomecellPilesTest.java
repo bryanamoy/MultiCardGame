@@ -9,7 +9,7 @@ import org.junit.Test;
 public class HomecellPilesTest {
 /*
  * This Test case checks the initial homecell pile in freecell.  The initial size of the 
- * homecell pile should equal to zero.
+ * homecell pile should equal to zero..
  */
 	@Test
 	public void freecellInitial() {
