@@ -29,9 +29,4 @@ public class Card {
     public Rank getRank() {
         return this.rank;
     }
-
-    public void changeValue(Card card) {
-//        this.suit.setSuit();
-//        this.rank.setRank();        
-    } 
 }

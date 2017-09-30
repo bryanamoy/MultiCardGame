@@ -13,29 +13,46 @@ import java.util.ArrayList;
 * @since   2017-09-29
 */
 public abstract class Deck {
+
     protected Card card;
+
+    protected int tableauPiles;
+    protected int homecellPiles;       
+    protected int freecellPiles;
 
     private ArrayList<Card> deck;
     
     //The Deck() constructor takes an arrayList an already defined and makes a deck. HashMap boi
-    public Deck() {
+    public Deck(int tabbleauPiles, int homecellPiles, int freecellPiles) {
+        this.tableauPiles = tableauPiles;
+        this.homecellPiles = homecellPiles;
+        this.freecellPiles = freecellPiles;
         this.deck = new ArrayList<Card>();
-        for(Suit suit : card.getSuit().values()) {
-            for(Rank rank : card.getRank().values()) {
+
+        for(Suit suit : Suit.values()) {
+            for(Rank rank : Rank.values()) {
                 card = new Card(suit, rank); //{@code} This part is interesting. s.values() loops through s. s.values()[i]. It
                 this.deck.add(card);
-                System.out.println("The suit is " + suit + " and rank is " + rank); 
+                System.out.println("The cards that are in this deck are " + rank + " of " + suit); 
+                shuffleDeck(deck); 
+                System.out.println("The shuffled deck is now ordered like this: " + rank + " of " + suit); 
             }
         }
     }
 
-    void shuffleDeck(ArrayList<Card> deck) { 
+    protected void shuffleDeck(ArrayList<Card> deck) { 
         Collections.shuffle(deck);       
     }
 
     public ArrayList<Card> getDeck() {
         return deck;
     }
+
+    protected int getTableauPiles() {
+        return tableauPiles;
+    }
+
+
 
     protected abstract void initialSetup();
 
