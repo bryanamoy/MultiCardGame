@@ -22,40 +22,49 @@ public class Freecell extends Deck {
         return super.getDeck();
     }
 
-    protected int getTableauPiles() {
+    public int getTableauPiles() {
         return super.getTableauPiles();
+    }
+
+    public int getHomecellPiles() {
+        return super.getHomecellPiles();
+    }
+
+    public int getFreecellPiles() {
+        return getFreecellPiles();
     }
 
 
     //get private piles from the super class. Then according to each pile deal the cards by calling getDeck onto a deck arrayList and dealing them out.
     public void initialSetup() {
-        ArrayList<Card> deck = new ArrayList<Card>(getDeck());
-        ArrayList<Card> freecell_deck = new ArrayList<Card>();
+        final ArrayList<Card> deck = new ArrayList<Card>(getDeck());   //The normal 52 deck
+        final ArrayList<Card> freecell_deck = new ArrayList<Card>();   //The arraylist to fill
+
+        tableauPiles_List = new HashMap<Integer, ArrayList<Card>>();       
+        freecellPiles_List =  new HashMap<Integer, ArrayList<Card>>();
+        homecellPiles_List = new HashMap<Integer, ArrayList<Card>>();
+
+        int trade = 0;
         int pile = 1;
-        tableauPiles_List = new HashMap<Integer, ArrayList<Card>>();      
-        
-        while(pile <= getTableauPiles()){
+        while(pile <= getTableauPiles() && pile <= getHomecellPiles() && pile <= getFreecellPiles()) {  
             for(int cardNum = 0; cardNum < 12; cardNum++) {
-                if(pile <=  getTableauPiles() / 2) {                    
-                    freecell_deck.add(deck.get(cardNum)); 
-                    if(freecell_deck.size() ==  7) {    
-                        tableauPiles_List.put(pile,freecell_deck);
-                        System.out.println("The first 4 tab piles will have 7 cards " + pile + " " + freecell_deck);                    
-                    }   
-                } 
-                else if(pile > getTableauPiles() &&  cardNum > 6) {
+                if(pile <=  (getTableauPiles() / 2) && cardNum <= 6) {                    
+                    freecell_deck.add(deck.get(trade)); 
+                    deck.remove(trade);
+                } else {
+                    tableauPiles_List.put(pile, freecell_deck);
+                }
+                if(cardNum > 6 && pile > (getTableauPiles() / 2)) { 
                     freecell_deck.add(deck.get(cardNum));  
+                    deck.remove(trade);
+                } else {
+                    tableauPiles_List.put(pile, freecell_deck);
                 }
             }
+            homecellPiles_List.put(pile, deck);
+            freecellPiles_List.put(pile, deck);
             pile++;
-        }
-
-        homecellPiles_List = new HashMap<Integer, ArrayList<Card>>();
-        freecellPiles_List =  new HashMap<Integer, ArrayList<Card>>();
-
-//        for(int numOfPile = 1; numOfPile <= tableauPiles; numOfPile++) {
-//           tableauPiles_List.put(numOfPile, getDeck());
-//        }
+        }   
     }
 
     public void removeCard() {

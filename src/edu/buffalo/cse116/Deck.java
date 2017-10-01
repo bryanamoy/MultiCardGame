@@ -34,16 +34,16 @@ public abstract class Deck {
                 card = new Card(suit, rank); //{@code} This part is interesting. s.values() loops through s. s.values()[i]. It
                 this.deck.add(card);
                 System.out.println("The cards that are in this deck are " + rank + " of " + suit); 
-                shuffleDeck(deck); 
-                System.out.println("The shuffled deck is now ordered like this: " + rank + " of " + suit); 
             }
         }
+
+        shuffleDeck(deck); 
     }
 
-    protected void shuffleDeck(ArrayList<Card> deck) { 
+    public void shuffleDeck(ArrayList<Card> deck) { 
         Collections.shuffle(deck);       
     }
-
+ 
     public ArrayList<Card> getDeck() {
         return deck;
     }
@@ -52,7 +52,13 @@ public abstract class Deck {
         return tableauPiles;
     }
 
+    protected int getHomecellPiles() {
+        return homecellPiles;
+    }
 
+    protected int getFreecellPiles() {
+        return freecellPiles;
+    }
 
     protected abstract void initialSetup();
 
