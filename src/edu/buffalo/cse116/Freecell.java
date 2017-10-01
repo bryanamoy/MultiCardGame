@@ -1,8 +1,7 @@
 package edu.buffalo.cse116;
 
-import java.util.Collections;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.ArrayList;
 
 public class Freecell extends Deck {
     //Check to see if duplicating cards. Make a proccess to stop adding an already existing card or repeated deletion of the same card.
@@ -42,8 +41,7 @@ public class Freecell extends Deck {
     }
 
     //Change this so that the pilesList can be called from Main class.
-    public void initialSetup(HashMap<Integer,ArrayList<Card>> tableauMap, HashMap<Integer,ArrayList<Card>> homecellMap, 
-        HashMap<Integer,ArrayList<Card>> freecellMap ) {
+    public void initialSetup() {
         while(initial) {
             deck = new ArrayList<Card>(getDeck()); //Result is that deck is empty 
             freecell_deck = new ArrayList<Card>(); //Result is that all of the cards in all piles are in this deck       
@@ -54,9 +52,8 @@ public class Freecell extends Deck {
 
             int trade = 0;
             int pile = 1;
-
             while(pile <= getTableauPiles() && pile <= getHomecellPiles() && pile <= getFreecellPiles()) {  
-                for(int cardNum = 0; cardNum < 12; cardNum++) {
+                for(int cardNum = 0; cardNum < 13; cardNum++) {
                     if(pile <=  (getTableauPiles() / 2) && cardNum <= 6) {                    
                         freecell_deck.add(deck.get(trade)); 
                         deck.remove(trade);
@@ -70,64 +67,82 @@ public class Freecell extends Deck {
                         this.tableauMap.put(pile, freecell_deck);
                     }
                 }
-                homecellMap.put(pile, deck);
-                freecellMap.put(pile, deck);
+                this.homecellMap.put(pile, deck);
+                this.freecellMap.put(pile, deck);
                 pile++;
-            }
-            tableauMap = this.tableauMap;   
-            freecellMap = this.freecellMap;
-            homecellMap = this.homecellMap;
+            }       
         }
         initial = false;
     }
 
-    public void removeCard(HashMap<Integer, ArrayList<Card>> pilesMap, int pileNumber) { 
-        int indexOfTopCard;
-       
-        if(pilesMap == this.tableauMap) {
+    //HashMap pile number, cards within each pile
+    //pile number -> the pile # does not change
+    //ArrayList cards
+    
+    public boolean removeCard(String whichPile, int whichNumber) { 
+        int indexOfTopCard; 
+        String stringToCompare = "tableau";
+        boolean compare = stringToCompare.equalsIgnoreCase(whichPile);
+        if(compare == true) { 
             for(Integer key : this.tableauMap.keySet()) {
-                if(pileNumber == key) {
-                    deck = new ArrayList<Card>(this.tableauMap.get(key));                 //Holy fuck is this some HARD thinking
+                if(whichNumber == key) {
+                    deck = new ArrayList<Card>(this.tableauMap.get(key));					
                     if(deck.size() > 0) {
                         indexOfTopCard = deck.size() - 1;
                         deck.remove(indexOfTopCard);                                        //If put doesnt work use this
                         this.tableauMap.put(key, deck);                                     //this.tableauMap.replace(key,this.tableauMap.get(key), deck);
                         deck.clear();
-                        break;               
+                        return true;
                     }                      
                     else {
                         System.out.println("Can't remove anymore cards!");
+                        return false;
                     }
                 }
             }
         }
-        else if(pilesMap == homecellMap) {
-            System.out.println("Cards cannot be removed from a homecell Pile!");    
+        
+       stringToCompare = "homecell";
+       compare = stringToCompare.equalsIgnoreCase(whichPile);
+       if(compare == true) {
+            System.out.println("Cards cannot be removed from a homecell Pile!");
+            return false;
         }
-                
-        else if(pilesMap == freecellMap) {
-           //Any card within the homecellpile can be removed!   
+       stringToCompare = "homecell";
+       compare = stringToCompare.equalsIgnoreCase(whichPile);                
+        if(compare = true) {   
             for(Integer key : this.freecellMap.keySet()) {
-                if(pileNumber == key) {              
+                if(whichNumber == key) {              
                     deck = new ArrayList<Card>(this.freecellMap.get(key));                 
                     if(deck.size() > 0) {
                         indexOfTopCard = deck.size() - 1;    
                         deck.remove(indexOfTopCard);                                        
                         this.freecellMap.put(key, deck);                                     
                         deck.clear();
-                        break;
+                        return true;
                     }                                        
                     else {
                         System.out.println("Can't remove anymore cards!");
+                        return false;
                    }
                 }                                        
             }   
-        }        
+        }
+        return false;
     }
+    
 
-    public void addCard(HashMap<Integer, ArrayList<Card>> pilesMap, int pileNumber) {
+    public boolean addCard(String whichPile, int whichNumber) {
         //A card can be added to a tableau pile when its value is one less than the tableau's top card AND its suit is the opposite of the top card's suit.
         //The added card becomes the tableau's new top card. ANY card CAN be added to an empty tableau.
-       // if()    
+        String stringToCompare = "tableau";
+        boolean compare = stringToCompare.equalsIgnoreCase(whichPile);
+        if(compare == true) {
+        	return compare;
+        }
+		return compare;
+    	
     }
 }
+
+//
