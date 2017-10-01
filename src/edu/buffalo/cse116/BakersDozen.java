@@ -103,8 +103,6 @@ public class BakersDozen extends Deck{
 			// If card is the top...
 			if(c.equals(top)){
 					tableauPiles_List.get(Pile).remove(top);
-					Card replace = tableauPiles_List.get(Pile).get(1);
-					tableauPiles_List.get(Pile).set(0, replace);
 			}
 			else{
 				return false;
@@ -125,7 +123,7 @@ public class BakersDozen extends Deck{
 	protected boolean addCard(Card add,int Pile) {
 		// TODO Auto-generated method stub
 			Rank check = add.getRank();
-			ArrayList<Card> top = tableauPiles_List.get(Pile);
+			ArrayList<Card> top = new ArrayList<Card>(tableauPiles_List.get(Pile));
 			
 			if(tableauPiles_List.get(Pile).size() == 0){
 				return false;
