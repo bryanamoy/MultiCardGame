@@ -3,7 +3,7 @@ package edu.buffalo.cse116;
 import java.util.Iterator;
 import java.util.Collections;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 /**
 * <h1>Deck class</h1> 
 * Defines Deck class which has 52 Card instances.
@@ -60,73 +60,14 @@ public abstract class Deck {
         return freecellPiles;
     }
 
-    protected abstract void initialSetup();
+    protected abstract void initialSetup(HashMap<Integer,ArrayList<Card>> tableauMap, HashMap<Integer,ArrayList<Card>> homecellMap,
+        HashMap<Integer,ArrayList<Card>> freecellMap );
 
-    protected abstract void removeCard();
+    protected abstract void removeCard(HashMap<Integer, ArrayList<Card>> pilesMap, int pileNumber);
 
     protected abstract void addCard();
 
 }
-
-
-
-/**
-
-
-public static void main(String[] args) {
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-  private int homecell_piles;
-  private int tableau_piles;    
-  private int freecell_piles;
-
-    
-  public Deck(int tableau_piles, int homecell_piles, int freecell_piles) {
-    this.tableau_piles = tableau_piles;
-    this.homecell_piles = homecell_piles;
-    this.freecell_piles = freecell_piles;
-  }  
-  
-  public int getTableauPiles() {
-    return this.tableau_piles;
-  }
-
-  public int getHomecellPiles() {
-    return this.homecell_piles;
-  }
-  public int getFreecellPiles() {
-  public int getFreecellPiles() {
-    return this.freecell_piles;
-    return this.freecell_piles;
-
-
- **/ 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
