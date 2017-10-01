@@ -75,6 +75,20 @@ public class BakersDozenTest {
 		
 	}
 	@Test
+	public void testRemoveFromTableau(){
+	
+		BakersDozen cards = new BakersDozen();
+		HashMap<Integer,ArrayList<Card>> t = new HashMap<Integer,ArrayList<Card>>();
+		testCards.add(spades);
+		testCards.add(ace);
+		t.put(0, testCards);
+		cards.setTableauPiles_List(t);
+		boolean legal = cards.removeCard(spades, 0);
+		assertTrue(legal);
+		assertEquals(cards.getTableauPiles_List().get(0).size(),1);
+	}
+	
+	@Test
 	public void testHomecellPiles(){
 		test.initialSetup();
 		for(Integer i:test.getHomecellPiles_List().keySet()){
