@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BakersDozen extends Deck{
-	int sizeOfTableau;
-	private HashMap<Integer, ArrayList<Card>> tableauPiles_List;
+    int sizeOfTableau; // Number of tableau piles
+    private HashMap<Integer, ArrayList<Card>> tableauPiles_List;
     private HashMap<Integer, ArrayList<Card>> homecellPiles_List;
     private HashMap<Integer, ArrayList<Card>> freecellPiles_List;
     
@@ -47,30 +47,36 @@ public class BakersDozen extends Deck{
 		tableauPiles_List = new HashMap<Integer,ArrayList<Card>>();
 		ArrayList<Card> deck = new ArrayList<Card>(getDeck());
 		shuffleDeck(deck);
-		// Makes arraylist of cards 
+		// Make a king rank for comparison later
 		Rank king = Rank.KING;
-	   int cursor = 52;
+		// Cursor for later
+	   	int cursor = 52;
 		// Runs through 13 times for 13 piles
 		for(int i =0;i<13;i++){
-	
+				// Condition to allow 4 cards in each pile
 				if(cursor % 4 == 0 ){
-						ArrayList<Card> cards = new ArrayList<Card>( deck.subList(cursor-4, cursor));
-						tableauPiles_List.put(i, cards);
+					// Make arraylist instance of 4 cards each time
+					ArrayList<Card> cards = new ArrayList<Card>( deck.subList(cursor-4, cursor));
+					// Put in tableau piles
+					tableauPiles_List.put(i, cards);
 					}
-					cursor-=4;
-					sizeOfTableau++;
+				
+				cursor-=4;
+				sizeOfTableau++;
 		}
-		
+		// Function to put king card at the end of each pile
 		for(Integer i: tableauPiles_List.keySet()){
 			ArrayList<Card> Pile = tableauPiles_List.get(i);
+			
 			for(int x =0;x<4;x++){
+				// Switches king card at the end of each pile
 				if(Pile.get(x).getRank() == king){
 					Card replace = tableauPiles_List.get(i).get(x);
 					tableauPiles_List.get(i).set(3, replace);
 				}
 			}
 		}
-		
+		// Defines the homecell piles with 4 empty arraylists
 		homecellPiles_List = new HashMap<Integer, ArrayList<Card>>();
 		for(int h =0;h<4;h++){
 			ArrayList<Card> put = new ArrayList<Card>();
