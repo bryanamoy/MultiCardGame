@@ -36,10 +36,10 @@ public class BakersDozenTest {
 		test2.put(2, testCards);
 		Card check = new Card(Suit.HEARTS,Rank.FIVE);
 		test.setTableauPiles_List(test2);
-		
+		int sizeCheck = test.getTableauPiles_List().get(2).size();
 		boolean illegal = test.addCard(check,2);
  		assertFalse("Should be false but was true, check that move is illegal,",illegal);
-		//assertEquals("Size of tableau should be the same",sizeCheck,4);
+		assertEquals("Size of tableau should be the same",sizeCheck,1); 
 	}
 	
 	@Test // If adding card is legal or illegal and increases number of cards in tableau pile
@@ -58,8 +58,6 @@ public class BakersDozenTest {
 	@Test // If adding card is legal or illegal and increases number of cards in tableau pile
 	public void testAdditionToEmptyTableau() {
 		test.initialSetup();
-//		HashMap<Integer,ArrayList<Card>> empty = new HashMap<Integer, ArrayList<Card>>();
-//		ArrayList<Card> cards = new ArrayList<Card>();
 		test.resetTableau();
 		boolean illegal = test.addCard(spades,0);
  		assertFalse("Returned " + illegal + " when it should be false",illegal);
