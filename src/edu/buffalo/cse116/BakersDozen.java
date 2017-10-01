@@ -40,7 +40,13 @@ public class BakersDozen extends Deck{
 	public void setFreecellPiles_List(HashMap<Integer, ArrayList<Card>> freecellPiles_List) {
 		this.freecellPiles_List = freecellPiles_List;
 	}
-
+	/*
+	Initial setup
+	When the game begins each tableau pile should be dealt 4 cards. After dealing is completed, 
+	any Kings should be moved to the bottom of their tableau.
+	When the game begins each homecell pile should be empty.
+	*/
+	
 	@Override
 	protected void initialSetup() {
 		//Creates deck with getDeck method
@@ -85,11 +91,16 @@ public class BakersDozen extends Deck{
 	
 	}
 
-	
-
+	/*
+	Removing a Card
+	Only the card which is currently at the top of the tableau pile can be removed. 
+	Once a card is removed, the card following it in the pile becomes the top card and can be removed.
+	*/
 	@Override
 	protected boolean removeCard(Card c,int Pile) {
+		// Get the top of the pile given
 		Card top = tableauPiles_List.get(Pile).get(0);
+			// If card is the top...
 			if(c.equals(top)){
 					tableauPiles_List.get(Pile).remove(top);
 					Card replace = tableauPiles_List.get(Pile).get(1);
@@ -101,8 +112,15 @@ public class BakersDozen extends Deck{
 				
 		return true;
 	}
-		
-
+	
+	/*	
+	Adding a Card
+	A card can be added to a tableau pile when its value is one less than the tableau's top card (
+	suits do not matter for this). For example, it is legal to move a Queen onto a King, 
+	a 6 onto a 7, or an Ace onto a 2, but illegal to move a 4 onto a 6 or a Jack onto a 10. 
+	The added card becomes the tableau's new top card. Cards cannot be added to an empty tableau.
+	*/
+	
 	@Override
 	protected boolean addCard(Card add,int Pile) {
 		// TODO Auto-generated method stub
@@ -121,8 +139,12 @@ public class BakersDozen extends Deck{
 			}
 		}
 	
-	
-	
+	/*
+	Adding a Card
+	A card can be added to a homecell pile if it has the identical suit and a value one more than the homecell's top card. 
+	For example, the Queen of Spades can only be added to a homecell with the Jack of Spades as its top card. 
+	The added card becomes the homecell's new top card. Only the Aces can be added to an empty homecell.
+	*/
 	
 	public boolean addToHomecell(Card card, int Pile){
 		ArrayList<Card> this_card = new ArrayList<Card>();
