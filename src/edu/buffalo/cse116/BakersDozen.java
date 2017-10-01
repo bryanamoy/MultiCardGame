@@ -179,6 +179,28 @@ public class BakersDozen extends Deck{
 		return sizeOfTableau;
 	}
 	
+	public int getHomecellPileSize(int Pile){
+		int size = 0;
+		for(int x =0;x<4;x++){
+			if(x == Pile){
+				size =getHomecellPiles_List().get(x).size();
+			}
+		}
+		return size;
+		
+	}
+	
+	public int getTableauPileSize(int Pile){
+		int size = 0;
+		for(int x =0;x<13;x++){
+			if(x == Pile){
+				size = getTableauPiles_List().get(x).size();
+			}
+		}
+		return size;
+		
+	}
+	
 	public void resetTableau(){
 		for(Integer i : tableauPiles_List.keySet()){
 			for(int x =0;x<tableauPiles_List.get(i).size();x++){
