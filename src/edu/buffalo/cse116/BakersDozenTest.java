@@ -36,7 +36,7 @@ public class BakersDozenTest {
 		test2.put(2, testCards);
 		Card check = new Card(Suit.HEARTS,Rank.FIVE);
 		test.setTableauPiles_List(test2);
-		int sizeCheck = test.getTableauPiles_List().get(2).size();
+		int sizeCheck = test.getTableauPileSize(2);
 		boolean illegal = test.addCard(check,2);
  		assertFalse("Should be false but was true, check that move is illegal,",illegal);
 		assertEquals("Size of tableau should be the same",sizeCheck,1); 
@@ -82,8 +82,9 @@ public class BakersDozenTest {
 		t.put(0, testCards);
 		cards.setTableauPiles_List(t);
 		boolean legal = cards.removeCard(spades, 0);
+		int sizeCheck = cards.getTableauPileSize(0);
 		assertTrue(legal);
-		assertEquals(cards.getTableauPiles_List().get(0).size(),1);
+		assertEquals(sizeCheck,1);
 	}
 	
 	@Test
@@ -109,7 +110,7 @@ public class BakersDozenTest {
 		Card second = new Card(Suit.SPADES,Rank.EIGHT);
 		boolean legal = test.addToHomecell(first,2);
 		boolean illegal = test.addToHomecell(second,2);
-		int sizeofPile = test.getHomecellPiles_List().get(2).size();
+		int sizeofPile = test.getHomecellPileSize(2);
 		assertTrue("legal", legal);
 		assertFalse("illegal",illegal);
 		assertEquals("Should be 1 but returned" +sizeofPile ,sizeofPile,1);
