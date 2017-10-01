@@ -36,12 +36,13 @@ public abstract class Deck {
                 System.out.println("The cards that are in this deck are " + rank + " of " + suit); 
             }
         }
-
         shuffleDeck(deck); 
     }
 
     public void shuffleDeck(ArrayList<Card> deck) { 
-        Collections.shuffle(deck);       
+        for(int trueRandom = 0; trueRandom < 5; trueRandom++) {
+            Collections.shuffle(deck);       
+        }
     }
  
     public ArrayList<Card> getDeck() {
@@ -65,7 +66,7 @@ public abstract class Deck {
 
     protected abstract void removeCard(HashMap<Integer, ArrayList<Card>> pilesMap, int pileNumber);
 
-    protected abstract void addCard();
+    protected abstract void addCard(HashMap<Integer, ArrayList<Card>> pilesMap, int pileNumber);
 
 }
 
