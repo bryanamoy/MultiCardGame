@@ -119,7 +119,7 @@ public class Freecell extends Deck {
 			System.out.println("Cards cannot be removed from a homecell Pile!");
 			return false;
 		}
-		stringToCompare = "homecell";
+		stringToCompare = "freecell";
 		compare = stringToCompare.equalsIgnoreCase(whichPile);                
 		if(compare = true) {   
 			for(Integer key : this.freecellMap.keySet()) {
