@@ -148,7 +148,7 @@ public class Freecell extends Deck {
         deck = new ArrayList<Card>();
         int rank = card.getRank().getRank();
         int suit = card.getSuit().getSuit();
-        
+   /**     
         int pile = 1;
         int size = this.tableauMap.get(pile).size() - 1;
         while(pile != getTableauPiles()) {
@@ -162,7 +162,7 @@ public class Freecell extends Deck {
             }
             pile++;
         }
-
+**/
         String stringToCompare = "tableau";
 		boolean compare = stringToCompare.equalsIgnoreCase(whichPile);
 		if(compare == true) {
@@ -184,7 +184,7 @@ public class Freecell extends Deck {
 //        top card. For example, the Queen of Spades can only be added to a homecell with the Jack of Spades as its top card. 
 //        The added card becomes the homecell's new top card. Only the Aces can be added to an empty homecell.
 
-        pile = 1;
+       /** pile = 1;
         size = this.homecellMap.get(pile).size() - 1;
         while(pile != getHomecellPiles()) {
             for(int i =0; i <= size; i++) {
@@ -197,7 +197,7 @@ public class Freecell extends Deck {
             }
             pile++;
         }
-
+**/
         stringToCompare = "homecell";
         compare = stringToCompare.equalsIgnoreCase(whichPile);
         if(compare == true) {
@@ -218,7 +218,7 @@ public class Freecell extends Deck {
             }
         }
 
-        pile = 1;
+   /**     pile = 1;
         size = this.freecellMap.get(pile).size() - 1;
         while(pile != getFreecellPiles()) {
             for(int i =0; i <= size; i++) {
@@ -231,7 +231,7 @@ public class Freecell extends Deck {
             }
             pile++;
         }
-
+**/
         stringToCompare = "freecell";
         compare = stringToCompare.equalsIgnoreCase(whichPile);
         //Any card can be added to an EMPTY freecell pile. A card cannot be added to a freecell pile that already has a card.
