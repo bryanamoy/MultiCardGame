@@ -7,16 +7,16 @@ import java.util.List;
 
 public class BakersDozen extends Deck{
     int sizeOfTableau; // Number of tableau piles
-    private HashMap<Integer, ArrayList<Card>> tableauPiles_List;
-    private HashMap<Integer, ArrayList<Card>> homecellPiles_List;
-    private HashMap<Integer, ArrayList<Card>> freecellPiles_List;
+    private HashMap<Integer, ArrayList<Card>> tableauPiles_List;	// Storage for tableau piles
+    private HashMap<Integer, ArrayList<Card>> homecellPiles_List;	// Storage for homecell piles
+    private HashMap<Integer, ArrayList<Card>> freecellPiles_List;	// Storage for freecell piles (Never used)
     
     private ArrayList<Card> deck;
     
     
 	public BakersDozen() {
 		super(13, 4, 0);
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	// Getters and Setters
@@ -43,52 +43,50 @@ public class BakersDozen extends Deck{
 	public void setFreecellPiles_List(HashMap<Integer, ArrayList<Card>> freecellPiles_List) {
 		this.freecellPiles_List = freecellPiles_List;
 	}
-	/*
-	Initial setup
-	When the game begins each tableau pile should be dealt 4 cards. After dealing is completed, 
-	any Kings should be moved to the bottom of their tableau.
-	When the game begins each homecell pile should be empty.
-	*/
 	
-
+	/**
+	 * Initial setup: When the game begins each tableau pile should 
+	 * be dealt 4 cards and each homecell piles should be empty. 
+	 * After dealing is completed, any Kings should 
+	 * be moved to the bottom of their tableau. 
+	 * 
+	 */
 	protected void initialSetup() {
-		//Creates deck with getDeck method
+		
 		tableauPiles_List = new HashMap<Integer,ArrayList<Card>>();
 		ArrayList<Card> deck = new ArrayList<Card>(getDeck());
 	
 		shuffleDeck(deck);
-		
-		// Make a king rank for comparison later
 		Rank king = Rank.KING;
-		// Cursor for later
+		
 	   	int cursor = 52;
-		// Runs through 13 times for 13 piles
+		
 		for(int i =0;i<13;i++){
-				// Condition to allow 4 cards in each pile
+				
 				if(cursor % 4 == 0 ){
-					// Make arraylist instance of 4 cards each time
+					
 					ArrayList<Card> cards = new ArrayList<Card>( deck.subList(cursor-4, cursor));
-					// Put in tableau piles
+					
 					tableauPiles_List.put(i, cards);
 					}
 				
 				cursor-=4;
 				sizeOfTableau++;
 		}
-		// Function to put king card at the end of each pile
+		
 		for(Integer i: tableauPiles_List.keySet()){
 			ArrayList<Card> Pile = tableauPiles_List.get(i);
 		
 			for(int x =0;x<4;x++){
-				// Switches king card at the end of each pile
+				
 				if(Pile.get(x).getRank() == king){
 					Card replace = tableauPiles_List.get(i).get(x);
 					tableauPiles_List.get(i).set(3, replace);
-				//	System.out.println(tableauPiles_List.get(0));
+				
 				}
 			}
 		}
-		// Defines the homecell piles with 4 empty arraylists
+		
 		homecellPiles_List = new HashMap<Integer, ArrayList<Card>>();
 		for(int h =0;h<4;h++){
 			ArrayList<Card> put = new ArrayList<Card>();
@@ -97,13 +95,14 @@ public class BakersDozen extends Deck{
 	
 	}
 
-	/*
-	Removing a Card
-	Only the card which is currently at the top of the tableau pile can be removed. 
-	Once a card is removed, the card following it in the pile becomes the top card and can be removed.
-	*/
-	
-	//Add a string to check for which pile
+	/**
+	 * This method is used for tableau piles. The card that is currently at the top of the tableau pile can be removed. 
+	 * Once a card is removed, the card following it in the pile becomes the top card and can be removed.
+	 * 
+	 * @param c	Represents a card that the user wants to remove
+	 * @param Pile	Represents the pile that user wants to remove from
+	 * @return		If the user was able to remove card, returns true, if not false.
+	 */
 	protected boolean removeCard(Card c, int Pile) {
 		int sizeofPile = tableauPiles_List.get(Pile).size() - 1;
 		Card top = tableauPiles_List.get(Pile).get(sizeofPile);
@@ -118,17 +117,17 @@ public class BakersDozen extends Deck{
 
 	}
 	
-	/*	
-	Adding a Card
-	A card can be added to a tableau pile when its value is one less than the tableau's top card (
-	suits do not matter for this). For example, it is legal to move a Queen onto a King, 
-	a 6 onto a 7, or an Ace onto a 2, but illegal to move a 4 onto a 6 or a Jack onto a 10. 
-	The added card becomes the tableau's new top card. Cards cannot be added to an empty tableau.
-	*/
-	
-	
+	/**
+	 * A card can be added to a tableau pile when its value is one less than 
+	 * the tableau's top card (suits do not matter). However, can't add card if
+	 * tableau pile is empty.
+	 * 
+	 * @param add	Represents the card that the user wants to add
+	 * @param Pile	Represents the pile that the user wants to add the card to
+	 * @return		Returns true if card was added, if not return false.
+	 */
 	protected boolean addCard(Card add, int Pile) {
-		// TODO Auto-generated method stub
+		
 		Rank check = add.getRank();
 		ArrayList<Card> PileCards = new ArrayList<Card>(tableauPiles_List.get(Pile));
 		int sizeofPile = PileCards.size();
@@ -144,18 +143,20 @@ public class BakersDozen extends Deck{
 		}
 	}
 	
-	/*
-	Adding a Card
-	A card can be added to a homecell pile if it has the identical suit and a value one more than the homecell's top card. 
-	For example, the Queen of Spades can only be added to a homecell with the Jack of Spades as its top card. 
-	The added card becomes the homecell's new top card. Only the Aces can be added to an empty homecell.
-	*/
-	
+	/**
+	 * A card can be added to a homecell pile if it has the identical suit 
+	 * and a value one more than the homecell's top card. Only Aces can be 
+	 * added to a empty homecell pile
+	 * 
+	 * @param card	Represents the card that the user wants to add to a homecell pile
+	 * @param Pile	Represents the homecell pile that the user wants to add to
+	 * @return		Returns true if a card is added, if not returns false
+	 */
 	public boolean addToHomecell(Card card, int Pile) {
 		ArrayList<Card> this_card = new ArrayList<Card>();
 		int sizeofPile = getHomecellPiles_List().get(Pile).size();
 		Card top;
-		// Work on this
+
 		int i = 0;
 		if (homecellPiles_List.get(Pile).size() == 0 && card.getRank() == Rank.ACE) {
 			this_card.add(card);
@@ -180,17 +181,23 @@ public class BakersDozen extends Deck{
 		return false;
 
 	}
-	
+	/**
+	 * @return	 If user tries to remove from Homecell, this method returns false.
+	 */
 	public boolean removeFromHomecell(){
 		
 		return false;
 	}
-	
+	/**
+	 * @return	Gives back the number of tableau piles
+	 */
 	public int getTableauSize(){
 		
 		return sizeOfTableau;
 	}
-	
+	/**
+	 * 	Used for testing empty tableau files 
+	 */
 	public void resetTableau(){
 		for(Integer i : tableauPiles_List.keySet()){
 			for(int x =0;x<tableauPiles_List.get(i).size();x++){
@@ -200,7 +207,10 @@ public class BakersDozen extends Deck{
 		}
 	}
 	
-	
+	/**
+	 * @param Pile	Represents the pile that user wants to access from homecell
+	 * @return	Returns the number of cards in the given homecell pile
+	 */
 	public int getHomecellPileSize(int Pile){
 		int size = 0;
 		for(int x =0;x<4;x++){
@@ -211,7 +221,10 @@ public class BakersDozen extends Deck{
 		return size;
 		
 	}
-	
+	/**
+	 * @param Pile	Represents the pile that user wants to access from tableau
+	 * @return	Returns the number of cards in the given tableau pile
+	 */
 	public int getTableauPileSize(int Pile){
 		int size = 0;
 		for(int x =0;x<13;x++){
