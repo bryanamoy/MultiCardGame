@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Freecell extends Deck {
-	//Check to see if duplicating cards. Make a proccess to stop adding an already existing card or repeated deletion of the same card.
+	//Check to see if duplicating cards. Make a process to stop adding an already existing card or repeated deletion of the same card.
 	//If you delete a card, where does it go? If you add a card where does it go?
 	//Idea to solve both problems: Make freecell_deck track what cards get added and removed!
 	private HashMap<Integer, ArrayList<Card>> tableauMap;
@@ -96,7 +96,7 @@ public class Freecell extends Deck {
 		if(compare == true) { 
 			for(Integer key : this.tableauMap.keySet()) {
 				if(whichNumber == key) {
-					deck = new ArrayList<Card>(this.tableauMap.get(key));					
+					deck = new ArrayList<Card>();					
 					if(deck.size() > 0) {
 						indexOfTopCard = deck.size() - 1;
 						deck.remove(indexOfTopCard);                                        //If put doesnt work use this
@@ -123,7 +123,7 @@ public class Freecell extends Deck {
 		if(compare = true) {   
 			for(Integer key : this.freecellMap.keySet()) {
 				if(whichNumber == key) {              
-					deck = new ArrayList<Card>(this.freecellMap.get(key));                 
+					deck = new ArrayList<Card>();                 
 					if(deck.size() > 0) {
 						indexOfTopCard = deck.size() - 1;    
 						deck.remove(indexOfTopCard);                                        
@@ -148,7 +148,7 @@ public class Freecell extends Deck {
         deck = new ArrayList<Card>();
         int rank = card.getRank().getRank();
         int suit = card.getSuit().getSuit();
-   /**     
+        
         int pile = 1;
         int size = this.tableauMap.get(pile).size() - 1;
         while(pile != getTableauPiles()) {
@@ -162,7 +162,7 @@ public class Freecell extends Deck {
             }
             pile++;
         }
-**/
+
         String stringToCompare = "tableau";
 		boolean compare = stringToCompare.equalsIgnoreCase(whichPile);
 		if(compare == true) {
@@ -184,7 +184,7 @@ public class Freecell extends Deck {
 //        top card. For example, the Queen of Spades can only be added to a homecell with the Jack of Spades as its top card. 
 //        The added card becomes the homecell's new top card. Only the Aces can be added to an empty homecell.
 
-       /** pile = 1;
+        pile = 1;
         size = this.homecellMap.get(pile).size() - 1;
         while(pile != getHomecellPiles()) {
             for(int i =0; i <= size; i++) {
@@ -197,7 +197,7 @@ public class Freecell extends Deck {
             }
             pile++;
         }
-**/
+
         stringToCompare = "homecell";
         compare = stringToCompare.equalsIgnoreCase(whichPile);
         if(compare == true) {
@@ -218,7 +218,7 @@ public class Freecell extends Deck {
             }
         }
 
-   /**     pile = 1;
+        pile = 1;
         size = this.freecellMap.get(pile).size() - 1;
         while(pile != getFreecellPiles()) {
             for(int i =0; i <= size; i++) {
@@ -231,7 +231,7 @@ public class Freecell extends Deck {
             }
             pile++;
         }
-**/
+
         stringToCompare = "freecell";
         compare = stringToCompare.equalsIgnoreCase(whichPile);
         //Any card can be added to an EMPTY freecell pile. A card cannot be added to a freecell pile that already has a card.
@@ -250,26 +250,5 @@ public class Freecell extends Deck {
         return false;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
