@@ -41,9 +41,8 @@ public class Freecell extends Deck {
         return super.getFreecellPiles();
     }
 
-    //Change this so that the pilesList can be called from Main class.
-    public void initialSetup(HashMap<Integer,ArrayList<Card>> tableauMap, HashMap<Integer,ArrayList<Card>> homecellMap, 
-        HashMap<Integer,ArrayList<Card>> freecellMap ) {
+    //Change this so that a main class can use this
+    public void initialSetup() {
         while(initial) {
             deck = new ArrayList<Card>(getDeck()); //Result is that deck is empty 
             freecell_deck = new ArrayList<Card>(); //Result is that all of the cards in all piles are in this deck       
@@ -81,7 +80,7 @@ public class Freecell extends Deck {
         initial = false;
     }
 
-    public void removeCard(HashMap<Integer, ArrayList<Card>> pilesMap, int pileNumber) { 
+    public void removeCard(Card card) { 
         int indexOfTopCard;
        
         if(pilesMap == this.tableauMap) {
