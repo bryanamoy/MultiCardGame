@@ -29,4 +29,9 @@ public class Card {
     public Rank getRank() {
         return this.rank;
     }
+     @Override
+    	public String toString() {
+    		// TODO Auto-generated method stub
+    		return getSuit() + " of " + getRank();
+    	}
 }
