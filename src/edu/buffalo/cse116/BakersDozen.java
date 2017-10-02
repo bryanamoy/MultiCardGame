@@ -11,6 +11,9 @@ public class BakersDozen extends Deck{
     private HashMap<Integer, ArrayList<Card>> homecellPiles_List;
     private HashMap<Integer, ArrayList<Card>> freecellPiles_List;
     
+    private ArrayList<Card> deck;
+    
+    
 	public BakersDozen() {
 		super(13, 4, 0);
 		// TODO Auto-generated constructor stub
@@ -47,12 +50,14 @@ public class BakersDozen extends Deck{
 	When the game begins each homecell pile should be empty.
 	*/
 	
-	@Override
+
 	protected void initialSetup() {
 		//Creates deck with getDeck method
 		tableauPiles_List = new HashMap<Integer,ArrayList<Card>>();
 		ArrayList<Card> deck = new ArrayList<Card>(getDeck());
+	
 		shuffleDeck(deck);
+		
 		// Make a king rank for comparison later
 		Rank king = Rank.KING;
 		// Cursor for later
@@ -73,12 +78,13 @@ public class BakersDozen extends Deck{
 		// Function to put king card at the end of each pile
 		for(Integer i: tableauPiles_List.keySet()){
 			ArrayList<Card> Pile = tableauPiles_List.get(i);
-			
+		
 			for(int x =0;x<4;x++){
 				// Switches king card at the end of each pile
 				if(Pile.get(x).getRank() == king){
 					Card replace = tableauPiles_List.get(i).get(x);
 					tableauPiles_List.get(i).set(3, replace);
+				//	System.out.println(tableauPiles_List.get(0));
 				}
 			}
 		}
@@ -96,20 +102,19 @@ public class BakersDozen extends Deck{
 	Only the card which is currently at the top of the tableau pile can be removed. 
 	Once a card is removed, the card following it in the pile becomes the top card and can be removed.
 	*/
-	@Override
-	protected boolean removeCard(Card c,int Pile) {
-		// Get the top of the pile given
-		Card top = tableauPiles_List.get(Pile).get(0);
-			// If card is the top...
-			if(c.equals(top)){
-					tableauPiles_List.get(Pile).remove(top);
-			}
-			else{
-				return false;
-			}
-				
-		return true;
-	}
+	
+	//Add a string to check for which pile
+	protected boolean removeCard(int pile) {
+		if(tableauPiles_List.get(pile).size() > 0) {
+			int top = tableauPiles_List.get(pile).size() - 1;
+			Card topCard = tableauPiles_List.get(pile).get(top);
+					tableauPiles_List.get(pile).remove(topCard);
+					return true;
+		}
+		System.out.println("Cant remove anymore cards!");
+		return false;
+		
+}
 	
 	/*	
 	Adding a Card
@@ -119,11 +124,11 @@ public class BakersDozen extends Deck{
 	The added card becomes the tableau's new top card. Cards cannot be added to an empty tableau.
 	*/
 	
-	@Override
+	
 	protected boolean addCard(Card add,int Pile) {
 		// TODO Auto-generated method stub
 			Rank check = add.getRank();
-			ArrayList<Card> top = new ArrayList<Card>(tableauPiles_List.get(Pile));
+			ArrayList<Card> top = tableauPiles_List.get(Pile);
 			
 			if(tableauPiles_List.get(Pile).size() == 0){
 				return false;
@@ -179,28 +184,6 @@ public class BakersDozen extends Deck{
 		return sizeOfTableau;
 	}
 	
-	public int getHomecellPileSize(int Pile){
-		int size = 0;
-		for(int x =0;x<4;x++){
-			if(x == Pile){
-				size =getHomecellPiles_List().get(x).size();
-			}
-		}
-		return size;
-		
-	}
-	
-	public int getTableauPileSize(int Pile){
-		int size = 0;
-		for(int x =0;x<13;x++){
-			if(x == Pile){
-				size = getTableauPiles_List().get(x).size();
-			}
-		}
-		return size;
-		
-	}
-	
 	public void resetTableau(){
 		for(Integer i : tableauPiles_List.keySet()){
 			for(int x =0;x<tableauPiles_List.get(i).size();x++){
@@ -208,6 +191,25 @@ public class BakersDozen extends Deck{
 					
 			}
 		}
+	}
+
+	@Override
+	protected void initialSetup(HashMap<Integer, ArrayList<Card>> tableauMap,
+			HashMap<Integer, ArrayList<Card>> homecellMap, HashMap<Integer, ArrayList<Card>> freecellMap) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void removeCard(HashMap<Integer, ArrayList<Card>> pilesMap, int pileNumber) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void addCard(HashMap<Integer, ArrayList<Card>> pilesMap, int pileNumber) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
