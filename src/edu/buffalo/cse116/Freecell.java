@@ -150,18 +150,18 @@ public class Freecell extends Deck {
         int suit = card.getSuit().getSuit();
         
         int pile = 1;
-        int size = this.tableauMap.get(pile).size() - 1;
-        while(pile != getTableauPiles()) {
-            for(int i =0; i <= size; i++) {
-                if(pile <= getTableauPiles()) {
-                    if(this.tableauMap.get(pile).get(i).equals(card)) {
-                        System.out.println("Cant add a card that is already in the pile!");
-                        return false;
-                    }
-                }        
-            }
-            pile++;
-        }
+        int size = this.tableauMap.get(pile).size() -1 ;
+//        while(pile != getTableauPiles()) {
+//            for(int i =0; i <= size; i++) {
+//                if(pile <= getTableauPiles()) {
+//                    if(this.tableauMap.get(pile).get(i).equals(card)) {
+//                        System.out.println("Cant add a card that is already in the pile!");
+//                        return false;
+//                    }
+//                }        
+//            }
+//            pile++;
+//        }
 
         String stringToCompare = "tableau";
 		boolean compare = stringToCompare.equalsIgnoreCase(whichPile);
@@ -186,17 +186,17 @@ public class Freecell extends Deck {
 
         pile = 1;
         size = this.homecellMap.get(pile).size() - 1;
-        while(pile != getHomecellPiles()) {
-            for(int i =0; i <= size; i++) {
-                if(pile <= getHomecellPiles()) {
-                    if(this.homecellMap.get(pile).get(i).equals(card)) {
-                        System.out.println("Cant add a card that is already in the pile!");
-                        return false;
-                    }
-                }
-            }
-            pile++;
-        }
+//        while(pile != getHomecellPiles()) {
+//            for(int i =0; i <= size; i++) {
+//                if(pile <= getHomecellPiles()) {
+//                    if(this.homecellMap.get(pile).get(i).equals(card)) {
+//                        System.out.println("Cant add a card that is already in the pile!");
+//                        return false;
+//                    }
+//                }
+//            }
+//            pile++;
+//        }
 
         stringToCompare = "homecell";
         compare = stringToCompare.equalsIgnoreCase(whichPile);
@@ -220,17 +220,17 @@ public class Freecell extends Deck {
 
         pile = 1;
         size = this.freecellMap.get(pile).size() - 1;
-        while(pile != getFreecellPiles()) {
-            for(int i =0; i <= size; i++) {
-                if(pile <= getFreecellPiles()) {
-                    if(this.freecellMap.get(pile).get(i).equals(card)) {
-                        System.out.println("Cant add a card that is already in the pile!");
-                        return false;
-                    }
-                }
-            }
-            pile++;
-        }
+//        while(pile != getFreecellPiles()) {
+//            for(int i =0; i <= size; i++) {
+//                if(pile <= getFreecellPiles()) {
+//                    if(this.freecellMap.get(pile).get(i).equals(card)) {
+//                        System.out.println("Cant add a card that is already in the pile!");
+//                        return false;
+//                    }
+//                }
+//            }
+//            pile++;
+//        }
 
         stringToCompare = "freecell";
         compare = stringToCompare.equalsIgnoreCase(whichPile);
@@ -250,5 +250,3 @@ public class Freecell extends Deck {
         return false;
 	}
 }
-
-
