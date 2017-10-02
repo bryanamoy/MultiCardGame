@@ -192,25 +192,30 @@ public class BakersDozen extends Deck{
 			}
 		}
 	}
-
-	@Override
-	protected void initialSetup(HashMap<Integer, ArrayList<Card>> tableauMap,
-			HashMap<Integer, ArrayList<Card>> homecellMap, HashMap<Integer, ArrayList<Card>> freecellMap) {
-		// TODO Auto-generated method stub
+	
+	
+	public int getHomecellPileSize(int Pile){
+		int size = 0;
+		for(int x =0;x<4;x++){
+			if(x == Pile){
+				size =getHomecellPiles_List().get(x).size();
+			}
+		}
+		return size;
 		
 	}
-
-	@Override
-	protected void removeCard(HashMap<Integer, ArrayList<Card>> pilesMap, int pileNumber) {
-		// TODO Auto-generated method stub
+	
+	public int getTableauPileSize(int Pile){
+		int size = 0;
+		for(int x =0;x<13;x++){
+			if(x == Pile){
+				size = getTableauPiles_List().get(x).size();
+			}
+		}
+		return size;
 		
 	}
-
-	@Override
-	protected void addCard(HashMap<Integer, ArrayList<Card>> pilesMap, int pileNumber) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 
 
