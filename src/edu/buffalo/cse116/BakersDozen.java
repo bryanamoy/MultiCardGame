@@ -104,17 +104,19 @@ public class BakersDozen extends Deck{
 	*/
 	
 	//Add a string to check for which pile
-	protected boolean removeCard(int pile) {
-		if(tableauPiles_List.get(pile).size() > 0) {
-			int top = tableauPiles_List.get(pile).size() - 1;
-			Card topCard = tableauPiles_List.get(pile).get(top);
-					tableauPiles_List.get(pile).remove(topCard);
-					return true;
+	protected boolean removeCard(Card c, int Pile) {
+		int sizeofPile = tableauPiles_List.get(Pile).size() - 1;
+		Card top = tableauPiles_List.get(Pile).get(sizeofPile);
+
+		if (c.equals(top)) {
+			tableauPiles_List.get(Pile).remove(top);
+			return true;
+
+		} else {
+			return false;
 		}
-		System.out.println("Cant remove anymore cards!");
-		return false;
-		
-}
+
+	}
 	
 	/*	
 	Adding a Card
@@ -125,22 +127,22 @@ public class BakersDozen extends Deck{
 	*/
 	
 	
-	protected boolean addCard(Card add,int Pile) {
+	protected boolean addCard(Card add, int Pile) {
 		// TODO Auto-generated method stub
-			Rank check = add.getRank();
-			ArrayList<Card> top = tableauPiles_List.get(Pile);
-			
-			if(tableauPiles_List.get(Pile).size() == 0){
-				return false;
-			}
-			else if(top.get(0).getRank().ordinal() == check.ordinal()+1 ){
-						tableauPiles_List.get(Pile).set(0, add);
-				return true;
-				}
-			else{
-				return false;
-			}
+		Rank check = add.getRank();
+		ArrayList<Card> PileCards = new ArrayList<Card>(tableauPiles_List.get(Pile));
+		int sizeofPile = PileCards.size();
+
+		if (sizeofPile == 0) {
+			return false;
+		} else if (PileCards.get(sizeofPile - 1).getRank().ordinal() == check.ordinal() + 1) {
+
+			tableauPiles_List.get(Pile).add(add);
+			return true;
+		} else {
+			return false;
 		}
+	}
 	
 	/*
 	Adding a Card
@@ -149,31 +151,36 @@ public class BakersDozen extends Deck{
 	The added card becomes the homecell's new top card. Only the Aces can be added to an empty homecell.
 	*/
 	
-	public boolean addToHomecell(Card card, int Pile){
+	public boolean addToHomecell(Card card, int Pile) {
 		ArrayList<Card> this_card = new ArrayList<Card>();
+		int sizeofPile = getHomecellPiles_List().get(Pile).size();
 		Card top;
-		
-		if(card.getRank() == Rank.ACE){
+		// Work on this
+		int i = 0;
+		if (homecellPiles_List.get(Pile).size() == 0 && card.getRank() == Rank.ACE) {
 			this_card.add(card);
-			
-			if(homecellPiles_List.get(Pile).size() ==0){
-					homecellPiles_List.put(Pile, this_card);
+			homecellPiles_List.put(Pile, this_card);
+			return true;
+		}
+
+		else {
+			top = homecellPiles_List.get(Pile).get(sizeofPile - 1);
+			;
+			if (card.getSuit() == top.getSuit() && card.getRank().ordinal() == top.getRank().ordinal() + 1) {
+				while (i < sizeofPile) {
+					this_card.add(homecellPiles_List.get(Pile).get(i));
+					this_card.add(card);
+					i++;
+				}
+				homecellPiles_List.put(Pile, this_card);
 				return true;
 			}
-			
 		}
-		else{
-			top = homecellPiles_List.get(Pile).get(0);
-				if(card.getSuit() == top.getSuit() && card.getRank().ordinal() == top.getRank().ordinal() + 1){
-					homecellPiles_List.get(Pile).set(0, card);
-					return true;
-				}
-		}
-		
-		
+
 		return false;
-		
+
 	}
+	
 	public boolean removeFromHomecell(){
 		
 		return false;
