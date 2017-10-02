@@ -62,38 +62,5 @@ public abstract class Deck {
 
     protected abstract void initialSetup();
 
-    protected abstract boolean removeCard(String whichPile, int whichNumber);
-
-    protected abstract boolean addCard(String whichPile, int whichNumber);
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
