@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import edu.buffalo.cse116.Card;
 import edu.buffalo.cse116.Freecell;
+import edu.buffalo.cse116.Rank;
+import edu.buffalo.cse116.Suit;
 
 import java.util.ArrayList;
 
@@ -44,6 +47,11 @@ public void testRemoveFreecellPile() {
 //	//bullet 7: Adding card to Freecell tableau pile increases its number of cards and results in that card being the tableau pile's new top card
 	@Test // 
 	public void testLegalAdditionToEmptyFreecell() {
+		Freecell fe = new Freecell(8, 4, 4);
+		Card x = new Card(Suit.DIAMONDS, Rank.EIGHT);
+		fe.initialSetup();
+		fe.addCard(x, "tableau", 2);
+			assertEquals("The size of the pile should be 6 when adding a card to the tableau pile", 5,  fe.getTableauMap().get(2).size() - 2);
 
 
 	}
