@@ -103,7 +103,7 @@ public class BakersDozen extends Deck{
 	 * @param Pile	Represents the pile that user wants to remove from
 	 * @return		If the user was able to remove card, returns true, if not false.
 	 */
-	protected boolean removeCard(Card c, int Pile) {
+	public boolean removeCard(Card c, int Pile) {
 		int sizeofPile = tableauPiles_List.get(Pile).size() - 1;
 		Card top = tableauPiles_List.get(Pile).get(sizeofPile);
 
@@ -126,7 +126,7 @@ public class BakersDozen extends Deck{
 	 * @param Pile	Represents the pile that the user wants to add the card to
 	 * @return		Returns true if card was added, if not return false.
 	 */
-	protected boolean addCard(Card add, int Pile) {
+	public boolean addCard(Card add, int Pile) {
 		
 		Rank check = add.getRank();
 		ArrayList<Card> PileCards = new ArrayList<Card>(tableauPiles_List.get(Pile));
