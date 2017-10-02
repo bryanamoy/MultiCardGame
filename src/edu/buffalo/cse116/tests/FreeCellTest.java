@@ -34,25 +34,18 @@ public class FreeCellTest {
 //	
 //	//bullet 5: Freecell tableau pile correctly returns if removing top card is legal or illegal (e.g., if the tableau pile is NOT empty)
 	@Test 
-	public void testLegalAdditionToTableau() {
-		boolean legal = fc.getLegal();
-		int sizeCheck = fc.getTableauPiles();
- 		assertTrue("Should be true but was false,",legal);	
- 		assertEquals("Size of tableau should be increase",sizeCheck,3);
+public void testRemoveFreecellPile() {
+		
+		Freecell fe = new Freecell(8, 4, 4);
+		fe.initialSetup();
+		assertEquals("Doesnt remove if freecell is empty", false, fe.removeCard("Freecell", 3));
 	}
+	
 //	//bullet 7: Adding card to Freecell tableau pile increases its number of cards and results in that card being the tableau pile's new top card
 	@Test // 
 	public void testLegalAdditionToEmptyFreecell() {
 
 
-	}
-	// is this test necessary ?
-	@Test
-	public void testRemoveFreecellPile() {
-		
-		Freecell fe = new Freecell(8, 4, 4);
-		fe.initialSetup();
-		assertEquals("Doesnt remove if freecell is empty", false, fe.removeCard("Freecell", 3));
 	}
 // 	//bullet 9: Removing card from Freecell tableau pile decreases its number of cards and results in following card being the new top card 	
  		@Test
@@ -62,7 +55,7 @@ public class FreeCellTest {
  			fe.removeCard("TAblEaU", 2);
  			fe.removeCard("TAblEaU", 5);
  			
- 			int topCard = fe.getTableauMap().get(2).size() - 1;
+ 	//		int topCard = fe.getTableauMap().get(2).size() - 1;
  			assertEquals("The size of the pile should be 6 when removing a card from a tableau pile", 6,  fe.getTableauMap().get(5).size());
  			assertEquals("The size of the pile should be 5 when removing a card from a tableau pile", 7,  fe.getTableauMap().get(1).size());
  	}
