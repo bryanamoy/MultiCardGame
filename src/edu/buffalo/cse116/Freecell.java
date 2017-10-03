@@ -107,8 +107,9 @@ public class Freecell extends Deck {
 					}
 				}
 			}
+		
 		}
-		deck.clear();
+		
 
 		stringToCompare = "homecell";
         compare = stringToCompare.equalsIgnoreCase(whichPile);
@@ -134,9 +135,10 @@ public class Freecell extends Deck {
 						return false;
 					}
 				}                                        
-			}   
+			} 
+			deck.clear();
 		}
-		deck.clear();
+		
 		return false;
 	}
 
@@ -224,3 +226,4 @@ public class Freecell extends Deck {
         	return false;
 	}
 }
+
