@@ -1,0 +1,112 @@
+package edu.buffalo.cse116;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.junit.Test;
+
+public class TableauPileTest {
+	BakersDozen test = new BakersDozen();
+	Card ace = new Card(Suit.CLUBS, Rank.ACE);
+	Card spades = new Card(Suit.SPADES, Rank.EIGHT);
+	Card clubs = new Card(Suit.CLUBS, Rank.SEVEN);
+	ArrayList<Card> testCards = new ArrayList<Card>();
+	@Test
+	public void testFreeCellPiles(){
+		
+		//tableau pile tests, bullet 1: Tableau piles in Freecell initially hold 6 or 7 cards
+		Freecell fe = new Freecell(8, 4, 4);
+		fe.initialSetup();
+		assertEquals("Should return 6 or 7 cards initially for each tableau pile", 7, fe.getTableauMap().get(3).size());
+		assertEquals("Should return 6 or 7 cards initially for each tableau pile", 6, fe.getTableauMap().get(8).size());	
+	}
+	@Test // Making sure tableau piles holds 4 cards
+	public void testTableauPiles() {
+		BakersDozen test = new BakersDozen();
+		test.initialSetup();
+		for (Integer i : test.getTableauPiles_List().keySet()) {
+			ArrayList<Card> check = new ArrayList<Card>(test.getTableauPiles_List().get(i));
+			int sizeCheck = check.size();
+			assertEquals("Should return 4 cards initially for each tableau pile", sizeCheck, 4);
+		}
+		}
+	@Test
+	public void testTableauCanAdd(){
+		Freecell legal = new Freecell(8,4,4);
+		legal.initialSetup();
+		Card first = new Card(Suit.DIAMONDS, Rank.FIVE);
+		Card second = new Card(Suit.SPADES, Rank.FOUR);
+		legal.addCard(first, "Tableau", 1);
+		legal.addCard(second, "Tableau", 1);
+		assertTrue("Legal Can Add", legal.addCard(second, "Tableau", 1));
+	}
+	@Test // If adding card is legal or illegal and increases number of cards in
+	// tableau pile
+	public void testLegalAdditionToTableau() {
+		BakersDozen test2 = new BakersDozen();
+		ArrayList<Card> testCards = new ArrayList<Card>();
+		HashMap<Integer, ArrayList<Card>> check = new HashMap<Integer, ArrayList<Card>>();
+		Card clubs = new Card(Suit.CLUBS, Rank.SEVEN);
+		testCards.add(spades);
+		check.put(3, testCards);
+		test2.setTableauPiles_List(check);	
+		boolean legal = test2.addCard(clubs, 3);
+		int sizeCheck = test2.getTableauPileSize(3);
+		assertTrue("Should be true but was " + legal, legal);
+		assertEquals("Size of tableau pile should be 2", sizeCheck, 2);
+		assertEquals("Top card should be clubs", test2.getTableauPiles_List().get(3).get(sizeCheck - 1), clubs);
+
+}
+	//bullet 5: Freecell tableau pile correctly returns if removing top card is legal or illegal (e.g., if the tableau pile is NOT empty)
+		@Test 
+	public void testRemoveTableauPileinFC() {
+			Freecell fe = new Freecell(8, 4, 4);
+			fe.initialSetup();
+			assertEquals("Doesnt remove if freecell is empty", true, fe.removeCard("tableau", 3));
+		}
+
+		@Test // If removing card is legal or illegal and decreases number of cards
+		// in tableau pile
+public void testIllegalRemoveFromTableau() {
+	test.initialSetup();
+	boolean removeTest = test.removeCard(spades, 7);
+	assertFalse("Should be an illegal removal but returned" + removeTest, removeTest);
+}
+
+@Test
+public void testRemoveFromTableau() {
+
+	BakersDozen cards = new BakersDozen();
+	HashMap<Integer, ArrayList<Card>> t = new HashMap<Integer, ArrayList<Card>>();
+	testCards.add(spades);
+	testCards.add(ace);
+	t.put(0, testCards);
+	cards.setTableauPiles_List(t);
+	boolean legal = cards.removeCard(ace, 0);
+	int sizeCheck = cards.getTableauPileSize(0);
+	Card cardCheck = cards.getTableauPiles_List().get(0).get(0);
+	assertTrue("Returned " + legal, legal);
+	assertEquals(sizeCheck, 1);
+	assertEquals(cardCheck, spades);
+}
+//bullet 7: Adding card to Freecell tableau pile increases its number of cards and results in that card being the tableau pile's new top card
+	@Test // 
+	public void testSizeofTableauFC() {
+		Freecell fe = new Freecell(8, 4, 4);
+		Card givenCard = new Card(Suit.DIAMONDS, Rank.SEVEN);
+		
+		fe.initialSetup();
+		fe.getTableauMap().get(4).clear();
+	
+		Card topCard = new Card(Suit.CLUBS, Rank.EIGHT);
+		ArrayList<Card> testTop = new ArrayList<Card>();
+		
+		testTop.add(topCard);
+		fe.getTableauMap().put(4, testTop);
+		
+		fe.addCard(givenCard, "tableau", 4);
+		assertEquals("Adding card to Freecell tableau pile increases its number of cards and results in that card being the tableau pile's new top card", 2, fe.getTableauMap().get(4).size());
+}
+}
