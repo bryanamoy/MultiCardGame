@@ -8,8 +8,8 @@ import java.util.ArrayList;
 * Is an enum representing the values of
 * 
 * <p>
-* <b>Note:</b> This is to be the Freecell Game class
-*
+* <b>Note:</b> This is to be the Freecell Game class. It extends
+* the deck class.
 *
 * @author  Corey Almonte (With some input from John)
 * @version 4.5
@@ -57,35 +57,49 @@ public class Freecell extends Deck {
 	private ArrayList<Card> deck;   
 
 
-	/**
-     *Make the freecell constructor get take the private fields and set them equal
-     *
-	 */
+   /**
+    *The Freecell constructor calls the super constructor and sets the initial
+    *number of piles.
+    *
+    *@param  tableauPiles   Contains the initial tableau piles
+    *@param  homecellPiles  Contains the initial homecell piles
+    *@param  freecellPiles  Contains the initial freecell piles
+	*/
 	public Freecell(int tableauPiles, int homecellPiles, int freecellPiles) {
 		super(tableauPiles, homecellPiles, freecellPiles);
 	}
     
     /**
-    *   Returns the deck  
+    *Returns the deck.
     */
 	public ArrayList<Card> getDeck() {
 		return super.getDeck();
 	}
     /**
-    *   Returns the number of tableau piles
+    *Returns the number of tableau piles.
     */
 	public int getTableauPiles() {
 		return super.getTableauPiles();
 	}
-
+    /**
+    *Returns the number of homecell piles.
+    */
 	public int getHomecellPiles() {
 		return super.getHomecellPiles();
 	}
-
+    /**
+    *Returns the number of freecell piles.
+    */
 	public int getFreecellPiles() {
 		return super.getFreecellPiles();
 	}
-
+    /**
+    *Initializes the HashMaps and sets up the initial form of each piles
+    *tableau piles  Half of the tableau piles will be dealt 7 cards and the other half of the tableau piles will be dealt 6 cards.
+    *homecell piles When the game begins each homecell pile should be empty. 
+    *freecell piles When the game begins each freecell pile should be empty.
+    *@return Nothing.
+    */
 	public void initialSetup() {
 		deck = new ArrayList<Card>(getDeck());
 		freecell_deck = new ArrayList<Card>(); //Result is that all of the cards in all piles are in this deck       
@@ -118,7 +132,16 @@ public class Freecell extends Deck {
 	}	
 
 
-	
+	/**
+    *tableau piles  Only the card which is currently at the top of the tableau pile can be removed. 
+    *                   Once a card is removed, the card following it in the pile
+    *                   becomes the top card and can be removed.
+    *homecell piles Cards cannot be removed from a homecell pile.
+    *freecell piles Cards can always be removed from a freecell pile.
+    *
+    *Removes a card from a pile.
+    *@return A boolean.
+    */
 
 	public boolean removeCard(String whichPile, int whichNumber) { 
         int indexOfTopCard; 
@@ -174,7 +197,16 @@ public class Freecell extends Deck {
 		return false;
 	}
 
-
+    /**
+    *tableau piles  A card can be added to a tableau pile when its value is one less than the tableau's top card
+    *                   and its suit is the opposite of the top card's
+    *                   suit. Any card CAN be added to an empty tableau.
+    *homecell piles A card can be added to a homecell pile if it has the identical suit and a value one more than the homecell's top card.
+    *                   The added card becomes the homecell's new top card. Only the Aces can be added to an empty homecell.
+    *freecell piles Any card can be added to an EMPTY freecell pile. A card cannot be added to a freecell pile that already has a card.
+    *Adds a card to a pile.
+    *@return boolean
+    */
 	public boolean addCard(Card theCard, String whichPile, int whichNumber) {
 		//A card can be added to a tableau pile when its value is one less than the tableau's top card AND its suit is the opposite of the top card's suit.
 		//The added card becomes the tableau's new top card. ANY card CAN be added to an empty tableau.
