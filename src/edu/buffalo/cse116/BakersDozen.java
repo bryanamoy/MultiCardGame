@@ -1,3 +1,12 @@
+/**
+ * Baker's Dozen game Superclass
+ * 
+ * @author Jonathan Hercules
+ * @version 3.0
+ * @since 2017-10-02
+ * 
+ */
+
 package edu.buffalo.cse116;
 
 import java.util.ArrayList;
@@ -6,6 +15,15 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BakersDozen extends Deck{
+	/**
+	 * Initial setup 
+	 * @param sizeOfTableau
+	 * @param tableauPiles_List
+	 * @param homecellPiles_List
+	 * @param freecellPiles_List
+	 * @param deck
+	 */
+	
     int sizeOfTableau; // Number of tableau piles
     private HashMap<Integer, ArrayList<Card>> tableauPiles_List;	// Storage for tableau piles
     private HashMap<Integer, ArrayList<Card>> homecellPiles_List;	// Storage for homecell piles
@@ -13,33 +31,62 @@ public class BakersDozen extends Deck{
     
     private ArrayList<Card> deck;
     
+    /**
+     * Defines Superclass
+     */
     
 	public BakersDozen() {
 		super(13, 4, 0);
 		
 	}
 	
-	// Getters and Setters
+	/**
+	 * 	A getter for the tableau hashmap
+	 * @return tableauPiles_List
+	 */
+	
 	public HashMap<Integer, ArrayList<Card>> getTableauPiles_List() {
 		return tableauPiles_List;
 	}
 
+	/**
+	 * 	A setter for the tableau hashmap
+	 */
+	
 	public void setTableauPiles_List(HashMap<Integer, ArrayList<Card>> tableauPiles_List) {
 		this.tableauPiles_List = tableauPiles_List;
 	}
+	
+	/**
+	 * 	A getter for the homecell hashmap
+	 * @return homecellPiles_List
+	 */
 
 	public HashMap<Integer, ArrayList<Card>> getHomecellPiles_List() {
 		return homecellPiles_List;
 	}
 
+	/**
+	 * 	A setter for the homecell hashmap
+	 */
+	
 	public void setHomecellPiles_List(HashMap<Integer, ArrayList<Card>> homecellPiles_List) {
 		this.homecellPiles_List = homecellPiles_List;
 	}
+	
+	/**
+	 * 	A getter for the freecell hashmap
+	 * @return freecellPiles_List
+	 */
 
 	public HashMap<Integer, ArrayList<Card>> getFreecellPiles_List() {
 		return freecellPiles_List;
 	}
 
+	/**
+	 * 	A setter for the freecell hashmap
+	 */
+	
 	public void setFreecellPiles_List(HashMap<Integer, ArrayList<Card>> freecellPiles_List) {
 		this.freecellPiles_List = freecellPiles_List;
 	}
