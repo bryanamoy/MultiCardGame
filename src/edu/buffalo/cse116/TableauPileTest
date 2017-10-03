@@ -38,8 +38,10 @@ public class TableauPileTest {
 		legal.initialSetup();
 		Card first = new Card(Suit.DIAMONDS, Rank.FIVE);
 		Card second = new Card(Suit.SPADES, Rank.FOUR);
-		legal.addCard(first, "Tableau", 1);
-		legal.addCard(second, "Tableau", 1);
+		ArrayList<Card> test = new ArrayList<Card>();
+		test.add(first);
+		legal.getTableauMap().get(1).clear();
+		legal.getTableauMap().put(1, test);
 		assertTrue("Legal Can Add", legal.addCard(second, "Tableau", 1));
 	}
 	@Test // If adding card is legal or illegal and increases number of cards in
