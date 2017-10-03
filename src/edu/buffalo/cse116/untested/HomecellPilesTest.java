@@ -104,7 +104,7 @@ public class HomecellPilesTest {
 		test.add(cardInDeck);
 		topFC.getHomecellMap().put(1, test);
 		
-		assertTrue("Able to add", topFC.addCard(cardToAdd,"hOMECELL",1)); //able to add
+		assertTrue(topFC.addCard(cardToAdd,"hOMECELL",1)); //able to add
 		int indexOfTopCard = topFC.getHomecellMap().get(1).size() - 1;
 		assertEquals("Updates the top card", cardToAdd, topFC.getHomecellMap().get(1).get(indexOfTopCard));								//Is pile's top card		
 		assertEquals("Increases number of cards", 2, topFC.getHomecellMap().get(1).size()); 
