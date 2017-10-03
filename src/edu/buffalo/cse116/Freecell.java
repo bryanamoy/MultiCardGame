@@ -164,8 +164,9 @@ public class Freecell extends Deck {
 					}
 				}
 			}
+		
 		}
-		deck.clear();
+		
 
 		stringToCompare = "homecell";
         compare = stringToCompare.equalsIgnoreCase(whichPile);
@@ -191,9 +192,10 @@ public class Freecell extends Deck {
 						return false;
 					}
 				}                                        
-			}   
+			} 
+			deck.clear();
 		}
-		deck.clear();
+		
 		return false;
 	}
 
@@ -278,15 +280,17 @@ public class Freecell extends Deck {
 
 
         stringToCompare = "freecell";
-        compare = stringToCompare.equals(whichPile);
+        compare = stringToCompare.equalsIgnoreCase(whichPile);
         //Any card can be added to an EMPTY freecell pile. A card cannot be added to a freecell pile that already has a card.
         ArrayList<Card> cards1 = new ArrayList<Card>(this.freecellMap.get(whichNumber));
-        if(compare == true && this.freecellMap.size() ==0) {
+        if(compare == true && this.freecellMap.get(whichNumber).size() == 0) {
                 cards1.add(theCard);
                 freecellMap.put(whichNumber, cards1);
+                
                 return true;
-        }
+        } 
         	deck.clear();
         	return false;
+        
 	}
 }
