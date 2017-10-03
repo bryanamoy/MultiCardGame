@@ -9,7 +9,7 @@ public class Freecell extends Deck {
 	//Idea to solve both problems: Make freecell_deck track what cards get added and removed!
 	private HashMap<Integer, ArrayList<Card>> tableauMap;
 	private HashMap<Integer, ArrayList<Card>> homecellMap;
-
+	private HashMap<Integer, ArrayList<Card>> freecellMap;
 	public HashMap<Integer, ArrayList<Card>> getTableauMap() {
 		return this.tableauMap;
 	}
@@ -23,7 +23,6 @@ public class Freecell extends Deck {
 	}
 
 
-	private HashMap<Integer, ArrayList<Card>> freecellMap;
 
 	private ArrayList<Card> freecell_deck;   //The deck to fill
 	private ArrayList<Card> deck;   //The normal 52 deck
@@ -96,7 +95,7 @@ public class Freecell extends Deck {
 		if(compare == true) { 
 			for(Integer key : this.tableauMap.keySet()) {
 				if(whichNumber == key) {
-					deck = new ArrayList<Card>();					
+					deck = new ArrayList<Card>(this.getTableauMap().get(whichNumber));					
 					if(deck.size() > 0) {
 						indexOfTopCard = deck.size() - 1;
 						deck.remove(indexOfTopCard);                                        //If put doesnt work use this
@@ -123,7 +122,7 @@ public class Freecell extends Deck {
 		if(compare = true) {   
 			for(Integer key : this.freecellMap.keySet()) {
 				if(whichNumber == key) {              
-					deck = new ArrayList<Card>();                 
+					deck = new ArrayList<Card>(this.freecellMap.get(whichNumber));                 
 					if(deck.size() > 0) {
 						indexOfTopCard = deck.size() - 1;    
 						deck.remove(indexOfTopCard);                                        
@@ -142,16 +141,16 @@ public class Freecell extends Deck {
 	}
 
 
-	public boolean addCard(Card card, String whichPile, int whichNumber) {
+	public boolean addCard(Card theCard, String whichPile, int whichNumber) {
 		//A card can be added to a tableau pile when its value is one less than the tableau's top card AND its suit is the opposite of the top card's suit.
 		//The added card becomes the tableau's new top card. ANY card CAN be added to an empty tableau.
         deck = new ArrayList<Card>();
-        int rank = card.getRank().getRank();
-        int suit = card.getSuit().getSuit();
+        int rank = theCard.getRank().ordinal();
+        int suit = theCard.getSuit().ordinal();
         
-        int pile = 1;
-        int size = this.tableauMap.get(pile).size() -1 ;
-//        while(pile != getTableauPiles()) {
+//        int pile = 1;
+//        int size = this.tableauMap.get(pile).size() - 1;
+//       
 //            for(int i =0; i <= size; i++) {
 //                if(pile <= getTableauPiles()) {
 //                    if(this.tableauMap.get(pile).get(i).equals(card)) {
@@ -161,32 +160,42 @@ public class Freecell extends Deck {
 //                }        
 //            }
 //            pile++;
-//        }
+//        
 
         String stringToCompare = "tableau";
 		boolean compare = stringToCompare.equalsIgnoreCase(whichPile);
+		System.out.println(1);
 		if(compare == true) {
-            int topCard = this.tableauMap.get(whichNumber).size() - 1;
-            if(rank > this.tableauMap.get(whichNumber).get(topCard).getRank().getRank()) {
-	            return false;
-		    } 
-            else if(suit % 2 == 0 && this.tableauMap.get(whichNumber).get(topCard).getSuit().getSuit() % 2 == 0) {
-                return false;
-            } else {
-                deck = new ArrayList<Card>(this.tableauMap.get(whichNumber));   
-                deck.add(card);
+       	 	deck = new ArrayList<Card>(this.tableauMap.get(whichNumber));   
+            if(deck.isEmpty()) {
+                 deck.add(theCard);
+                 this.tableauMap.put(whichNumber, deck);
+                 deck.clear(); 
+                 return true;
+            }
+            else{
+            	int topCard = deck.size() - 1;
+            	if(rank > deck.get(topCard).getRank().ordinal()) {
+            		return false;
+            	} 
+            	else if(suit % 2 == 0 && deck.get(topCard).getSuit().ordinal() % 2 == 0) {
+            		return false;
+            	} 	
+            	else{
+                deck.add(theCard);
                 this.tableauMap.put(whichNumber, deck);
                 deck.clear(); 
                 return true;
+            	}
             }
         }
 //        A card can be added to a homecell pile if it has the identical suit and a value one more than the homecell's 
 //        top card. For example, the Queen of Spades can only be added to a homecell with the Jack of Spades as its top card. 
 //        The added card becomes the homecell's new top card. Only the Aces can be added to an empty homecell.
 
-        pile = 1;
-        size = this.homecellMap.get(pile).size() - 1;
-//        while(pile != getHomecellPiles()) {
+//        pile = 1;
+//        size = this.homecellMap.get(pile).size() - 1;
+//        
 //            for(int i =0; i <= size; i++) {
 //                if(pile <= getHomecellPiles()) {
 //                    if(this.homecellMap.get(pile).get(i).equals(card)) {
@@ -194,22 +203,21 @@ public class Freecell extends Deck {
 //                        return false;
 //                    }
 //                }
-//            }
+//          
 //            pile++;
 //        }
 
         stringToCompare = "homecell";
         compare = stringToCompare.equalsIgnoreCase(whichPile);
         if(compare == true) {
-            int topCard = this.tableauMap.get(whichNumber).size() - 1;
+            deck = new ArrayList<Card>(this.homecellMap.get(whichNumber)); 
+            int topCard = deck.size() - 1;
             if(this.homecellMap.get(whichNumber).get(topCard).getSuit().getSuit() == suit) {
-                if(this.homecellMap.get(whichNumber).get(topCard).getRank().getRank() + 1 == rank) {
-                deck = new ArrayList<Card>(this.homecellMap.get(whichNumber));   
-                deck.add(card);
-                this.homecellMap.put(whichNumber, deck);
-                deck.clear(); 
-
-                     return true;
+                if(this.homecellMap.get(whichNumber).get(topCard).getRank().getRank() + 1 == rank) {               
+                	deck.add(theCard);
+                	this.homecellMap.put(whichNumber, deck);
+                	deck.clear(); 
+                     return true;                 
                 } else {
                     return false;
                 }
@@ -218,35 +226,31 @@ public class Freecell extends Deck {
             }
         }
 
-        pile = 1;
-        size = this.freecellMap.get(pile).size() - 1;
-//        while(pile != getFreecellPiles()) {
+//        pile = 1;
+//        size = this.freecellMap.get(pile).size() - 1;
+        
 //            for(int i =0; i <= size; i++) {
 //                if(pile <= getFreecellPiles()) {
 //                    if(this.freecellMap.get(pile).get(i).equals(card)) {
-//                        System.out.println("Cant add a card that is already in the pile!");
+//                       // System.out.println("Cant add a card that is already in the pile!");
 //                        return false;
 //                    }
 //                }
 //            }
 //            pile++;
-//        }
+//        
 
         stringToCompare = "freecell";
-        compare = stringToCompare.equalsIgnoreCase(whichPile);
+        compare = stringToCompare.equals(whichPile);
         //Any card can be added to an EMPTY freecell pile. A card cannot be added to a freecell pile that already has a card.
-        if(compare == true) {
-            if(this.freecellMap.isEmpty()) {
-                deck = new ArrayList<Card>(this.freecellMap.get(whichNumber));
-                deck.add(card);
-                this.freecellMap.put(whichNumber, deck);
-                deck.clear();
+        ArrayList<Card> cards1 = new ArrayList<Card>(this.freecellMap.get(whichNumber));
+        if(compare == true && this.freecellMap.size() ==0) {
+                cards1.add(theCard);
+                freecellMap.put(whichNumber, cards1);
                 return true;
-            } else {
-                System.out.println("Pile already contains card!");
-                return false;
-            }
         }
-        return false;
+        	return false;
 	}
 }
+
+
