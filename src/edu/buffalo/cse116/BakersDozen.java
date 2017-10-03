@@ -1,6 +1,6 @@
 /**
- * Baker's Dozen game Superclass
- * 
+ * <h1>Baker's Dozen game Superclass</h1>
+ * <p>
  * @author Jonathan Hercules
  * @version 3.0
  * @since 2017-10-02
