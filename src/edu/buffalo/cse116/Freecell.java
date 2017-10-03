@@ -176,23 +176,31 @@ public class Freecell extends Deck {
         }
 
 
-        stringToCompare = "homecell";
-        compare = stringToCompare.equalsIgnoreCase(whichPile);
-        if(compare == true) {
-            deck = new ArrayList<Card>(this.homecellMap.get(whichNumber)); 
-            int topCard = deck.size() - 1;
-            if(this.homecellMap.get(whichNumber).get(topCard).getSuit().getSuit() == suit) {
-                if(this.homecellMap.get(whichNumber).get(topCard).getRank().getRank() + 1 == rank) {               
-                	deck.add(theCard);
-                	this.homecellMap.put(whichNumber, deck);
-                     return true;                 
-                } else {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
+		stringToCompare = "homecell";
+		compare = stringToCompare.equalsIgnoreCase(whichPile);
+		if(compare == true) {
+			deck = new ArrayList<Card>(this.homecellMap.get(whichNumber)); 
+			if(this.homecellMap.get(whichNumber).size() > 0) {
+				int topCard = this.homecellMap.get(whichNumber).size() -1;
+				if(this.homecellMap.get(whichNumber).get(topCard).getSuit().getSuit() == suit) {
+					if(this.homecellMap.get(whichNumber).get(topCard).getRank().getRank() + 1 == rank) {               
+						deck.add(theCard);
+						this.homecellMap.put(whichNumber, deck);
+						return true;                 
+					}
+				}else {
+					return false;
+				}
+			} 
+			else if(theCard.getRank() == Rank.ACE) {
+				deck.add(theCard);
+				this.homecellMap.put(whichNumber, deck);
+				return true;  
+			} else {
+				return false;
+			}
+
+		}
 
 
 
