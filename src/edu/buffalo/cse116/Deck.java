@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.ArrayList;
 import java.util.HashMap;
 /**
-* <h1>Deck class</h1> 
+* <h1>Deck Class</h1> 
 * Defines Deck class which has 52 Card instances.
 * <p>
 * @author Corey Almonte 

@@ -1,7 +1,7 @@
 package edu.buffalo.cse116;
 
 /**
-* <h1>Rank</h1>
+* <h1>Rank Enum</h1>
 * Is an enum representing the values of
 * a card. 
 * <p>
@@ -34,7 +34,7 @@ public enum Rank {
       this.rank = rank;
     }
     /**
-    *   The Getter  for the rank enum.
+    *   The Getter for the rank enum.
     */
     public int getRank() {
       return rank;

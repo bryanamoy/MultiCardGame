@@ -1,6 +1,6 @@
 package edu.buffalo.cse116;
 /**
-* <h1>Suit</h1>
+* <h1>Suit Enum</h1>
 * Is an enum representing the suit of a card. 
 * <p>
 * <b>Note:</b> This is to be combined with the Rank enum to form

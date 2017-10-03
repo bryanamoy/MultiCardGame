@@ -3,6 +3,19 @@ package edu.buffalo.cse116;
 import java.util.HashMap;
 import java.util.ArrayList;
 
+/**
+* <h1>Freecell class</h1>
+* Is an enum representing the values of
+* 
+* <p>
+* <b>Note:</b> This is to be the Freecell Game class
+*
+*
+* @author  Corey Almonte (With some input from John)
+* @version 4.5
+* @since   2017-09-29
+*/
+
 public class Freecell extends Deck {
 	/**
     *   Hashmap for tableau piles. Contains the pile number and the cards of each pile.
