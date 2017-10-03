@@ -73,9 +73,10 @@ public class BakersDozenTest {
 			// in tableau pile
 	public void testIllegalRemoveFromTableau() {
 		test.initialSetup();
-		test.getTableauPiles_List().get(7).clear();
-		test.getTableauPiles_List().get(7).add(clubs);
-		boolean removeTest = test.removeCard(spades, 7);
+		ArrayList<Card> testc = new ArrayList<Card>();
+		testc.add(spades);
+		test.getTableauPiles_List().get(7).addAll(testc);
+		boolean removeTest = test.removeCard(ace, 7);
 		assertFalse("Should be an illegal removal but returned" + removeTest, removeTest);
 	}
 
