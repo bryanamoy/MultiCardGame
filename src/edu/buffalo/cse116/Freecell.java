@@ -4,42 +4,63 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class Freecell extends Deck {
-	//Check to see if duplicating cards. Make a process to stop adding an already existing card or repeated deletion of the same card.
-	//If you delete a card, where does it go? If you add a card where does it go?
-	//Idea to solve both problems: Make freecell_deck track what cards get added and removed!
+	/**
+    *   Hashmap for tableau piles. Contains the pile number and the cards of each pile.
+    */
 	private HashMap<Integer, ArrayList<Card>> tableauMap;
+    /**
+    *   Hashmap for homecell piles. Contains the pile number and the cards of each pile.
+    */
 	private HashMap<Integer, ArrayList<Card>> homecellMap;
+    /**
+    *   Hashmap for freecell piles. Contains the pile number and the cards of each pile.
+    */
 	private HashMap<Integer, ArrayList<Card>> freecellMap;
+    /**
+    *   Getter for the tableau hashmap.
+    */
 	public HashMap<Integer, ArrayList<Card>> getTableauMap() {
 		return this.tableauMap;
 	}
-
+    /**
+    *   Getter for the homecell hashmap.
+    */
 	public HashMap<Integer, ArrayList<Card>> getHomecellMap() {
 		return this.homecellMap;
 	}
-
+    /**
+    *   Getter for the freecell hashmap.
+    */
 	public HashMap<Integer, ArrayList<Card>> getFreecellMap() {
 		return this.freecellMap;
 	}
+    /**
+    *   The arraylist freecell_deck used as a buffer.
+    */
+	private ArrayList<Card> freecell_deck;
+    /**
+    *   The arraylist deck used as an already filled deck.
+    */
+	private ArrayList<Card> deck;   
 
-
-
-	private ArrayList<Card> freecell_deck;   //The deck to fill
-	private ArrayList<Card> deck;   //The normal 52 deck
-
-	private boolean initial = true;
 
 	/**
-        Make the freecell constructor get take the private fields and set them equal
+     *Make the freecell constructor get take the private fields and set them equal
+     *
 	 */
 	public Freecell(int tableauPiles, int homecellPiles, int freecellPiles) {
 		super(tableauPiles, homecellPiles, freecellPiles);
 	}
-
+    
+    /**
+    *   Returns the deck  
+    */
 	public ArrayList<Card> getDeck() {
 		return super.getDeck();
 	}
-
+    /**
+    *   Returns the number of tableau piles
+    */
 	public int getTableauPiles() {
 		return super.getTableauPiles();
 	}
