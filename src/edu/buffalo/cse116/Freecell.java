@@ -98,7 +98,7 @@ public class Freecell extends Deck {
 						indexOfTopCard = deck.size() - 1;
 						deck.remove(indexOfTopCard);                                        //If put doesnt work use this
 						this.tableauMap.put(key, deck);                                     //this.tableauMap.replace(key,this.tableauMap.get(key), deck);
-						deck.clear();
+						
 						return true;
 					}                      
 					else {
@@ -108,6 +108,7 @@ public class Freecell extends Deck {
 				}
 			}
 		}
+		deck.clear();
 
 		stringToCompare = "homecell";
         compare = stringToCompare.equalsIgnoreCase(whichPile);
@@ -125,7 +126,7 @@ public class Freecell extends Deck {
 						indexOfTopCard = deck.size() - 1;    
 						deck.remove(indexOfTopCard);                                        
 						this.freecellMap.put(key, deck);                                     
-						deck.clear();
+						
 						return true;
 					}                                        
 					else {
@@ -135,6 +136,7 @@ public class Freecell extends Deck {
 				}                                        
 			}   
 		}
+		deck.clear();
 		return false;
 	}
 
@@ -222,4 +224,3 @@ public class Freecell extends Deck {
         	return false;
 	}
 }
-
