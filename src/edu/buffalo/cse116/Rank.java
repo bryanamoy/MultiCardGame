@@ -39,12 +39,5 @@ public enum Rank {
     public int getRank() {
       return rank;
     }
-    /**
-    *   Overrides the toString method to get cards to print as strings.
-    */
-    @Override
-    public String toString() {
-        return getSuit() + " of " + getRank();
-    }
 }        
 

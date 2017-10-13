@@ -23,7 +23,7 @@ public class BakersDozenTest {
 		for (Integer i : test.getTableauPiles_List().keySet()) {
 			ArrayList<Card> check = new ArrayList<Card>(test.getTableauPiles_List().get(i));
 			int sizeCheck = check.size();
-			assertEquals("Should return 4 cards initially for each tableau pile",4 ,sizeCheck);
+			assertEquals("Should return 4 cards initially for each tableau pile", sizeCheck, 4);
 		}
 
 	}
@@ -40,7 +40,7 @@ public class BakersDozenTest {
 		int sizeCheck = test.getTableauPileSize(2);
 		boolean illegal = test.addCard(check, 2);
 		assertFalse("Should be false but was true, check that move is illegal,", illegal);
-		assertEquals("Size of tableau should be the same", 1,sizeCheck);
+		assertEquals("Size of tableau should be the same", sizeCheck, 1);
 	}
 
 	@Test // If adding card is legal or illegal and increases number of cards in
@@ -55,8 +55,8 @@ public class BakersDozenTest {
 		boolean legal = test2.addCard(clubs, 3);
 		int sizeCheck = test2.getTableauPileSize(3);
 		assertTrue("Should be true but was " + legal, legal);
-		assertEquals("Size of tableau pile should be 2",2, sizeCheck);
-		assertEquals("Top card should be clubs", clubs, test2.getTableauPiles_List().get(3).get(sizeCheck - 1));
+		assertEquals("Size of tableau pile should be 2", sizeCheck, 2);
+		assertEquals("Top card should be clubs", test2.getTableauPiles_List().get(3).get(sizeCheck - 1), clubs);
 
 	}
 
@@ -73,8 +73,6 @@ public class BakersDozenTest {
 			// in tableau pile
 	public void testIllegalRemoveFromTableau() {
 		test.initialSetup();
-		test.getTableauPiles_List().get(7).clear();
-		test.getTableauPiles_List().get(7).add(clubs);
 		boolean removeTest = test.removeCard(spades, 7);
 		assertFalse("Should be an illegal removal but returned" + removeTest, removeTest);
 	}
@@ -92,8 +90,8 @@ public class BakersDozenTest {
 		int sizeCheck = cards.getTableauPileSize(0);
 		Card cardCheck = cards.getTableauPiles_List().get(0).get(0);
 		assertTrue("Returned " + legal, legal);
-		assertEquals(1,sizeCheck);
-		assertEquals(spades,cardCheck);
+		assertEquals(sizeCheck, 1);
+		assertEquals(cardCheck, spades);
 	}
 
 	@Test
@@ -102,7 +100,7 @@ public class BakersDozenTest {
 		for (Integer i : test.getHomecellPiles_List().keySet()) {
 			ArrayList<Card> check = new ArrayList<Card>(test.getHomecellPiles_List().get(i));
 			int sizeCheck = check.size();
-			assertEquals("Should return 4 cards initially for each homecell pile", 0,sizeCheck);
+			assertEquals("Should return 4 cards initially for each tableau pile", sizeCheck, 0);
 		}
 	}
 
@@ -123,7 +121,7 @@ public class BakersDozenTest {
 		int sizeofPile = test.getHomecellPileSize(2);
 		assertTrue("legal", legal);
 		assertFalse("illegal", illegal);
-		assertEquals("Should be 1 but returned" + sizeofPile, 1,sizeofPile);
+		assertEquals("Should be 1 but returned" + sizeofPile, sizeofPile, 1);
 	}
 
 	@Test
@@ -134,8 +132,8 @@ public class BakersDozenTest {
 		Card second = new Card(Suit.DIAMONDS, Rank.TWO);
 		topBD.addToHomecell(first, 3);
 		topBD.addToHomecell(second, 3);
-		assertEquals("new top card",second, topBD.getHomecellPiles_List().get(3).get(1));
-		assertEquals("size of pile", 2,topBD.getHomecellPiles_List().get(3).size());
+		assertEquals("new top card", topBD.getHomecellPiles_List().get(3).get(1), second);
+		assertEquals("size of pile", topBD.getHomecellPiles_List().get(3).size(), 2);
 
 	}
 

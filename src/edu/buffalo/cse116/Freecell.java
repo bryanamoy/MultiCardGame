@@ -56,6 +56,10 @@ public class Freecell extends Deck {
     */
 	private ArrayList<Card> deck;   
 
+    public Freecell() {
+        this(8, 4, 4);
+    }
+
 
    /**
     *The Freecell constructor calls the super constructor and sets the initial

@@ -8,10 +8,10 @@ import java.util.HashMap;
 * Defines Deck class which has 52 Card instances.
 * <p>
 * @author Corey Almonte 
-* @version 2.5
+* @version 2.5                          //Rename Deck class to Solitaire. Call deck field cardList. Get rid of parameters in constructor.
 * @since   2017-10-1
-*/
-public abstract class Deck {
+*/                      
+public abstract class Solitaire {
     /**
     *Instance of card.
     */
@@ -31,25 +31,25 @@ public abstract class Deck {
     /**
     *Arraylist to hold 52 instances of card
     */
-    private ArrayList<Card> deck;
+    private ArrayList<Card> cardList;
     
     /**
     *The constructor for the deck class sets it to number of piles for tableau,homecell, and freecell.
     *Also initializes arraylist of cards to hold 52 cards
     *@param tableauPiles    Number of tableauPiles
     *@param homecellPiles   Number of homecellPiles
-    *@param freecellPiles   Number of freecellPiles
+    *@param freecellPiles   Number of freecellPiles     
     */
-    public Deck(int tableauPiles, int homecellPiles, int freecellPiles) {
+    public Deck(int tableauPiles, int homecellPiles, int freecellPiles) {       //Remove arguments
         this.tableauPiles = tableauPiles;
         this.homecellPiles = homecellPiles;
         this.freecellPiles = freecellPiles;
-        this.deck = new ArrayList<Card>();
+        this.cardList = new ArrayList<Card>();
 
         for(Suit suit : Suit.values()) {
             for(Rank rank : Rank.values()) {
                 card = new Card(suit, rank); //{@code} This part is interesting. s.values()[i] is iterable.
-                this.deck.add(card);
+                this.cardList.add(card);
                 System.out.println("The cards that are in this deck are " + rank + " of " + suit); 
             }
         }
