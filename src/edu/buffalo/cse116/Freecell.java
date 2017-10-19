@@ -16,7 +16,7 @@ import java.util.ArrayList;
 * @since   2017-09-29
 */
 
-public class Freecell extends Deck {
+public class Freecell extends Solitaire {
 	/**
     *   Hashmap for tableau piles. Contains the pile number and the cards of each pile.
     */
@@ -69,7 +69,7 @@ public class Freecell extends Deck {
     *@param  homecellPiles  Contains the initial homecell piles
     *@param  freecellPiles  Contains the initial freecell piles
 	*/
-	public Freecell(int tableauPiles, int homecellPiles, int freecellPiles) {
+	private Freecell(int tableauPiles, int homecellPiles, int freecellPiles) {
 		super(tableauPiles, homecellPiles, freecellPiles);
 	}
     

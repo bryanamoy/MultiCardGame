@@ -40,7 +40,7 @@ public abstract class Solitaire {
     *@param homecellPiles   Number of homecellPiles
     *@param freecellPiles   Number of freecellPiles     
     */
-    public Deck(int tableauPiles, int homecellPiles, int freecellPiles) {       //Remove arguments
+    public Solitaire(int tableauPiles, int homecellPiles, int freecellPiles) {       //Remove arguments
         this.tableauPiles = tableauPiles;
         this.homecellPiles = homecellPiles;
         this.freecellPiles = freecellPiles;
@@ -50,25 +50,22 @@ public abstract class Solitaire {
             for(Rank rank : Rank.values()) {
                 card = new Card(suit, rank); //{@code} This part is interesting. s.values()[i] is iterable.
                 this.cardList.add(card);
-                System.out.println("The cards that are in this deck are " + rank + " of " + suit); 
             }
         }
-        shuffleDeck(deck); 
+        shuffleDeck();
     }
     /**
     *Method used to shuffle deck
     *@param ArrayList<Card> deck    Represents the deck after having been shuffled. TRUERANDOM IS TO SHUFFLE 5 TIMES!!!
     */
-    public void shuffleDeck(ArrayList<Card> deck) {
-        for(int trueRandom = 0; trueRandom < 5; trueRandom++) {
-            Collections.shuffle(deck);
-        }
+    public void shuffleDeck() {
+        Collections.shuffle(this.cardList);
     }
     /**
     *Getter for deck of 52 card instances.
     */
     public ArrayList<Card> getDeck() {
-        return deck;
+        return cardList;
     }
     /**
     *Getter for number of tableau Piles
