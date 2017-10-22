@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class BakersDozen extends Deck{
+public class BakersDozen extends Solitaire{
 	/**
 	 * Initial setup 
 	 * @param sizeOfTableau
@@ -103,7 +103,7 @@ public class BakersDozen extends Deck{
 		tableauPiles_List = new HashMap<Integer,ArrayList<Card>>();
 		ArrayList<Card> deck = new ArrayList<Card>(getDeck());
 	
-		shuffleDeck(deck);
+		shuffleDeck();
 		Rank king = Rank.KING;
 		
 	   	int cursor = 52;
