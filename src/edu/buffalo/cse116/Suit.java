@@ -34,4 +34,10 @@ public enum Suit {
     public int getSuit() {
       return suit;
     }
+    
+     @Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return  name();
+	}
   }
