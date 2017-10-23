@@ -39,5 +39,10 @@ public enum Rank {
     public int getRank() {
       return rank;
     }
+    @Override
+   	public String toString() {
+   		// TODO Auto-generated method stub
+   		return  name();
+   	}
 }        
 
