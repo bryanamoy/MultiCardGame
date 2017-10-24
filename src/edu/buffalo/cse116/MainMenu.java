@@ -62,7 +62,7 @@ public class MainMenu extends Application {
 	private double mainHeight = 500;
 	
 	private Stage stage;
-	private static MediaPlayer mediaPlayer;
+//	private static MediaPlayer mediaPlayer;
 
 	//All gui code can be done within the start method
 	@Override
@@ -74,27 +74,30 @@ public class MainMenu extends Application {
 		text.setFont(Font.font ("Verdana", 150));
 		text.setFill(Color.ALICEBLUE);//
 		
-		Image image = new Image("http://i0.kym-cdn.com/photos/images/original/001/169/608/a43.gif", true);  								
-		ImageView imageView = new ImageView(image);			
-		imageView.setPreserveRatio(true);  
-		imageView.fitWidthProperty().bind(mainWindow.widthProperty()); 
+//		Image image = new Image("http://i0.kym-cdn.com/photos/images/original/001/169/608/a43.gif", true);  								
+//		ImageView imageView = new ImageView(image);			
+//		imageView.setPreserveRatio(true);  
+//		imageView.fitWidthProperty().bind(mainWindow.widthProperty()); 
 
-		Media sound = new Media("https://www.mfiles.co.uk/mp3-downloads/gabriels-message-keyboard.mp3");
-		mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.setOnEndOfMedia(new Runnable() {
-			@Override public void run() {
-				mediaPlayer.seek(Duration.ZERO);
-			}
-		});
-		mediaPlayer.play();
+//		Media sound = new Media("https://www.mfiles.co.uk/mp3-downloads/gabriels-message-keyboard.mp3");
+//		mediaPlayer = new MediaPlayer(sound);
+//		mediaPlayer.setOnEndOfMedia(new Runnable() {
+//			@Override public void run() {
+//				mediaPlayer.seek(Duration.ZERO);
+//			}
+//		});
+//		mediaPlayer.play();
 
 		BorderPane borderPane = new BorderPane();
-		borderPane.getChildren().add(imageView);
+		SolitaireView solitaireView = new SolitaireView();
+		solitaireView.setCardImages();
+		
+		borderPane.getChildren().add(solitaireView.getCardImages().get(new Card(Suit.CLUBS,Rank.ACE)));
 
 		MenuItem bdMenuItm = new MenuItem("Baker's Dozen");
 		bdMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	mediaPlayer.stop();
+//		    	mediaPlayer.stop();
 		    	bakersDozenGame();
 		    }
 		});
@@ -102,7 +105,7 @@ public class MainMenu extends Application {
 		MenuItem fcMenuItm = new MenuItem("Freecell");
 		fcMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	Freecell fc = new Freecell();
+		    	Freecell fc = new Freecell(8, 4, 4);
 		    	fc.initialSetup();
 		    }
 		});
@@ -153,14 +156,14 @@ public class MainMenu extends Application {
     	StackPane stackPane = new StackPane();
     	changeScene(stackPane); 
     	    	   	
-		Media sound = new Media("https://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
-		mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.setOnEndOfMedia(new Runnable() {
-			@Override public void run() {
-		         mediaPlayer.seek(Duration.ZERO);
-		       }
-		});
-		mediaPlayer.play(); 
+//		Media sound = new Media("https://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
+//		mediaPlayer = new MediaPlayer(sound);
+//		mediaPlayer.setOnEndOfMedia(new Runnable() {
+//			@Override public void run() {
+//		         mediaPlayer.seek(Duration.ZERO);
+//		       }
+//		});
+//		mediaPlayer.play(); 
 		
 		BakersDozen bd = new BakersDozen();
     	bd.initialSetup();
