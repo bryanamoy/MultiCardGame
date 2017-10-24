@@ -21,24 +21,28 @@ public class SolitaireView {
 	}
 	
 	HashMap<Card, ImageView> setCardImages() throws FileNotFoundException {
-		File file = new File("modern.zip");
+		File file = new File("moderncards.zip");
 		InputStream ifs = new FileInputStream(file);
 		ZipInputStream zip = new ZipInputStream(ifs);
 		try {
-			ZipEntry entry = zip.getNextEntry();
-			ZipEntry trav = entry;
-			while(zip.getNextEntry() != null) {
+			ZipEntry entry = null;
+//Its the way that you are looping. The cardImageFile == suit.tostring + ... is never actually being hit. Fix your looping
+			while((entry = zip.getNextEntry() )!= null) {
+			//	System.out.println(entry.getName());
 				if(entry.getName().endsWith(".png")) {
-					System.out.println(entry.getName());
-					String cardImageFile = entry.getName().substring(0, entry.getName().indexOf(".") - 1);
+				//	System.out.println(entry.getName());
+					String cardImageFile = entry.getName().substring(0, entry.getName().indexOf("."));
+					System.out.println(cardImageFile);					
 					for(Suit suit : Suit.values()) {
 						for(Rank rank : Rank.values()) {
 							card = new Card(suit, rank);
+							 System.out.println(suit.toString() + rank.toString());
 							if(cardImageFile == suit.toString() + rank.toString()) {
 								 Image image = new Image (cardImageFile + ".png", true);
+								 System.out.println(suit.toString() + rank.toString());
+						//		 System.out.println(cardImageFile + ".png");
 								 ImageView imageView = new ImageView(image);
 								 cardImages.put(card, imageView);
-								 zip.getNextEntry();
 							}
 						}
 					}
@@ -46,7 +50,6 @@ public class SolitaireView {
 				}
 			}
 			zip.close();
-			ifs.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,9 +58,8 @@ public class SolitaireView {
 		return cardImages;
 	}
 
-	ImageView getCardImage(Card card) {
-		
-		return cardImages.get(card);
+	public HashMap<Card, ImageView> getCardImages() {	
+		return cardImages;
 	}
 	
 
