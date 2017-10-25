@@ -198,15 +198,13 @@ public class MainMenu extends Application {
 	    GridPane.setHalignment(Lbl2, HPos.CENTER);
 	    gridpane.add(Lbl2, 1, 1);
 	 
-		Scene scene = new Scene(stackPane);
 		// button wont display. Irritating
 		GridPane.setValignment(newGame, VPos.BOTTOM);
 		gridpane.add(newGame, 0, 0);
 		root.setCenter(gridpane);
 		
 		//throwing error here because there's a stage conflict
-		stage.setScene(scene);
-		stage.show();
+		stackPane.getChildren().add(root);
 	
 		Media sound = new Media("https://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
 		mediaPlayer = new MediaPlayer(sound);
@@ -267,15 +265,11 @@ public class MainMenu extends Application {
 	    GridPane.setHalignment(Lbl3, HPos.CENTER);
 	    gridpane.add(Lbl3, 2, 0);
 	    
-		Scene scene = new Scene(stackPane);
 		GridPane.setHalignment(newGame, HPos.CENTER);
 		gridpane.add(newGame, 1, 2);
 		
 		root.setCenter(gridpane);
-		
-		//throwing error here because there's a stage conflict
-		stage.setScene(scene);
-		stage.show();
+		stackPane.getChildren().add(root);
 	
 		Media sound = new Media("https://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
 		mediaPlayer = new MediaPlayer(sound);
