@@ -190,6 +190,26 @@ public class MainMenu extends Application {
 	    Label Lbl2 = new Label("<---- Tableau Piles ---->");
 	    
 	    Button newGame = new Button("New Game");
+	    newGame.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	mediaPlayer.stop();
+		    	bakersDozenGame();
+		    }
+		});
+	    Button quitWD = new Button("Quit with dignity");
+	    quitWD.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	//Closes the application
+		    	Platform.exit();
+		    }
+		});
+	    Button quitNoD = new Button("Just Quit");
+	    quitNoD.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	//Closes the application
+		    	Platform.exit();
+		    }
+		});
 	    
 	    GridPane.setHalignment(Lbl1, HPos.RIGHT);
 	    GridPane.setValignment(Lbl1, VPos.CENTER);
@@ -198,12 +218,14 @@ public class MainMenu extends Application {
 	    GridPane.setHalignment(Lbl2, HPos.CENTER);
 	    gridpane.add(Lbl2, 1, 1);
 	 
-		// button wont display. Irritating
-		GridPane.setValignment(newGame, VPos.BOTTOM);
-		gridpane.add(newGame, 0, 0);
-		root.setCenter(gridpane);
+	    GridPane.setHalignment(newGame, HPos.CENTER);
+		gridpane.add(newGame, 1, 3);
+		GridPane.setHalignment(quitWD, HPos.LEFT);
+		gridpane.add(quitWD, 2, 3);
+		GridPane.setHalignment(quitNoD, HPos.CENTER);
+		gridpane.add(quitNoD, 3, 3);
 		
-		//throwing error here because there's a stage conflict
+		root.setCenter(gridpane);
 		stackPane.getChildren().add(root);
 	
 		Media sound = new Media("https://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
@@ -250,15 +272,34 @@ public class MainMenu extends Application {
 	    gridpane.getColumnConstraints().addAll(column1, column2);
 
 	    Button newGame = new Button("New Game");
+	    newGame.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	mediaPlayer.stop();
+		    	freeCellGame();
+		    }
+		});
+	    Button quitWD = new Button("Quit with dignity");
+	    quitWD.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	//Closes the application
+		    	Platform.exit();
+		    }
+		});
+	    Button quitNoD = new Button("Just Quit");
+	    quitNoD.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	//Closes the application
+		    	Platform.exit();
+		    }
+		});
 	    
 	    Label Lbl1 = new Label("Homecell Piles ->");
 	    Label Lbl2 = new Label("<---- Tableau Piles ---->");
 	    Label Lbl3 = new Label("Freecell Piles ->");
-	    // First name label
+	    
 	    GridPane.setHalignment(Lbl1, HPos.RIGHT);
 	    GridPane.setValignment(Lbl1, VPos.CENTER);
 	    gridpane.add(Lbl1, 0, 0);
-	    // Last name label
 	    GridPane.setHalignment(Lbl2, HPos.CENTER);
 	    gridpane.add(Lbl2, 1, 2);
 	 
@@ -266,7 +307,11 @@ public class MainMenu extends Application {
 	    gridpane.add(Lbl3, 2, 0);
 	    
 		GridPane.setHalignment(newGame, HPos.CENTER);
-		gridpane.add(newGame, 1, 2);
+		gridpane.add(newGame, 1, 3);
+		GridPane.setHalignment(quitWD, HPos.LEFT);
+		gridpane.add(quitWD, 2, 3);
+		GridPane.setHalignment(quitNoD, HPos.CENTER);
+		gridpane.add(quitNoD, 3, 3);
 		
 		root.setCenter(gridpane);
 		stackPane.getChildren().add(root);
