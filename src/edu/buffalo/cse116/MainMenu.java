@@ -204,9 +204,9 @@ public class MainMenu extends Application {
 		
 		// gridpane grid layout..
 		
-		gridpane.setPadding(new Insets(10));
+		gridpane.setPadding(new Insets(40));
 	    gridpane.setHgap(20);
-	    gridpane.setVgap(25);
+	    gridpane.setVgap(20);
 	    ColumnConstraints column1 = new ColumnConstraints();
 	     column1.setPercentWidth(12.5);
 	     ColumnConstraints column2 = new ColumnConstraints();
