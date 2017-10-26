@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 public class SolitaireController {
 	private MainMenu gui;
 	private SolitaireView view;
+	private BakersDozen bd;
 	private static final Border UNSELECTED_BORDER = BorderFactory.createEmptyBorder(5, 5, 5, 5);
     private static final Border SELECTED_BORDER = BorderFactory.createMatteBorder(5, 5, 5, 5,
                                                                                 Color.BLUE);
@@ -16,6 +17,11 @@ public class SolitaireController {
 	public SolitaireController(MainMenu gui, SolitaireView view){
 		this.gui = gui;
 		this.view = view;
+		
+		this.view.addSolitaireListener(new SolitaireListener());
+		
+	}
+	class SolitaireListener implements ActionListener{
 		
 	}
 	public void selectCard(MainMenu border){
@@ -32,11 +38,14 @@ public class SolitaireController {
 	public void addTableau(Card card){
 		
 	}
-	public boolean selectHomecell(){
-		return false;
+	public void selectHomecell(){
+		bd.removeFromHomecell();
 	}
 	public void addHomecell(BakersDozen bd, Card card){
-		if(bd.addToHomecell((card.getSuit(), card.getRank()), bd.getHomecellPiles()) == false){
+		if(bd.addToHomecell(card, 0) == true){
+			//topHomecell = addedcard
+		}
+		else{
 			System.out.println("This move is not legal!");
 		}
 	}
