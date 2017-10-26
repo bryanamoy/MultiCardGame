@@ -42,6 +42,7 @@ public class SolitaireController {
 		bd.removeFromHomecell();
 	}
 	public void addHomecell(Card card, int Pile){
+		if(bd.addToHomecell(card, Pile) == true){
 		bd.addToHomecell(card, Pile);
 		view.setCardImages();
 			//topHomecell = addedcard
