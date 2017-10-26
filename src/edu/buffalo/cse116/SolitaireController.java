@@ -44,7 +44,7 @@ public class SolitaireController {
 				bd.addCard(add, Pile);
 				view.setCardImages();
 			}
-			catch(IllegalCardTableuCardException tex){
+			catch(IllegalCardTableauCardException tex){
 				view.displayErrorMessage("Card needs to be one less rank than current top card");
 			}
 		}
