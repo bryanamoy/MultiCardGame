@@ -33,15 +33,20 @@ public class SolitaireController {
 			border.setBorder(UNSELECTED_BORDER);
 			border.repaint();
 		}
-		public void getTopTableu(Card card, Card theCard, String whichPile, int whichNumber){
+		public void selectTopTableau(Card card, Card theCard, String whichPile, int whichNumber){
 			bd.getTableauPiles_List();
 			view.setCardImages();
 			fc.addCard(theCard, whichPile, whichNumber);
 			view.setCardImages();
 		}
 		public void addTableau(Card add, int Pile){
-			bd.addCard(add, Pile);
-			view.setCardImages();
+			try{
+				bd.addCard(add, Pile);
+				view.setCardImages();
+			}
+			catch(IllegalCardTableuCardException tex){
+				view.displayErrorMessage("Card needs to be one less rank than current top card");
+			}
 		}
 		public void selectHomecell(){
 			bd.removeFromHomecell(); //returns false, cannot select homecell cards, can't move them
@@ -49,12 +54,11 @@ public class SolitaireController {
 		public void addHomecell(Card card, int Pile){
 			try{
 				bd.addToHomecell(card, Pile);
-					bd.addToHomecell(card, Pile);
-					view.setCardImages();
+				view.setCardImages();
 						//topHomecell = addedcard
 			}
-			catch(IllegalCardException ex){
-				view.displayErrorMessage("Card needs to be identical suit and one rank above top card");
+			catch(IllegalHomecellCardException hex){
+				view.displayErrorMessage("Card needs to be identical suit and one rank above current top card");
 			}
 		}
 		
