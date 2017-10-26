@@ -35,14 +35,14 @@ public class SolitaireController {
 		}
 		public void selectTopTableau(Card card, Card theCard, String whichPile, int whichNumber){
 			bd.getTableauPiles_List();
-			view.setCardImages();
+			
 			fc.addCard(theCard, whichPile, whichNumber);
-			view.setCardImages();
+		
 		}
 		public void addTableau(Card add, int Pile){
 			try{
 				bd.addCard(add, Pile);
-				view.setCardImages();
+				
 			}
 			catch(IllegalCardTableauCardException tex){
 				view.displayErrorMessage("Card needs to be one less rank than current top card");
@@ -54,7 +54,7 @@ public class SolitaireController {
 		public void addHomecell(Card card, int Pile){
 			try{
 				bd.addToHomecell(card, Pile);
-				view.setCardImages();
+				
 						//topHomecell = addedcard
 			}
 			catch(IllegalHomecellCardException hex){
@@ -70,6 +70,6 @@ public class SolitaireController {
 	
 	
 	public void updateSolitaireView(){
-		
+		view.getCardImages();
 	}
 }
