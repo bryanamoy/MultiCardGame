@@ -33,7 +33,7 @@ public class SolitaireController {
 		border.repaint();
 	}
 	public void getTopTableu(Card card){
-		
+		bd.
 	}
 	public void addTableau(Card card){
 		
@@ -41,8 +41,9 @@ public class SolitaireController {
 	public void selectHomecell(){
 		bd.removeFromHomecell();
 	}
-	public void addHomecell(BakersDozen bd, Card card){
-		if(bd.addToHomecell(card, 0) == true){
+	public void addHomecell(Card card, int Pile){
+		bd.addToHomecell(card, Pile);
+		view.setCardImages();
 			//topHomecell = addedcard
 		}
 		else{
