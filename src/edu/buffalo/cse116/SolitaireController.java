@@ -47,13 +47,14 @@ public class SolitaireController {
 			bd.removeFromHomecell(); //returns false, cannot select homecell cards, can't move them
 		}
 		public void addHomecell(Card card, int Pile){
-			if(bd.addToHomecell(card, Pile) == true){
-			bd.addToHomecell(card, Pile);
-			view.setCardImages();
-				//topHomecell = addedcard
+			try{
+				bd.addToHomecell(card, Pile);
+					bd.addToHomecell(card, Pile);
+					view.setCardImages();
+						//topHomecell = addedcard
 			}
-			else{
-				System.out.println("This move is not legal!");
+			catch(IllegalCardException ex){
+				view.displayErrorMessage("Card needs to be identical suit and one rank above top card");
 			}
 		}
 		
