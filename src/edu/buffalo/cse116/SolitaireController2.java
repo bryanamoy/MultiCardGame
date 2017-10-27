@@ -4,25 +4,28 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
-public class SolitaireController2 extends Application{
+public class SolitaireController2{
 	private MainMenu gui;
 	private SolitaireView view;
 	private BakersDozen bd;
 	private Freecell fc;
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// TODO Auto-generated method stub
+		
+	public void BakersDozenGame(ActionEvent event){
 		BakersDozen bd = new BakersDozen(); //create new BakersDozen game
 		bd.initialSetup();					//set up bakersdozen game
-		
+	}
+	public void FreecellGame(ActionEvent event){
 		Freecell fc = new Freecell(8,4,4); //create new freecell game
 		fc.initialSetup();				  //set up freecell game
-		
-		bd.removeFromHomecell(); //returns illegal move
-		
+	}
+	public void removeHomecell(ActionEvent event){
+	bd.removeFromHomecell(); //returns illegal move
+		fc.removeCard(whichPile, whichNumber);
+	}
 		//try and catch for when a move to tableau pile is illegal. displayErrorMessage is for
 		//for the bullet point asking to display error message for the move
-		try{
+	public void addCard(ActionEvent event){	
+	try{
 			bd.addToHomecell(card, Pile);	
 		}
 		catch(IllegalHomecellCardException hex){
@@ -43,8 +46,8 @@ public class SolitaireController2 extends Application{
 		catch(IllegalMoveException ex){
 			view.displayErrorMessage("Error Message");
 		}
+	
+	
 	}
-	public static void main(String args[]){ 
-	      launch(args); 
-	   } 
+	
 }
