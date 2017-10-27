@@ -22,9 +22,9 @@ public class SolitaireController2{
 	bd.removeFromHomecell(); //returns illegal move
 		fc.removeCard(whichPile, whichNumber);
 	}
-		//try and catch for when a move to tableau pile is illegal. displayErrorMessage is for
-		//for the bullet point asking to display error message for the move
+		
 	public void addCard(ActionEvent event){	
+		//try and catch for when a move to homecell pile is illegal
 	try{
 			bd.addToHomecell(card, Pile);	
 		}
@@ -32,8 +32,11 @@ public class SolitaireController2{
 			view.displayErrorMessage("Card needs to be identical suit and one rank above current top card");
 		}
 		
-		//try and catch for when a move to homecell pile is illegal
-		try{
+	/*	
+	try and catch for when a move to tableau pile is illegal. displayErrorMessage is for
+	for the bullet point asking to display error message for the move	
+	*/
+	try{
 			bd.addCard(add, Pile);
 		}
 		catch(IllegalCardTableauCardException tex){
