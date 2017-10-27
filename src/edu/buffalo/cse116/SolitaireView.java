@@ -13,16 +13,18 @@ import java.util.zip.ZipInputStream;
 import javax.swing.ImageIcon;
 
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.Scene;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -47,16 +49,10 @@ public class SolitaireView {
 	private BakersDozen bd;
 	private Freecell fc;
 	private MediaPlayer mediaPlayer;
-	private Pane pane;
+	private StackPane stackPane = new StackPane();
 	
-	SolitaireController sc = new SolitaireController();
-
-	public MediaPlayer getMediaPlayer() {
-		return mediaPlayer;
-	}
-
-
-	public SolitaireView() {
+	
+	public SolitaireView()  {
 		
 	}
 
@@ -89,7 +85,7 @@ public class SolitaireView {
 		}
 
 		if (game.toLowerCase().equals("freecell")) {
-	//		fc = new Freecell();
+			fc = new Freecell();
 			fc.initialSetup();
 			cards = fc.getDeck();
 			if (directoryListing != null) {
@@ -117,8 +113,8 @@ public class SolitaireView {
 	public HashMap<Card, ImageView> getCardImages() {
 		return cardImages;
 	}
-	
-	
+
+
 	public ImageView displayImageViewOfCard(Card c) {
 		ImageView rtn = null;
 
@@ -128,12 +124,18 @@ public class SolitaireView {
 
 			}
 		}
-		return rtn;	
+		return rtn;
+
+	}
+	
+	public MediaPlayer getMediaPlayer() {
+		return mediaPlayer;
 	}
 
-	// sets up baker's dozen board
-	public void bdSetupBoard(){
-    	
+	public StackPane  startbdGame() {
+		
+		stackPane = new StackPane();
+    	BorderPane root = new BorderPane();
     	Rectangle r = new Rectangle(900, 500, Color.AQUA);
     	Rectangle test = new Rectangle(25,40, Color.RED);
     	Rectangle test2 = new Rectangle(25,40, Color.YELLOW);
@@ -153,7 +155,8 @@ public class SolitaireView {
     	Rectangle t12 = new Rectangle(25,40, Color.RED);
     	Rectangle t13 = new Rectangle(25,40, Color.YELLOW);
     	
-    	Label title = new Label("Baker's Dozen");
+    	Label title = new Label("Baker's Dozen- to the DEATH");
+    	stackPane.setAlignment(title, Pos.TOP_CENTER);
     	//Setting the font of the text 
         title.setFont(Font.font(null, FontWeight.BOLD, 15));     
         
@@ -162,6 +165,9 @@ public class SolitaireView {
         
         GridPane gridpane = new GridPane();
         
+    	ObservableList list = stackPane.getChildren(); 
+		list.addAll(r, title, gridpane);
+		
 		// gridpane grid layout..
 		
 		gridpane.setPadding(new Insets(40));
@@ -205,6 +211,13 @@ public class SolitaireView {
 	    Label Lbl1 = new Label("Homecell Piles-^");
 	    Label Lbl2 = new Label("^- Tableau Piles -^");
 	    
+	    Button newGame = new Button("New Game");
+	    newGame.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	mediaPlayer.stop();
+		    	startbdGame();
+		    }
+		});
 	    Button quitWD = new Button("Quit with dignity");
 	    quitWD.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
@@ -241,24 +254,52 @@ public class SolitaireView {
 	    gridpane.add(t13, 5, 6);
 	    
 	   // Homecell and tableau Labels
-	    sc.startBDButton(new Button("Restart"));
 	    
 	    GridPane.setHalignment(Lbl2, HPos.CENTER);
 	    gridpane.add(Lbl1, 2, 1); //homecell
 	    gridpane.add(Lbl2, 3, 7); //tableau
 	 
-	    GridPane.setHalignment(sc.getButton(), HPos.CENTER);
-		gridpane.add(sc.getButton(), 1, 8);
+	    GridPane.setHalignment(newGame, HPos.CENTER);
+		gridpane.add(newGame, 1, 8);
 		GridPane.setHalignment(quitWD, HPos.LEFT);
 		gridpane.add(quitWD, 4, 8);
 		GridPane.setHalignment(quitNoD, HPos.CENTER);
 		gridpane.add(quitNoD, 7, 8);
-		this.pane=gridpane;
+		
+		root.setCenter(gridpane);
+		stackPane.getChildren().add(root);
+	
+		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
+		mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setOnEndOfMedia(new Runnable() {
+			@Override public void run() {
+		         mediaPlayer.seek(Duration.ZERO);
+		       }
+		});
+		mediaPlayer.play(); 
+		
+		return stackPane;
+	}
+	
+	
+	
+
+	public void playMusic(Media song){
+		mediaPlayer = new MediaPlayer(song);
+		mediaPlayer.setOnEndOfMedia(new Runnable() {
+			@Override public void run() {
+				mediaPlayer.seek(Duration.ZERO);
+				mediaPlayer.play();
+			}
+		});
 		
 		
 	}
+	
+	
+	
 
-	public Pane getPane(){
-	  return this.pane;
+	public static void main(String[] args) {
+
 	}
 }
