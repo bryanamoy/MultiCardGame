@@ -82,25 +82,19 @@ public class MainMenu extends Application {
 
 		stage = mainWindow;
 		view = new SolitaireView();
-		view.setCardImages("bakersdozen");
+		
 		
 		Text text = new Text("Solitaire!");
 		text.setFont(Font.font ("Verdana", 150));
 		text.setFill(Color.ALICEBLUE);//
 		
 		Image image = new Image("http://i0.kym-cdn.com/photos/images/original/001/169/608/a43.gif", true);  								
-		ImageView imageView =  view.displayImageViewOfCard(new Card(Suit.DIAMONDS,Rank.EIGHT));
-		imageView.setFitHeight(150);
-		imageView.setFitWidth(200);
+		ImageView imageView = new ImageView(image);
+		imageView.setPreserveRatio(true);
+		imageView.fitWidthProperty().bind(stage.widthProperty());
 		
 		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/gabriels-message-keyboard.mp3");
-		mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.setOnEndOfMedia(new Runnable() {
-			@Override public void run() {
-				mediaPlayer.seek(Duration.ZERO);
-			}
-		});
-		mediaPlayer.play();
+		view.playMusic(sound);
 
 		BorderPane borderPane = new BorderPane();
 		borderPane.getChildren().add(imageView);
@@ -108,7 +102,7 @@ public class MainMenu extends Application {
 		MenuItem bdMenuItm = new MenuItem("Baker's Dozen");
 		bdMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	mediaPlayer.stop();
+		    	view.getMediaPlayer().stop();
 		    	changeScene(view.startBakersDozenGame());
 		    }
 		});
@@ -116,8 +110,7 @@ public class MainMenu extends Application {
 		MenuItem fcMenuItm = new MenuItem("Freecell");
 		fcMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	mediaPlayer.stop();
-		    	Freecell fc = new Freecell(8, 4, 4);
+		    	view.getMediaPlayer().stop();
 		    	changeScene(view.startfreeCellGame());
 		    }
 		});
