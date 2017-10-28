@@ -33,6 +33,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -49,12 +50,11 @@ public class SolitaireView {
 	private Freecell fc;
 	private MediaPlayer mediaPlayer;
 
-	
 	public SolitaireView() {
 
 	}
 
-	public HashMap<Card, ImageView> setCardImages(String game) throws FileNotFoundException {
+	public HashMap<Card, ImageView> setCardImages(String game) {
 
 		File files = new File(("moderncards"));
 		File[] directoryListing = files.listFiles();
@@ -70,10 +70,16 @@ public class SolitaireView {
 						if (cardImageFile
 								.equals(cards.get(i).getSuit().toString() + cards.get(i).getRank().toString())) {
 							Card card = new Card(cards.get(i).getSuit(), cards.get(i).getRank());
-							FileInputStream inputstream = new FileInputStream("moderncards/" + cardImageFile + ".png");
-							Image image = new Image(inputstream);
-							ImageView imageView = new ImageView(image);
-							cardImages.put(card, imageView);
+							FileInputStream inputstream;
+							try {
+								inputstream = new FileInputStream("moderncards/" + cardImageFile + ".png");
+								Image image = new Image(inputstream);
+								ImageView imageView = new ImageView(image);
+								cardImages.put(card, imageView);
+							} catch (FileNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 
 						}
 				}
@@ -93,10 +99,16 @@ public class SolitaireView {
 						if (cardImageFile
 								.equals(cards.get(i).getSuit().toString() + cards.get(i).getRank().toString())) {
 							Card card = new Card(cards.get(i).getSuit(), cards.get(i).getRank());
-							FileInputStream inputstream = new FileInputStream("moderncards/" + cardImageFile + ".png");
-							Image image = new Image(inputstream);
-							ImageView imageView = new ImageView(image);
-							cardImages.put(card, imageView);
+							FileInputStream inputstream;
+							try {
+								inputstream = new FileInputStream("moderncards/" + cardImageFile + ".png");
+								Image image = new Image(inputstream);
+								ImageView imageView = new ImageView(image);
+								cardImages.put(card, imageView);
+							} catch (FileNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 
 						}
 				}
@@ -132,7 +144,26 @@ public class SolitaireView {
 	public StackPane startBakersDozenGame() {
 
 		StackPane stackPane = new StackPane();
+		
 		BorderPane root = new BorderPane();
+		setCardImages("bakersdozen");
+		HashMap<Card, ImageView> Images = getCardImages();
+		ArrayList<VBox> boxes = new ArrayList<VBox>();
+
+		for (Card i : Images.keySet()) {
+			for (ArrayList<Card> pile : bd.getTableauPiles_List().values()) {
+				for (int x = 0; x < 13; x++) {
+					VBox loc = new VBox(10);
+					for (int ind = 0; ind < 4; ind++) {
+						if (pile.get(ind).equals(i)) {
+							loc.getChildren().add(Images.get(i));
+						}
+					}
+					boxes.add(loc);
+				}
+			}
+		}
+
 		Rectangle r = new Rectangle(900, 500, Color.AQUA);
 		Rectangle test = new Rectangle(25, 40, Color.RED);
 		Rectangle test2 = new Rectangle(25, 40, Color.YELLOW);
@@ -213,7 +244,7 @@ public class SolitaireView {
 			@Override
 			public void handle(ActionEvent e) {
 				mediaPlayer.stop();
-			startBakersDozenGame();
+				startBakersDozenGame();
 			}
 		});
 		Button quitWD = new Button("Quit with dignity");
@@ -232,6 +263,7 @@ public class SolitaireView {
 				Platform.exit();
 			}
 		});
+
 		// homecell pile locations
 		gridpane.add(test, 1, 0);
 		gridpane.add(test2, 2, 0);
@@ -240,18 +272,21 @@ public class SolitaireView {
 		// tableau pile 1 location
 		gridpane.add(test6, 6, 0);
 
-		gridpane.add(t2, 3, 3);
-		gridpane.add(t3, 3, 2);
-		gridpane.add(t4, 3, 4);
-		gridpane.add(t5, 3, 6);
-		gridpane.add(t6, 4, 3);
-		gridpane.add(t7, 4, 2);
-		gridpane.add(t8, 4, 4);
-		gridpane.add(t9, 4, 6);
-		gridpane.add(t10, 5, 3);
-		gridpane.add(t11, 5, 2);
-		gridpane.add(t12, 5, 4);
-		gridpane.add(t13, 5, 6);
+		
+		 gridpane.add(t2, 3, 2);
+		 gridpane.add(t3, 3, 3);
+		 gridpane.add(t4, 3, 4);
+		 gridpane.add(t5, 3, 5);
+		
+		 gridpane.add(t6, 4, 2);
+		 gridpane.add(t7, 4, 3);
+		 gridpane.add(t8, 4, 4);
+		 gridpane.add(t9, 4, 5);
+		
+		 gridpane.add(t10, 5, 2);
+		 gridpane.add(t11, 5, 3);
+		 gridpane.add(t12, 5, 4);
+		 gridpane.add(t13, 5, 5);
 
 		// Homecell and tableau Labels
 
@@ -270,22 +305,15 @@ public class SolitaireView {
 		stackPane.getChildren().add(root);
 
 		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
-		mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.setOnEndOfMedia(new Runnable() {
-			@Override
-			public void run() {
-				mediaPlayer.seek(Duration.ZERO);
-			}
-		});
-		mediaPlayer.play();
+		playMusic(sound);
 
 		return stackPane;
 	}
 
 	public StackPane startfreeCellGame() {
-		
+
 		StackPane stackPane = new StackPane();
-		
+		setCardImages("freecell");
 		BorderPane root = new BorderPane();
 		Rectangle r = new Rectangle(900, 500, Color.LIGHTGREEN);
 
@@ -427,16 +455,8 @@ public class SolitaireView {
 		stackPane.getChildren().add(root);
 
 		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
-		mediaPlayer = new MediaPlayer(sound);
-		mediaPlayer.setOnEndOfMedia(new Runnable() {
-			@Override
-			public void run() {
-				mediaPlayer.seek(Duration.ZERO);
-			}
-		});
-		mediaPlayer.play();
+		playMusic(sound);
 
-		
 		return stackPane;
 	}
 
