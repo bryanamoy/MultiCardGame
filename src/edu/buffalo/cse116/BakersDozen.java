@@ -126,12 +126,14 @@ public class BakersDozen extends Solitaire{
 		
 			for(int x =0;x<4;x++){
 				
-				if(Pile.get(x).getRank() == king){
-					Card replace = tableauPiles_List.get(i).get(x);
-					tableauPiles_List.get(i).set(3, replace);
-				
+				if(Pile.get(x).getRank() == Rank.KING){
+					Card replace = Pile.get(x);
+					Card back = Pile.get(0);
+					Pile.set(0, replace);
+					Pile.set(x, back);
 				}
 			}
+			
 		}
 		
 		homecellPiles_List = new HashMap<Integer, ArrayList<Card>>();
