@@ -55,7 +55,7 @@ public class SolitaireView {
 	private Freecell fc;
 	private MediaPlayer mediaPlayer;
 	private ArrayList<HBox> boxesforBD = new ArrayList<HBox>();
-	private ArrayList<VBox> boxesforFC = new ArrayList<VBox>();
+	private ArrayList<HBox> boxesforFC = new ArrayList<HBox>();
 
 	public SolitaireView() {
 
@@ -168,14 +168,14 @@ public class SolitaireView {
 			}
 		}
 		for (ImageView image : Images.values()) {
-			image.setFitHeight(50);
-			image.setFitWidth(40);
+			image.setFitHeight(60);
+			image.setFitWidth(45);
 		}
 
 		int cursor = 0;
 		for (int x = 0; x < 13; x++) {
 			if (cursor % 4 == 0) {
-				HBox n = new HBox(10);
+				HBox n = new HBox();
 				for (int h = 0; h < cards.size(); h++) {
 					for (Card c : Images.keySet()) {
 						if (cards.get(h).toString().equals(c.toString())) {
@@ -212,9 +212,10 @@ public class SolitaireView {
 
 		// gridpane grid layout..
 
-		gridpane.setPadding(new Insets(40));
-		gridpane.setHgap(20);
-		gridpane.setVgap(20);
+		gridpane.setPadding(new Insets(50));
+		gridpane.setHgap(25);
+		gridpane.setVgap(25);
+		
 		ColumnConstraints column1 = new ColumnConstraints();
 		column1.setPercentWidth(12.5);
 		ColumnConstraints column2 = new ColumnConstraints();
@@ -324,7 +325,7 @@ public class SolitaireView {
 		HashMap<Card, ImageView> Images = getCardImages();
 		ArrayList<Card> cards = new ArrayList<Card>();
 		ArrayList<ImageView> pics = new ArrayList<ImageView>();
-
+		
 		for (Integer pile : fc.getTableauMap().keySet()) {
 			if (pile < 5) {
 				for (int x = 0; x < 7; x++) {
@@ -338,7 +339,7 @@ public class SolitaireView {
 		}
 
 		for (ImageView image : Images.values()) {
-			image.setFitHeight(50);
+			image.setFitHeight(60);
 			image.setFitWidth(40);
 		}
 		
@@ -354,17 +355,16 @@ public class SolitaireView {
 		for (int x = 0; x < 8; x++) {
 			
 			if (cursor % 7 == 0 && cursor < 28) {
-				VBox box1 = new VBox(5);
+				HBox box = new HBox();
 				List<ImageView> images = pics.subList(cursor, cursor + 7);
 				for (int ind = 0; ind < 7; ind++) {
-					box1.getChildren().add(images.get(ind));
+					box.getChildren().add(images.get(ind));
 				}
-
-				boxesforFC.add(box1);
-
+				boxesforFC.add(box);
 				cursor += 7;
-			} else if (cursor % 6 > 0 && cursor < 52) {
-				VBox box1 = new VBox(5);
+			} 
+			else if (cursor % 6 > 0 && cursor < 52) {
+				HBox box1 = new HBox();
 				List<ImageView> images = pics.subList(cursor, cursor + 6);
 				for (int ind = 0; ind < 6; ind++) {
 					box1.getChildren().add(images.get(ind));
@@ -374,8 +374,10 @@ public class SolitaireView {
 			}
 
 		}
-
-		Rectangle r = new Rectangle(900, 500, Color.LIGHTGREEN);
+		
+		BackgroundFill fill = new BackgroundFill(Color.LIGHTGREEN, null, null);
+		Background background = new Background(fill);
+		
 		Rectangle fc1 = new Rectangle(25, 40, Color.RED);
 		Rectangle fc2 = new Rectangle(25, 40, Color.RED);
 		Rectangle fc3 = new Rectangle(25, 40, Color.RED);
@@ -403,34 +405,28 @@ public class SolitaireView {
 
 		GridPane gridpane = new GridPane();
 
-		ObservableList list = stackPane.getChildren();
-		list.addAll(r, title, gridpane);
-
 		// gridpane grid layout..
 
-		gridpane.setPadding(new Insets(40));
-		gridpane.setHgap(20);
-		gridpane.setVgap(20);
+		gridpane.setPadding(new Insets(50));
+		gridpane.setHgap(25);
+		gridpane.setVgap(25);
+		
 		ColumnConstraints column1 = new ColumnConstraints();
-		column1.setPercentWidth(10);
+		column1.setPercentWidth(12.5);
 		ColumnConstraints column2 = new ColumnConstraints();
-		column2.setPercentWidth(10);
+		column2.setPercentWidth(12.5);
 		ColumnConstraints column3 = new ColumnConstraints();
-		column3.setPercentWidth(10);
+		column3.setPercentWidth(12.5);
 		ColumnConstraints column4 = new ColumnConstraints();
-		column4.setPercentWidth(10);
+		column4.setPercentWidth(12.5);
 		ColumnConstraints column5 = new ColumnConstraints();
-		column5.setPercentWidth(10);
+		column5.setPercentWidth(12.5);
 		ColumnConstraints column6 = new ColumnConstraints();
-		column6.setPercentWidth(10);
+		column6.setPercentWidth(12.5);
 		ColumnConstraints column7 = new ColumnConstraints();
-		column7.setPercentWidth(10);
+		column7.setPercentWidth(12.5);
 		ColumnConstraints column8 = new ColumnConstraints();
-		column8.setPercentWidth(10);
-		ColumnConstraints column9 = new ColumnConstraints();
-		column9.setPercentWidth(10);
-		ColumnConstraints column10 = new ColumnConstraints();
-		column10.setPercentWidth(10);
+		column8.setPercentWidth(12.5);
 		gridpane.getColumnConstraints().addAll(column1, column2, column3, column4, column5, column6, column7, column8);
 		RowConstraints row1 = new RowConstraints();
 		row1.setPercentHeight(12.5);
@@ -469,33 +465,27 @@ public class SolitaireView {
 				Platform.exit();
 			}
 		});
-		Button quitNoD = new Button("Just Quit");
-		quitNoD.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				// Closes the application
-				Platform.exit();
-			}
-		});
+		
 		// homecell pile locations
-		gridpane.add(fc1, 1, 0);
-		gridpane.add(fc2, 2, 0);
-		gridpane.add(fc3, 3, 0);
-		gridpane.add(fc4, 4, 0);
+		gridpane.add(fc1, 2, 0);
+		gridpane.add(fc2, 3, 0);
+		gridpane.add(fc3, 4, 0);
+		gridpane.add(fc4, 5, 0);
+		
 		// tableau pile 1 location
-		gridpane.add(hc1, 6, 0);
-		gridpane.add(hc2, 7, 0);
-		gridpane.add(hc3, 8, 0);
-		gridpane.add(hc4, 9, 0);
+		gridpane.add(hc1, 2, 1);
+		gridpane.add(hc2, 3, 1);
+		gridpane.add(hc3, 4, 1);
+		gridpane.add(hc4, 5, 1);
 
-		gridpane.add(boxesforFC.get(0), 1, 3);
+		gridpane.add(boxesforFC.get(0), 2, 2);
 		gridpane.add(boxesforFC.get(1), 2, 3);
-		gridpane.add(boxesforFC.get(2), 3, 3);
-		gridpane.add(boxesforFC.get(3), 4, 3);
-		gridpane.add(boxesforFC.get(4), 5, 3);
-		gridpane.add(boxesforFC.get(5), 6, 3);
-		gridpane.add(boxesforFC.get(6), 7, 3);
-		gridpane.add(boxesforFC.get(7), 8, 3);
+		gridpane.add(boxesforFC.get(2), 2, 4);
+		gridpane.add(boxesforFC.get(3), 2, 5);
+		gridpane.add(boxesforFC.get(4), 4, 2);
+		gridpane.add(boxesforFC.get(5), 4, 3);
+		gridpane.add(boxesforFC.get(6), 4, 4);
+		gridpane.add(boxesforFC.get(7), 4, 5);
 
 		// Homecell and tableau Labels
 
@@ -507,11 +497,10 @@ public class SolitaireView {
 		gridpane.add(newGame, 1, 8);
 		GridPane.setHalignment(quitWD, HPos.LEFT);
 		gridpane.add(quitWD, 4, 8);
-		GridPane.setHalignment(quitNoD, HPos.CENTER);
-		gridpane.add(quitNoD, 7, 8);
 
 		root.setCenter(gridpane);
-		stackPane.getChildren().add(root);
+		stackPane.setBackground(background);
+		stackPane.getChildren().addAll(root,gridpane);
 
 		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
 		playMusic(sound);
@@ -544,4 +533,3 @@ public class SolitaireView {
 
 	}
 }
-
