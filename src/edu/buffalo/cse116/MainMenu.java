@@ -76,13 +76,11 @@ public class MainMenu extends Application {
 	private Stage stage;
 	private static MediaPlayer mediaPlayer;
 
-	//All gui code can be done within the start method
 	@Override
 	public void start(Stage mainWindow) throws Exception {
 
 		stage = mainWindow;
 		view = new SolitaireView();
-		
 		
 		Text text = new Text("Solitaire!");
 		text.setFont(Font.font ("Verdana", 150));
@@ -118,7 +116,6 @@ public class MainMenu extends Application {
 		MenuItem quitMenuItm = new MenuItem("Quit");
 		quitMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	//Closes the application
 		    	Platform.exit();
 		    }
 		});
@@ -132,9 +129,6 @@ public class MainMenu extends Application {
 		borderPane.setCenter(text);
 		borderPane.setBottom(menuBar);
 		
-		//Prepare a Scene with the required dimensions and add the scene graph (root node of the scene graph) to it.
-		//This is basically the inside window.
-		//Each scene object can only have one root node.
 		Scene scene = new Scene(borderPane, mainWidth, mainHeight);  //, mainWidth, mainHeight);
 
 		//A window		
@@ -142,15 +136,8 @@ public class MainMenu extends Application {
 
 		//Add the scene to the stage and display the contents of the stage.		
 		mainWindow.setScene(scene);
-
-		//Actually displays the contents
 		mainWindow.show();	
 
-		//Stage				 The window (BOOK)
-		//Scene				 The space within the window (like a pane). (A PAGE) 
-		//					 This is supposed to be like an area within the application.
-		//Root Node			 The thing to hold all of the scene graphs (The stuff that holds all of the stuff in the page)
-		//Scene graph(nodes) The stuff inside the scene(buttons, color, shape and other stuff) (THE STUFF WITHIN THE PAGE)
 	}
 	
 	private Boolean changeScene(Pane pane){
@@ -160,20 +147,9 @@ public class MainMenu extends Application {
 		}
 		return false;
 	}
-	
-	
-	
-	
-
-	//stop() -An empty method which can be overridden, here you can write the logic to stop the application. So like when I want
-	//to exit the game.
-
-	//init() - An empty method which can be overridden, but you cannot create stage or scene in this method. Place to hold code 
-	//before the start() method
 
 	public static void main(String args[]){           
 		
-		//Implicitly calls start()
 		launch(args);      
 	} 
 }
