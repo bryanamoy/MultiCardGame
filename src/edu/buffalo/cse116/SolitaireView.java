@@ -168,7 +168,7 @@ public class SolitaireView {
 			}
 		}
 		for (ImageView image : Images.values()) {
-			image.setFitHeight(60);
+			image.setFitHeight(80);
 			image.setFitWidth(45);
 		}
 
@@ -340,7 +340,7 @@ public class SolitaireView {
 
 		for (ImageView image : Images.values()) {
 			image.setFitHeight(60);
-			image.setFitWidth(40);
+			image.setFitWidth(45);
 		}
 		
 		for (int size = 0; size < 52; size++) {
@@ -351,30 +351,34 @@ public class SolitaireView {
 			}
 		}
 		
+		
 		int cursor = 0;
 		for (int x = 0; x < 8; x++) {
+			HBox box = new HBox();
 			
 			if (cursor % 7 == 0 && cursor < 28) {
-				HBox box = new HBox();
+				
 				List<ImageView> images = pics.subList(cursor, cursor + 7);
 				for (int ind = 0; ind < 7; ind++) {
 					box.getChildren().add(images.get(ind));
+				
 				}
 				boxesforFC.add(box);
 				cursor += 7;
 			} 
 			else if (cursor % 6 > 0 && cursor < 52) {
-				HBox box1 = new HBox();
+				
 				List<ImageView> images = pics.subList(cursor, cursor + 6);
 				for (int ind = 0; ind < 6; ind++) {
-					box1.getChildren().add(images.get(ind));
+					box.getChildren().add(images.get(ind));
+				
 				}
-				boxesforFC.add(box1);
+				boxesforFC.add(box);
 				cursor += 6;
 			}
-
 		}
-		
+	       
+	       
 		BackgroundFill fill = new BackgroundFill(Color.LIGHTGREEN, null, null);
 		Background background = new Background(fill);
 		
@@ -386,14 +390,6 @@ public class SolitaireView {
 		Rectangle hc2 = new Rectangle(25, 40, Color.YELLOW);
 		Rectangle hc3 = new Rectangle(25, 40, Color.YELLOW);
 		Rectangle hc4 = new Rectangle(25, 40, Color.YELLOW);
-		Rectangle t1 = new Rectangle(25, 40, Color.GREEN);
-		Rectangle t2 = new Rectangle(25, 40, Color.RED);
-		Rectangle t3 = new Rectangle(25, 40, Color.YELLOW);
-		Rectangle t4 = new Rectangle(25, 40, Color.RED);
-		Rectangle t5 = new Rectangle(25, 40, Color.YELLOW);
-		Rectangle t6 = new Rectangle(25, 40, Color.RED);
-		Rectangle t7 = new Rectangle(25, 40, Color.YELLOW);
-		Rectangle t8 = new Rectangle(25, 40, Color.RED);
 
 		Label title = new Label("Freecell- to the DEATH");
 		stackPane.setAlignment(title, Pos.TOP_CENTER);
@@ -439,16 +435,14 @@ public class SolitaireView {
 		RowConstraints row5 = new RowConstraints();
 		row5.setPercentHeight(12.5);
 		RowConstraints row6 = new RowConstraints();
-		row5.setPercentHeight(12.5);
+		row6.setPercentHeight(12.5);
 		RowConstraints row7 = new RowConstraints();
-		row5.setPercentHeight(12.5);
+		row7.setPercentHeight(12.5);
 		RowConstraints row8 = new RowConstraints();
-		row5.setPercentHeight(12.5);
+		row8.setPercentHeight(12.5);
 		gridpane.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6, row7, row8);
 
-		Label Lbl1 = new Label("Homecell Piles-^");
-		Label Lbl2 = new Label("^- Tableau Piles -^");
-
+	
 		Button newGame = new Button("New Game");
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -489,10 +483,6 @@ public class SolitaireView {
 
 		// Homecell and tableau Labels
 
-		GridPane.setHalignment(Lbl2, HPos.CENTER);
-		gridpane.add(Lbl1, 2, 1); // homecell
-		gridpane.add(Lbl2, 3, 7); // tableau
-
 		GridPane.setHalignment(newGame, HPos.CENTER);
 		gridpane.add(newGame, 1, 8);
 		GridPane.setHalignment(quitWD, HPos.LEFT);
@@ -526,8 +516,9 @@ public class SolitaireView {
 		} else if (game.equals("freecell")) {
 			startfreeCellGame();
 		}
-
 	}
+	
+	
 
 	public static void main(String[] args) {
 
