@@ -54,8 +54,8 @@ public class SolitaireView {
 	private BakersDozen bd;
 	private Freecell fc;
 	private MediaPlayer mediaPlayer;
-	private ArrayList<HBox> boxesforBD = new ArrayList<HBox>();
-	private ArrayList<HBox> boxesforFC = new ArrayList<HBox>();
+	private ArrayList<StackPane> stacksforBD = new ArrayList<StackPane>();
+	private ArrayList<StackPane> boxesforFC = new ArrayList<StackPane>();
 
 	public SolitaireView() {
 
@@ -131,8 +131,8 @@ public class SolitaireView {
 		return cardImages;
 	}
 
-	public ArrayList<HBox> getBoxesforBD() {
-		return boxesforBD;
+	public ArrayList<StackPane> getStackforBD() {
+		return stacksforBD;
 	}
 
 	public ImageView getImageViewOfCard(Card c) {
@@ -152,12 +152,24 @@ public class SolitaireView {
 		return mediaPlayer;
 	}
 
-	public StackPane startBakersDozenGame() {
-		StackPane stackPane = new StackPane();
-
-		BorderPane root = new BorderPane();
+	public BorderPane startBakersDozenGame() {
+		
+		BorderPane window = new BorderPane();
 		setCardImages("bakersdozen");
-
+		
+		VBox box1 = new VBox();
+		VBox box2 = new VBox();
+		VBox box3 = new VBox();
+		
+		HBox mainhbox = new HBox();
+		
+		StackPane stack = new StackPane();
+		StackPane stack2 = new StackPane();
+		StackPane stack3 = new StackPane();
+		StackPane stack4 = new StackPane();
+		StackPane stack5 = new StackPane();
+		
+		
 		HashMap<Card, ImageView> Images = getCardImages();
 		ArrayList<Card> cards = new ArrayList<Card>();
 		ArrayList<ImageView> pics = new ArrayList<ImageView>();
@@ -169,13 +181,14 @@ public class SolitaireView {
 		}
 		for (ImageView image : Images.values()) {
 			image.setFitHeight(80);
-			image.setFitWidth(45);
+			image.setFitWidth(50);
+			
 		}
 
 		int cursor = 0;
 		for (int x = 0; x < 13; x++) {
 			if (cursor % 4 == 0) {
-				HBox n = new HBox();
+				StackPane  n = new StackPane();
 				for (int h = 0; h < cards.size(); h++) {
 					for (Card c : Images.keySet()) {
 						if (cards.get(h).toString().equals(c.toString())) {
@@ -183,75 +196,38 @@ public class SolitaireView {
 						}
 					}
 				}
+				
 				List<ImageView> images = pics.subList(cursor, cursor + 4);
 				for (int ind = 0; ind < 4; ind++) {
 
 					n.getChildren().add(images.get(ind));
 				}
-				boxesforBD.add(n);
+				stacksforBD.add(n);
 			}
 			cursor += 4;
 		}
 
 		BackgroundFill fill = new BackgroundFill(Color.AQUA, null, null);
 		Background background = new Background(fill);
-		Rectangle test = new Rectangle(25, 40, Color.RED);
-		Rectangle test2 = new Rectangle(25, 40, Color.BLACK);
-		Rectangle test3 = new Rectangle(25, 40, Color.RED);
-		Rectangle test4 = new Rectangle(25, 40, Color.BLACK);
+		Rectangle test = new Rectangle(50, 80, Color.RED);
+		Rectangle test2 = new Rectangle(50, 80, Color.BLACK);
+		Rectangle test3 = new Rectangle(50, 80, Color.RED);
+		Rectangle test4 = new Rectangle(50, 80, Color.BLACK);
 
 		Label title = new Label("Baker's Dozen- to the DEATH");
-		stackPane.setAlignment(title, Pos.TOP_CENTER);
+		window.setAlignment(title, Pos.TOP_CENTER);
 		// Setting the font of the text
 		title.setFont(Font.font(null, FontWeight.BOLD, 15));
 
 		// Setting the color of the text
 		title.setTextFill(Color.CRIMSON);
-
-		GridPane gridpane = new GridPane();
-
 		// gridpane grid layout..
 
-		gridpane.setPadding(new Insets(50));
-		gridpane.setHgap(25);
-		gridpane.setVgap(25);
+		box1.getChildren().addAll(stacksforBD.get(0),stacksforBD.get(1),stacksforBD.get(2),stacksforBD.get(3));
+		box2.getChildren().addAll(stacksforBD.get(4),stacksforBD.get(5),stacksforBD.get(6),stacksforBD.get(7));
+		box3.getChildren().addAll(stacksforBD.get(8),stacksforBD.get(9),stacksforBD.get(10),stacksforBD.get(11));
 		
-		ColumnConstraints column1 = new ColumnConstraints();
-		column1.setPercentWidth(12.5);
-		ColumnConstraints column2 = new ColumnConstraints();
-		column2.setPercentWidth(12.5);
-		ColumnConstraints column3 = new ColumnConstraints();
-		column3.setPercentWidth(12.5);
-		ColumnConstraints column4 = new ColumnConstraints();
-		column4.setPercentWidth(12.5);
-		ColumnConstraints column5 = new ColumnConstraints();
-		column5.setPercentWidth(12.5);
-		ColumnConstraints column6 = new ColumnConstraints();
-		column6.setPercentWidth(12.5);
-		ColumnConstraints column7 = new ColumnConstraints();
-		column7.setPercentWidth(12.5);
-		ColumnConstraints column8 = new ColumnConstraints();
-		column8.setPercentWidth(12.5);
-		gridpane.getColumnConstraints().addAll(column1, column2, column3, column4, column5, column6, column7, column8);
-
-		RowConstraints row1 = new RowConstraints();
-		row1.setPercentHeight(12.5);
-		RowConstraints row2 = new RowConstraints();
-		row2.setPercentHeight(12.5);
-		RowConstraints row3 = new RowConstraints();
-		row3.setPercentHeight(12.5);
-		RowConstraints row4 = new RowConstraints();
-		row4.setPercentHeight(12.5);
-		RowConstraints row5 = new RowConstraints();
-		row5.setPercentHeight(12.5);
-		RowConstraints row6 = new RowConstraints();
-		row5.setPercentHeight(12.5);
-		RowConstraints row7 = new RowConstraints();
-		row5.setPercentHeight(12.5);
-		RowConstraints row8 = new RowConstraints();
-		row5.setPercentHeight(12.5);
-		gridpane.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6, row7, row8);
-
+		
 		Label Lbl1 = new Label("Homecell Piles-^");
 		Label Lbl2 = new Label("^- Tableau Piles -^");
 
@@ -272,48 +248,28 @@ public class SolitaireView {
 				Platform.exit();
 			}
 		});
-
-		// homecell pile locations
-
-		gridpane.add(test, 1, 0);
-		gridpane.add(test2, 2, 0);
-		gridpane.add(test3, 3, 0);
-		gridpane.add(test4, 4, 0);
-		// tableau pile 1 location
-
-		gridpane.add(boxesforBD.get(12), 6, 0);
-		gridpane.add(boxesforBD.get(0), 1, 2);
-		gridpane.add(boxesforBD.get(1), 1, 3);
-		gridpane.add(boxesforBD.get(2), 1, 4);
-		gridpane.add(boxesforBD.get(3), 1, 5);
-		gridpane.add(boxesforBD.get(4), 3, 2);
-		gridpane.add(boxesforBD.get(5), 3, 3);
-		gridpane.add(boxesforBD.get(6), 3, 4);
-		gridpane.add(boxesforBD.get(7), 3, 5);
-		gridpane.add(boxesforBD.get(8), 5, 2);
-		gridpane.add(boxesforBD.get(9), 5, 3);
-		gridpane.add(boxesforBD.get(10), 5, 4);
-		gridpane.add(boxesforBD.get(11), 5, 5);
-
-		// Homecell and tableau Labels
-
-		GridPane.setHalignment(Lbl2, HPos.CENTER);
-		gridpane.add(Lbl1, 2, 1); // homecell
-		gridpane.add(Lbl2, 3, 7); // tableau
-
-		GridPane.setHalignment(newGame, HPos.CENTER);
-		gridpane.add(newGame, 1, 8);
-
-		GridPane.setHalignment(quitNoD, HPos.CENTER);
-		gridpane.add(quitNoD, 4, 8);
-
-		root.setCenter(gridpane);
-		stackPane.setBackground(background);
-		stackPane.getChildren().addAll(root, title, gridpane);
+		stack.getChildren().add(test);
+		stack2.getChildren().add(test2);
+		stack3.getChildren().add(test3);
+		stack4.getChildren().add(test4);
+		stack5.getChildren().add(stacksforBD.get(12));
+		
+		
+		mainhbox.getChildren().addAll(stack,stack2,stack3,stack4,stack5);
+	
+		window.setTop(mainhbox);
+		window.setAlignment(newGame, Pos.BOTTOM_LEFT);
+		window.setAlignment(quitNoD, Pos.BOTTOM_RIGHT);
+		window.setLeft(box1);
+		window.setCenter(box2);
+		window.setRight(box3);
+		
+		window.setBackground(background);
+		
 		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
 		playMusic(sound);
 
-		return stackPane;
+		return window;
 	}
 
 	public StackPane startfreeCellGame() {
@@ -337,7 +293,7 @@ public class SolitaireView {
 				}
 			}
 		}
-
+		
 		for (ImageView image : Images.values()) {
 			image.setFitHeight(60);
 			image.setFitWidth(45);
@@ -361,8 +317,9 @@ public class SolitaireView {
 				List<ImageView> images = pics.subList(cursor, cursor + 7);
 				for (int ind = 0; ind < 7; ind++) {
 					box.getChildren().add(images.get(ind));
-				
+					
 				}
+			
 				boxesforFC.add(box);
 				cursor += 7;
 			} 
@@ -371,8 +328,9 @@ public class SolitaireView {
 				List<ImageView> images = pics.subList(cursor, cursor + 6);
 				for (int ind = 0; ind < 6; ind++) {
 					box.getChildren().add(images.get(ind));
-				
+					
 				}
+			
 				boxesforFC.add(box);
 				cursor += 6;
 			}
