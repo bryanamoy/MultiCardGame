@@ -1,5 +1,7 @@
 package edu.buffalo.cse116;
 
+
+
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -74,7 +76,7 @@ public class MainMenu extends Application {
 	private double mainHeight = 500;
 	private SolitaireView view;
 	private Stage stage;
-	private static MediaPlayer mediaPlayer;
+
 
 	@Override
 	public void start(Stage mainWindow) throws Exception {
@@ -91,8 +93,14 @@ public class MainMenu extends Application {
 		imageView.setPreserveRatio(true);
 		imageView.fitWidthProperty().bind(stage.widthProperty());
 		
-		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/gabriels-message-keyboard.mp3");
-		view.playMusic(sound);
+		Media sound = new Media("https://www.mfiles.co.uk/mp3-downloads/gabriels-message-keyboard.mp3");
+				MediaPlayer mediaPlayer = new MediaPlayer(sound);
+				mediaPlayer.setOnEndOfMedia(new Runnable() {
+					@Override public void run() {
+						mediaPlayer.seek(Duration.ZERO);
+					}
+				});
+				mediaPlayer.play();
 
 		BorderPane borderPane = new BorderPane();
 		borderPane.getChildren().add(imageView);
@@ -100,7 +108,7 @@ public class MainMenu extends Application {
 		MenuItem bdMenuItm = new MenuItem("Baker's Dozen");
 		bdMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	view.getMediaPlayer().stop();
+		    	mediaPlayer.stop();
 		    	changeScene(view.startBakersDozenGame());
 		    }
 		});
@@ -108,7 +116,7 @@ public class MainMenu extends Application {
 		MenuItem fcMenuItm = new MenuItem("Freecell");
 		fcMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	view.getMediaPlayer().stop();
+		    	mediaPlayer.stop();
 		    	changeScene(view.startfreeCellGame());
 		    }
 		});
