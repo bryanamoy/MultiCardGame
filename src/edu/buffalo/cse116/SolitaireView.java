@@ -55,7 +55,7 @@ public class SolitaireView {
 	private Freecell fc;
 	private MediaPlayer mediaPlayer;
 	private ArrayList<StackPane> stacksforBD = new ArrayList<StackPane>();
-	private ArrayList<StackPane> boxesforFC = new ArrayList<StackPane>();
+	private ArrayList<StackPane> stacksforFC = new ArrayList<StackPane>();
 
 	public SolitaireView() {
 
@@ -161,7 +161,7 @@ public class SolitaireView {
 		VBox box2 = new VBox();
 		VBox box3 = new VBox();
 		
-		HBox mainhbox = new HBox();
+		HBox mainhbox = new HBox(20);
 		
 		StackPane stack = new StackPane();
 		StackPane stack2 = new StackPane();
@@ -254,15 +254,17 @@ public class SolitaireView {
 		stack4.getChildren().add(test4);
 		stack5.getChildren().add(stacksforBD.get(12));
 		
-		
+		Insets insets = new Insets(0,0,0,350);
 		mainhbox.getChildren().addAll(stack,stack2,stack3,stack4,stack5);
 	
 		window.setTop(mainhbox);
-		window.setAlignment(newGame, Pos.BOTTOM_LEFT);
-		window.setAlignment(quitNoD, Pos.BOTTOM_RIGHT);
+		window.setMargin(mainhbox, insets);
 		window.setLeft(box1);
+		window.setMargin(box1, insets);
 		window.setCenter(box2);
+		window.setMargin(box2, insets);
 		window.setRight(box3);
+		window.setMargin(box3, insets);
 		
 		window.setBackground(background);
 		
@@ -272,12 +274,23 @@ public class SolitaireView {
 		return window;
 	}
 
-	public StackPane startfreeCellGame() {
+	public BorderPane startfreeCellGame() {
 
-		StackPane stackPane = new StackPane();
+	
 		setCardImages("freecell");
-		BorderPane root = new BorderPane();
-
+		BorderPane window = new BorderPane();
+		
+		HBox hbox1 = new HBox();
+		HBox hbox2 = new HBox();
+		VBox v1 = new VBox();
+		VBox v2 = new VBox();
+		VBox v3 = new VBox();
+		VBox v4 = new VBox();
+		VBox v5 = new VBox();
+		VBox v6 = new VBox();
+		VBox v7 = new VBox();
+		VBox v8 = new VBox();
+		
 		HashMap<Card, ImageView> Images = getCardImages();
 		ArrayList<Card> cards = new ArrayList<Card>();
 		ArrayList<ImageView> pics = new ArrayList<ImageView>();
@@ -310,7 +323,7 @@ public class SolitaireView {
 		
 		int cursor = 0;
 		for (int x = 0; x < 8; x++) {
-			HBox box = new HBox();
+			StackPane box = new StackPane();
 			
 			if (cursor % 7 == 0 && cursor < 28) {
 				
@@ -320,7 +333,7 @@ public class SolitaireView {
 					
 				}
 			
-				boxesforFC.add(box);
+				stacksforFC.add(box);
 				cursor += 7;
 			} 
 			else if (cursor % 6 > 0 && cursor < 52) {
@@ -331,11 +344,19 @@ public class SolitaireView {
 					
 				}
 			
-				boxesforFC.add(box);
+				stacksforFC.add(box);
 				cursor += 6;
 			}
 		}
-	       
+	      
+		v1.getChildren().add(stacksforFC.get(0));
+		v1.getChildren().add(stacksforFC.get(1));
+		v1.getChildren().add(stacksforFC.get(2));
+		v1.getChildren().add(stacksforFC.get(3));
+		v1.getChildren().add(stacksforFC.get(4));
+		v1.getChildren().add(stacksforFC.get(5));
+		v1.getChildren().add(stacksforFC.get(6));
+		v1.getChildren().add(stacksforFC.get(7));
 	       
 		BackgroundFill fill = new BackgroundFill(Color.LIGHTGREEN, null, null);
 		Background background = new Background(fill);
@@ -350,7 +371,7 @@ public class SolitaireView {
 		Rectangle hc4 = new Rectangle(25, 40, Color.YELLOW);
 
 		Label title = new Label("Freecell- to the DEATH");
-		stackPane.setAlignment(title, Pos.TOP_CENTER);
+		window.setAlignment(title, Pos.TOP_CENTER);
 		// Setting the font of the text
 		title.setFont(Font.font(null, FontWeight.BOLD, 15));
 
@@ -361,46 +382,6 @@ public class SolitaireView {
 
 		// gridpane grid layout..
 
-		gridpane.setPadding(new Insets(50));
-		gridpane.setHgap(25);
-		gridpane.setVgap(25);
-		
-		ColumnConstraints column1 = new ColumnConstraints();
-		column1.setPercentWidth(12.5);
-		ColumnConstraints column2 = new ColumnConstraints();
-		column2.setPercentWidth(12.5);
-		ColumnConstraints column3 = new ColumnConstraints();
-		column3.setPercentWidth(12.5);
-		ColumnConstraints column4 = new ColumnConstraints();
-		column4.setPercentWidth(12.5);
-		ColumnConstraints column5 = new ColumnConstraints();
-		column5.setPercentWidth(12.5);
-		ColumnConstraints column6 = new ColumnConstraints();
-		column6.setPercentWidth(12.5);
-		ColumnConstraints column7 = new ColumnConstraints();
-		column7.setPercentWidth(12.5);
-		ColumnConstraints column8 = new ColumnConstraints();
-		column8.setPercentWidth(12.5);
-		gridpane.getColumnConstraints().addAll(column1, column2, column3, column4, column5, column6, column7, column8);
-		RowConstraints row1 = new RowConstraints();
-		row1.setPercentHeight(12.5);
-		RowConstraints row2 = new RowConstraints();
-		row2.setPercentHeight(12.5);
-		RowConstraints row3 = new RowConstraints();
-		row3.setPercentHeight(12.5);
-		RowConstraints row4 = new RowConstraints();
-		row4.setPercentHeight(12.5);
-		RowConstraints row5 = new RowConstraints();
-		row5.setPercentHeight(12.5);
-		RowConstraints row6 = new RowConstraints();
-		row6.setPercentHeight(12.5);
-		RowConstraints row7 = new RowConstraints();
-		row7.setPercentHeight(12.5);
-		RowConstraints row8 = new RowConstraints();
-		row8.setPercentHeight(12.5);
-		gridpane.getRowConstraints().addAll(row1, row2, row3, row4, row5, row6, row7, row8);
-
-	
 		Button newGame = new Button("New Game");
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -419,41 +400,28 @@ public class SolitaireView {
 		});
 		
 		// homecell pile locations
-		gridpane.add(fc1, 2, 0);
-		gridpane.add(fc2, 3, 0);
-		gridpane.add(fc3, 4, 0);
-		gridpane.add(fc4, 5, 0);
+		hbox1.getChildren().addAll(hc1,hc2,hc3,hc4);
+		hbox2.getChildren().addAll(fc1,fc2,fc3,fc4);
 		
-		// tableau pile 1 location
-		gridpane.add(hc1, 2, 1);
-		gridpane.add(hc2, 3, 1);
-		gridpane.add(hc3, 4, 1);
-		gridpane.add(hc4, 5, 1);
-
-		gridpane.add(boxesforFC.get(0), 2, 2);
-		gridpane.add(boxesforFC.get(1), 2, 3);
-		gridpane.add(boxesforFC.get(2), 2, 4);
-		gridpane.add(boxesforFC.get(3), 2, 5);
-		gridpane.add(boxesforFC.get(4), 4, 2);
-		gridpane.add(boxesforFC.get(5), 4, 3);
-		gridpane.add(boxesforFC.get(6), 4, 4);
-		gridpane.add(boxesforFC.get(7), 4, 5);
-
-		// Homecell and tableau Labels
-
-		GridPane.setHalignment(newGame, HPos.CENTER);
-		gridpane.add(newGame, 1, 8);
-		GridPane.setHalignment(quitWD, HPos.LEFT);
-		gridpane.add(quitWD, 4, 8);
-
-		root.setCenter(gridpane);
-		stackPane.setBackground(background);
-		stackPane.getChildren().addAll(root,gridpane);
+		window.setTop(hbox1);
+//		window.setTop(hbox2);
+//		
+//		window.setLeft(v1);
+//		window.setLeft(v2);
+//		window.setCenter(v3);
+//		window.setCenter(v4);
+//		window.setCenter(v5);
+//		window.setCenter(v6);
+//		window.setRight(v7);
+//		window.setRight(v8);
+		
+		window.setBackground(background);
+	
 
 		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
 		playMusic(sound);
 
-		return stackPane;
+		return  window;
 	}
 
 	public void playMusic(Media song) {
