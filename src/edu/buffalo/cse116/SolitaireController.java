@@ -19,9 +19,19 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
+/**
+ * <h1>SolitaireController class</h1>
+ * <p>
+ * <b>Note:</b> This is the Controller part of the Model-View-Controller, it handles
+ * the mouse events for the interface.
+ * @author Corey Almonte
+ * @since 2017-10-30
+ */
 public class SolitaireController {
 	private MainMenu gui;
+	/**
+	 * SolitaireView instance
+	 */
 	private SolitaireView view = new SolitaireView();
 	private BakersDozen bd;
 	private Freecell fc;
