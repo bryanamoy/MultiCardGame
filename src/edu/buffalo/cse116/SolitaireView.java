@@ -254,17 +254,17 @@ public class SolitaireView {
 		stack4.getChildren().add(test4);
 		stack5.getChildren().add(stacksforBD.get(12));
 		
-		Insets insets = new Insets(0,0,0,350);
+		
 		mainhbox.getChildren().addAll(stack,stack2,stack3,stack4,stack5);
 	
 		window.setTop(mainhbox);
-		window.setMargin(mainhbox, insets);
+		window.setMargin(mainhbox, new Insets(0,0,0,300));
 		window.setLeft(box1);
-		window.setMargin(box1, insets);
+		window.setMargin(box1, new Insets(20,0,0,250));
 		window.setCenter(box2);
-		window.setMargin(box2, insets);
+		window.setMargin(box2, new Insets(20,0,0,0));
 		window.setRight(box3);
-		window.setMargin(box3, insets);
+		window.setMargin(box3, new Insets(20,250,0,0));
 		
 		window.setBackground(background);
 		
@@ -403,9 +403,13 @@ public class SolitaireView {
 		hbox1.getChildren().addAll(hc1,hc2,hc3,hc4);
 		hbox2.getChildren().addAll(fc1,fc2,fc3,fc4);
 		
-		window.setTop(hbox1);
+		window.setAlignment(hbox1, Pos.TOP_LEFT);
+	     window.getChildren().add(hbox1);
+		  
+	     window.setAlignment(hbox2, Pos.TOP_RIGHT);
+	     window.getChildren().add(hbox2);
 //		window.setTop(hbox2);
-//		
+//		window.setMargin(hbox1, new Insets(0,0,0,600));
 //		window.setLeft(v1);
 //		window.setLeft(v2);
 //		window.setCenter(v3);
