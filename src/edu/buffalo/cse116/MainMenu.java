@@ -127,13 +127,25 @@ public class MainMenu extends Application {
 		    	Platform.exit();
 		    }
 		});
+		
+		MenuItem extras = new MenuItem("Extras");
+		extras.setOnAction(new EventHandler<ActionEvent>() {
+		    @Override public void handle(ActionEvent e) {
+		    	mediaPlayer.stop();
+		    	changeScene(view.startEE());
+		    }
+		});
+		
 
 		Menu menu = new Menu("New Game");
 		menu.getItems().addAll(bdMenuItm, fcMenuItm, quitMenuItm);
-		MenuBar menuBar = new MenuBar(menu);
+
+		Menu m = new Menu("Options");
+		MenuBar menuBar = new MenuBar(menu, m);
 		menuBar.setPrefHeight(30);
 		menuBar.prefWidthProperty().bind(mainWindow.widthProperty());
-
+		m.getItems().addAll(extras);
+		
 		borderPane.setCenter(text);
 		borderPane.setBottom(menuBar);
 		
