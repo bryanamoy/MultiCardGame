@@ -55,6 +55,8 @@ public class SolitaireView {
 	private Freecell fc;
 	private ArrayList<StackPane> stacksforBD = new ArrayList<StackPane>();
 	private ArrayList<StackPane> stacksforBDHbox = new ArrayList<StackPane>();
+	private ArrayList<StackPane> stacksforFC = new ArrayList<StackPane>();
+	private ArrayList<StackPane> stacksforFCHbox = new ArrayList<StackPane>();
 	
 	public ArrayList<Card> getCards() {
 		return cards;
@@ -72,9 +74,6 @@ public class SolitaireView {
 		this.stacksforBDHbox = stacksforBDHbox;
 	}
 
-
-
-	private ArrayList<StackPane> stacksforFC = new ArrayList<StackPane>();
 
 	public SolitaireView() {
 
@@ -320,6 +319,17 @@ public class SolitaireView {
 		
 		HBox hbox1 = new HBox();
 		HBox hbox2 = new HBox();
+		
+		StackPane stack1 = new StackPane();
+		StackPane stack2 = new StackPane();
+		StackPane stack3 = new StackPane();
+		StackPane stack4 = new StackPane();
+		StackPane stack5 = new StackPane();
+		StackPane stack6 = new StackPane();
+		StackPane stack7 = new StackPane();
+		StackPane stack8 = new StackPane();
+		
+		
 		VBox v1 = new VBox();
 		VBox v2 = new VBox();
 		VBox v3 = new VBox();
@@ -388,13 +398,13 @@ public class SolitaireView {
 		}
 	      
 		v1.getChildren().add(stacksforFC.get(0));
-		v1.getChildren().add(stacksforFC.get(1));
-		v1.getChildren().add(stacksforFC.get(2));
-		v1.getChildren().add(stacksforFC.get(3));
-		v1.getChildren().add(stacksforFC.get(4));
-		v1.getChildren().add(stacksforFC.get(5));
-		v1.getChildren().add(stacksforFC.get(6));
-		v1.getChildren().add(stacksforFC.get(7));
+		v2.getChildren().add(stacksforFC.get(1));
+		v3.getChildren().add(stacksforFC.get(2));
+		v4.getChildren().add(stacksforFC.get(3));
+		v5.getChildren().add(stacksforFC.get(4));
+		v6.getChildren().add(stacksforFC.get(5));
+		v7.getChildren().add(stacksforFC.get(6));
+		v8.getChildren().add(stacksforFC.get(7));
 	       
 		BackgroundFill fill = new BackgroundFill(Color.LIGHTGREEN, null, null);
 		Background background = new Background(fill);
@@ -408,6 +418,24 @@ public class SolitaireView {
 		Rectangle hc3 = new Rectangle(25, 40, Color.YELLOW);
 		Rectangle hc4 = new Rectangle(25, 40, Color.YELLOW);
 
+		stack1.getChildren().add(hc1);
+		stack2.getChildren().add(hc2);
+		stack3.getChildren().add(hc3);
+		stack4.getChildren().add(hc4);
+		stack5.getChildren().add(fc1);
+		stack6.getChildren().add(fc2);
+		stack7.getChildren().add(fc3);
+		stack8.getChildren().add(fc4);
+		
+		stacksforFCHbox.add(stack1);
+		stacksforFCHbox.add(stack2);
+		stacksforFCHbox.add(stack3);
+		stacksforFCHbox.add(stack4);
+		stacksforFCHbox.add(stack5);
+		stacksforFCHbox.add(stack6);
+		stacksforFCHbox.add(stack7);
+		stacksforFCHbox.add(stack8);;
+		
 		Label title = new Label("Freecell- to the DEATH");
 		window.setAlignment(title, Pos.TOP_CENTER);
 		// Setting the font of the text
@@ -415,8 +443,6 @@ public class SolitaireView {
 
 		// Setting the color of the text
 		title.setTextFill(Color.CRIMSON);
-
-		GridPane gridpane = new GridPane();
 
 		// gridpane grid layout..
 
@@ -438,8 +464,9 @@ public class SolitaireView {
 		});
 		
 		// homecell pile locations
-		hbox1.getChildren().addAll(hc1,hc2,hc3,hc4);
-		hbox2.getChildren().addAll(fc1,fc2,fc3,fc4);
+		
+		hbox1.getChildren().addAll(stack1,stack2,stack3,stack4);
+		hbox2.getChildren().addAll(stack5,stack6,stack7,stack8);
 		
 		window.setAlignment(hbox1, Pos.TOP_LEFT);
 	     window.getChildren().add(hbox1);
