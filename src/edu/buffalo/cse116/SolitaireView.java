@@ -1,3 +1,4 @@
+
 package edu.buffalo.cse116;
 
 import java.io.File;
@@ -31,6 +32,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -47,29 +52,67 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
-
+/**
+ * <h1>SolitaireView class</h1>
+ * <p>
+ * <b>Note:</b> This is the View part of Model-View-Controller, it handles
+ * the visual aspects of the game.
+ * @author Mike Nicholas & Johnathan Hercules
+ * @since 2017-10-30
+ */
 public class SolitaireView {
-
+	/**
+ * HashMap for cardImages. Contains the images for the cards.
+ */
 	private HashMap<Card, ImageView> cardImages = new HashMap<Card, ImageView>();
+	/**
+	 * ArrayList for the cards.
+	 */
+
 	private ArrayList<Card> cards = new ArrayList<Card>();
+	/**
+	 * Baker's Dozen game instance, holds functions
+	 */
 	private BakersDozen bd;
+	/**
+	 * Freecell game instance, holds functions
+	 */
 	private Freecell fc;
+	/**
+	 * ArrayList for Stack Panes in Baker's Dozen game.
+	 */
 	private ArrayList<StackPane> stacksforBD = new ArrayList<StackPane>();
+	/**
+	 * ArrayList for Stack Panes in Baker's Dozen HBox's.
+	 */
 	private ArrayList<StackPane> stacksforBDHbox = new ArrayList<StackPane>();
 	private ArrayList<StackPane> stacksforFC = new ArrayList<StackPane>();
 	private ArrayList<StackPane> stacksforFCHbox = new ArrayList<StackPane>();
+	/**
+	 * A getter for the ArrayList of cards.
+	 * @return cards
+	 */
 	public ArrayList<Card> getCards() {
 		return cards;
 	}
-
+	/**
+	 * A setter for the ArrayList of cards
+	 * @param cards
+	 */
 	public void setCards(ArrayList<Card> cards) {
 		this.cards = cards;
 	}
-
+	/**
+	 * A getter for the Stack Panes in HBox's for Baker's Dozen
+	 * @return stacksforBDHbox
+	 */
 	public ArrayList<StackPane> getStacksforBDHbox() {
 		return stacksforBDHbox;
 	}
-
+	/**
+	 * A setter for the Stack Panes 
+	 * @param stacksforBDHbox
+	 */
 	public void setStacksforBDHbox(ArrayList<StackPane> stacksforBDHbox) {
 		this.stacksforBDHbox = stacksforBDHbox;
 	}
@@ -78,7 +121,14 @@ public class SolitaireView {
 	public SolitaireView() {
 
 	}
-
+	/**
+ * A setter for the Hashmap of cards and their images for both Baker's Dozen and Freecell game.  It links the card to it's image.
+ * Obtains image of card from the "moderncards" folder which holds each 
+ * cards image.
+ * 
+ * @param game
+ * @return cardImages
+ */
 	public HashMap<Card, ImageView> setCardImages(String game) {
 
 		File files = new File(("moderncards"));
@@ -144,28 +194,54 @@ public class SolitaireView {
 
 		return cardImages;
 	}
-
+	/**
+ * 
+ * A getter for Card Images
+ * 
+ * @return cardImages
+ */
 	public HashMap<Card, ImageView> getCardImages() {
 		return cardImages;
 	}
-
+	/**
+ * A getter for the stack panes in the Baker's Dozen game
+ * 
+ * @return stacksforBD
+ */
 	public ArrayList<StackPane> getStacksforBD() {
 		return stacksforBD;
 	}
-
+	/**
+ * A setter for Stack Panes in Baker's Dozen game
+ * 
+ * @param stacksforBD
+ */
 	public void setStacksforBD(ArrayList<StackPane> stacksforBD) {
 		this.stacksforBD = stacksforBD;
 	}
-
+	/**
+ * A getter for Stack Panes in Freecell game
+ * 
+ * @return stacksforFC
+ */	
 	public ArrayList<StackPane> getStacksforFC() {
 		return stacksforFC;
 	}
-
+	/**
+ * A setter for Stack Panes in Freecell game
+ * 
+ * @param stacksforFC
+ */
 	public void setStacksforFC(ArrayList<StackPane> stacksforFC) {
 		this.stacksforFC = stacksforFC;
 	}
 
-
+	/**
+ * A getter for ImageView of card for a card. It returns the card image linked to it's card.
+ * 
+ * @param c
+ * @return rtn
+ */
 	public ImageView getImageViewOfCard(Card c) {
 		ImageView rtn = null;
 
@@ -179,7 +255,13 @@ public class SolitaireView {
 
 	}
 
-
+	/**
+ * Sets up the interface for the Baker's Dozen game. 3 VBox's are displayed as the 3 columns in the Baker's Dozen view. 
+ * 12 Tableau Piles are displayed here.  StackPanes are created to hold the cards for each pile.  Also, the labels for each
+ * type of pile are created.  Depending on Freecell or Baker's Dozen, there is a different background for each game type.
+ * 
+ * @return window
+ */
 	public BorderPane startBakersDozenGame() {
 		
 		BorderPane window = new BorderPane();
@@ -227,8 +309,7 @@ public class SolitaireView {
 				
 				List<ImageView> images = pics.subList(cursor, cursor + 4);
 				for (int ind = 0; ind < 4; ind++) {
-					SolitaireController s = new SolitaireController();
-					s.selected(n);
+
 					n.getChildren().add(images.get(ind));
 				}
 				stacksforBD.add(n);
@@ -316,7 +397,14 @@ public class SolitaireView {
 
 
 
-
+/**
+ * The interface for the Freecell Game is created.  BorderPane is used to display the whole interface.  
+ * MediaPlayer is implemented to play a different song for this game mode. For each type of pile they are displayed
+ * as Stack Panes for the ability to stack the cards on top of each other.  In addition, the event handlers for clicking the buttons
+ * within the interface is implemented to handle an event of clicking the a menu option.
+ * 
+ * @return window
+ */
 	public BorderPane startfreeCellGame() {
 
 	
@@ -383,8 +471,6 @@ public class SolitaireView {
 				
 				List<ImageView> images = pics.subList(cursor, cursor + 7);
 				for (int ind = 0; ind < 7; ind++) {
-					SolitaireController s = new SolitaireController();
-					s.selected(box);
 					box.getChildren().add(images.get(ind));
 					
 				}
@@ -396,8 +482,6 @@ public class SolitaireView {
 				
 				List<ImageView> images = pics.subList(cursor, cursor + 6);
 				for (int ind = 0; ind < 6; ind++) {
-					SolitaireController s = new SolitaireController();
-					s.selected(box);
 					box.getChildren().add(images.get(ind));
 					
 				}
@@ -501,8 +585,51 @@ public class SolitaireView {
 		return  window;
 	}
 
+	/**
+	 * Easter Egg. Somewhat lame.
+	 */
 	
-
+	public StackPane startEE() {
+		StackPane stackPane = new StackPane();
+		BorderPane root = new BorderPane();
+		
+		BackgroundFill fill = new BackgroundFill(Color.RED, null, null);
+		Background background = new Background(fill);
+	    
+	    Button button1 = new Button("Click Me!!!");
+	    
+	    button1.setStyle("-fx-font: 5 arial; -fx-base: #b6e7c9;");
+	    button1.setOnAction(new EventHandler<ActionEvent>() {
+	        @Override public void handle(ActionEvent e) {
+	        	
+	        	BackgroundImage myBI= new BackgroundImage(new Image("http://www-cs.canisius.edu/PICTURES/FACULTY_STAFF/small_hertz.jpg",700,700,false,true),BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+	        	          BackgroundSize.DEFAULT);
+	        	stackPane.setBackground(new Background(myBI));
+//	        	
+//	        	Button button2 = new Button("Back");
+//	        	button2.setStyle("-fx-font: 15 arial; -fx-base: #b6e7c9;");
+	      
+	        	}
+	        });
+	    
+    	
+	    VBox headerGraphic = new VBox();  
+	    headerGraphic.setAlignment(Pos.BOTTOM_CENTER);
+	    headerGraphic.getChildren().addAll(button1);
+	    
+		stackPane.setBackground(background);
+		stackPane.getChildren().addAll(root, headerGraphic);
+		return stackPane;
+	        
+	}	
+	
+	
+/**
+ * This method resets the game.  If the current game is Baker's Dozen then it restarts a new game of Baker's Dozen, else if current game is Freecell
+ * then a new instance of Freecell game is created.
+ * 
+ * @param game
+ */
 	public void restart(String game) {
 		getCardImages().clear();
 		if (game.equals("bakersdozen")) {
@@ -512,9 +639,12 @@ public class SolitaireView {
 		}
 	}
 
-
+/**
+ * Method enabling code to run.
+ * @param args
+ */
 	public static void main(String[] args) {
 
 	}
 }
-}
+
