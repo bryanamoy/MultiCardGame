@@ -33,8 +33,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -71,28 +77,14 @@ import javafx.util.Duration;
  * 
  */
 public class MainMenu extends Application {
-	/**
-	 * The width setting of the window
-	 */
-	private double mainWidth = 900;
-	/**
-	 * The height setting of the window
-	 */
-	private double mainHeight = 500;
-	/**
-	 * SolitaireView instance
-	 */
-	private SolitaireView view;
-	/**
-	 * The Window for the interface
-	 */
-	private Stage stage;
 
-/**
- * This method creates the user interface to the Main Menu using JavaFx.  Within this set up, the background image and media sound is set when the interface opens.
- * The New Game button is created, listing the menu items for opening a Baker's Dozen game, Freecell game, or the option of quitting and closing the window.
- * 
- */
+	private double mainWidth = 900;
+	private double mainHeight = 500;
+	private SolitaireView view;
+	Stage stage;
+	BorderPane borderPane1;
+	BorderPane borderPane2;
+	
 	@Override
 	public void start(Stage mainWindow) throws Exception {
 
@@ -112,18 +104,17 @@ public class MainMenu extends Application {
 				MediaPlayer mediaPlayer = new MediaPlayer(sound);
 				mediaPlayer.setOnEndOfMedia(new Runnable() {
 					@Override public void run() {
-//						mediaPlayer.seek(Duration.ZERO);
+						mediaPlayer.seek(Duration.ZERO);
 					}
 				});
 				mediaPlayer.play();
-
-		BorderPane borderPane = new BorderPane();
-		borderPane.getChildren().add(imageView);
+			borderPane1 = new BorderPane();
+		borderPane1.getChildren().add(imageView);
 
 		MenuItem bdMenuItm = new MenuItem("Baker's Dozen");
 		bdMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	
+		    	mediaPlayer.stop();
 		    	changeScene(view.startBakersDozenGame());
 		    }
 		});
@@ -131,7 +122,7 @@ public class MainMenu extends Application {
 		MenuItem fcMenuItm = new MenuItem("Freecell");
 		fcMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	
+		    	mediaPlayer.stop();
 		    	changeScene(view.startfreeCellGame());
 		    }
 		});
@@ -146,8 +137,8 @@ public class MainMenu extends Application {
 		MenuItem extras = new MenuItem("Extras");
 		extras.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	
-		    	
+		    	mediaPlayer.stop();
+		    	changeScene(view.startEE());
 		    }
 		});
 		
@@ -161,36 +152,35 @@ public class MainMenu extends Application {
 		menuBar.prefWidthProperty().bind(mainWindow.widthProperty());
 		m.getItems().addAll(extras);
 		
-		borderPane.setCenter(text);
-		borderPane.setBottom(menuBar);
+		borderPane1.setCenter(text);
+		borderPane1.setBottom(menuBar);
 		
-		Scene scene = new Scene(borderPane, mainWidth, mainHeight);  //, mainWidth, mainHeight);
-
+		Scene scene1 = new Scene(borderPane1, mainWidth, mainHeight);  //, mainWidth, mainHeight);
+		//Scene scene2 = new Scene(borderPane2, 700, 700);
+		
 		//A window		
 		mainWindow.setTitle("Solitaire.exe");
 
 		//Add the scene to the stage and display the contents of the stage.		
-		mainWindow.setScene(scene);
+		mainWindow.setScene(scene1);
 		mainWindow.show();	
 
 	}
-	/**
-	 * When a game is selected, the scene of the window is changed to the display of that game.
-	 * 
-	 * @param pane
-	 * @return boolean value, false
-	 */
-	private Boolean changeScene(Pane pane){
+	
+	Boolean changeScene(Pane pane){
 		stage.getScene().setRoot(pane);
 		if(pane == stage.getScene().getRoot()) {
 			return true;
 		}
 		return false;
 	}
-/**
- * This method enables the interface is start, by implicitly calling start.
- * @param args
- */
+	
+	public BorderPane getBorderPane(){
+		return this.borderPane1;
+	}
+
+	
+	
 	public static void main(String args[]){           
 		
 		launch(args);      
