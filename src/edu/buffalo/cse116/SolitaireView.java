@@ -53,8 +53,27 @@ public class SolitaireView {
 	private ArrayList<Card> cards = new ArrayList<Card>();
 	private BakersDozen bd;
 	private Freecell fc;
-	private MediaPlayer mediaPlayer;
 	private ArrayList<StackPane> stacksforBD = new ArrayList<StackPane>();
+	private ArrayList<StackPane> stacksforBDHbox = new ArrayList<StackPane>();
+	
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(ArrayList<Card> cards) {
+		this.cards = cards;
+	}
+
+	public ArrayList<StackPane> getStacksforBDHbox() {
+		return stacksforBDHbox;
+	}
+
+	public void setStacksforBDHbox(ArrayList<StackPane> stacksforBDHbox) {
+		this.stacksforBDHbox = stacksforBDHbox;
+	}
+
+
+
 	private ArrayList<StackPane> stacksforFC = new ArrayList<StackPane>();
 
 	public SolitaireView() {
@@ -131,8 +150,20 @@ public class SolitaireView {
 		return cardImages;
 	}
 
-	public ArrayList<StackPane> getStackforBD() {
+	public ArrayList<StackPane> getStacksforBD() {
 		return stacksforBD;
+	}
+
+	public void setStacksforBD(ArrayList<StackPane> stacksforBD) {
+		this.stacksforBD = stacksforBD;
+	}
+
+	public ArrayList<StackPane> getStacksforFC() {
+		return stacksforFC;
+	}
+
+	public void setStacksforFC(ArrayList<StackPane> stacksforFC) {
+		this.stacksforFC = stacksforFC;
 	}
 
 	public ImageView getImageViewOfCard(Card c) {
@@ -148,9 +179,6 @@ public class SolitaireView {
 
 	}
 
-	public MediaPlayer getMediaPlayer() {
-		return mediaPlayer;
-	}
 
 	public BorderPane startBakersDozenGame() {
 		
@@ -235,7 +263,7 @@ public class SolitaireView {
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				mediaPlayer.stop();
+				
 				restart("bakersdozen");
 			}
 		});
@@ -254,6 +282,12 @@ public class SolitaireView {
 		stack4.getChildren().add(test4);
 		stack5.getChildren().add(stacksforBD.get(12));
 		
+		stacksforBDHbox.add(stack);
+		stacksforBDHbox.add(stack2);
+		stacksforBDHbox.add(stack3);
+		stacksforBDHbox.add(stack4);
+		stacksforBDHbox.add(stack5);
+		
 		
 		mainhbox.getChildren().addAll(stack,stack2,stack3,stack4,stack5);
 	
@@ -267,10 +301,14 @@ public class SolitaireView {
 		window.setMargin(box3, new Insets(20,250,0,0));
 		
 		window.setBackground(background);
-		
-		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
-		playMusic(sound);
-
+		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/gabriels-message-keyboard.mp3");
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setOnEndOfMedia(new Runnable() {
+			@Override public void run() {
+				mediaPlayer.seek(Duration.ZERO);
+			}
+		});
+		mediaPlayer.play();
 		return window;
 	}
 
@@ -386,7 +424,7 @@ public class SolitaireView {
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				mediaPlayer.stop();
+				
 				startfreeCellGame();
 			}
 		});
@@ -422,22 +460,19 @@ public class SolitaireView {
 		window.setBackground(background);
 	
 
-		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/02.The%20calm%20sea%20floating%20mirage.mp3");
-		playMusic(sound);
+		Media sound = new Media("https://www.mfiles.co.uk/mp3-downloads/gabriels-message-keyboard.mp3");
+		MediaPlayer mediaPlayer = new MediaPlayer(sound);
+		mediaPlayer.setOnEndOfMedia(new Runnable() {
+			@Override public void run() {
+				mediaPlayer.seek(Duration.ZERO);
+			}
+		});
+		mediaPlayer.play();
 
 		return  window;
 	}
 
-	public void playMusic(Media song) {
-		mediaPlayer = new MediaPlayer(song);
-		mediaPlayer.setOnEndOfMedia(new Runnable() {
-			@Override
-			public void run() {
-				mediaPlayer.seek(Duration.ZERO);
-				mediaPlayer.play();
-			}
-		});
-	}
+	
 
 	public void restart(String game) {
 		getCardImages().clear();
