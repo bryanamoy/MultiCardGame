@@ -22,6 +22,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
@@ -164,6 +165,7 @@ public class SolitaireView {
 	public void setStacksforFC(ArrayList<StackPane> stacksforFC) {
 		this.stacksforFC = stacksforFC;
 	}
+
 
 	public ImageView getImageViewOfCard(Card c) {
 		ImageView rtn = null;
@@ -311,14 +313,18 @@ public class SolitaireView {
 		return window;
 	}
 
+
+
+
+
 	public BorderPane startfreeCellGame() {
 
 	
 		setCardImages("freecell");
 		BorderPane window = new BorderPane();
 		
-		HBox hbox1 = new HBox();
-		HBox hbox2 = new HBox();
+		HBox hbox1 = new HBox(10);
+		HBox hbox2 = new HBox(10);
 		
 		StackPane stack1 = new StackPane();
 		StackPane stack2 = new StackPane();
@@ -329,7 +335,7 @@ public class SolitaireView {
 		StackPane stack7 = new StackPane();
 		StackPane stack8 = new StackPane();
 		
-		
+		HBox vbox = new HBox(25);
 		VBox v1 = new VBox();
 		VBox v2 = new VBox();
 		VBox v3 = new VBox();
@@ -409,14 +415,14 @@ public class SolitaireView {
 		BackgroundFill fill = new BackgroundFill(Color.LIGHTGREEN, null, null);
 		Background background = new Background(fill);
 		
-		Rectangle fc1 = new Rectangle(25, 40, Color.RED);
-		Rectangle fc2 = new Rectangle(25, 40, Color.RED);
-		Rectangle fc3 = new Rectangle(25, 40, Color.RED);
-		Rectangle fc4 = new Rectangle(25, 40, Color.RED);
-		Rectangle hc1 = new Rectangle(25, 40, Color.YELLOW);
-		Rectangle hc2 = new Rectangle(25, 40, Color.YELLOW);
-		Rectangle hc3 = new Rectangle(25, 40, Color.YELLOW);
-		Rectangle hc4 = new Rectangle(25, 40, Color.YELLOW);
+		Rectangle fc1 = new Rectangle(40, 60, Color.RED);
+		Rectangle fc2 = new Rectangle(40, 60, Color.RED);
+		Rectangle fc3 = new Rectangle(40, 60, Color.RED);
+		Rectangle fc4 = new Rectangle(40, 60, Color.RED);
+		Rectangle hc1 = new Rectangle(40, 60, Color.YELLOW);
+		Rectangle hc2 = new Rectangle(40, 60, Color.YELLOW);
+		Rectangle hc3 = new Rectangle(40, 60, Color.YELLOW);
+		Rectangle hc4 = new Rectangle(40, 60, Color.YELLOW);
 
 		stack1.getChildren().add(hc1);
 		stack2.getChildren().add(hc2);
@@ -464,30 +470,22 @@ public class SolitaireView {
 		});
 		
 		// homecell pile locations
-		
+		HBox main = new HBox(20);
 		hbox1.getChildren().addAll(stack1,stack2,stack3,stack4);
 		hbox2.getChildren().addAll(stack5,stack6,stack7,stack8);
+		main.getChildren().addAll(hbox1,hbox2);
 		
-		window.setAlignment(hbox1, Pos.TOP_LEFT);
-	     window.getChildren().add(hbox1);
-		  
-	     window.setAlignment(hbox2, Pos.TOP_RIGHT);
-	     window.getChildren().add(hbox2);
-//		window.setTop(hbox2);
-//		window.setMargin(hbox1, new Insets(0,0,0,600));
-//		window.setLeft(v1);
-//		window.setLeft(v2);
-//		window.setCenter(v3);
-//		window.setCenter(v4);
-//		window.setCenter(v5);
-//		window.setCenter(v6);
-//		window.setRight(v7);
-//		window.setRight(v8);
 		
+		window.setTop(main);
+		window.setMargin(main, new Insets(50,0,0,300));
+		vbox.getChildren().addAll(v1,v2,v3,v4,v5,v6,v7,v8);
+		window.setCenter(vbox);
+		window.setMargin(vbox, new Insets(100,300,0,250));
+	
 		window.setBackground(background);
 	
 
-		Media sound = new Media("https://www.mfiles.co.uk/mp3-downloads/gabriels-message-keyboard.mp3");
+		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/gabriels-message-keyboard.mp3");
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.setOnEndOfMedia(new Runnable() {
 			@Override public void run() {
@@ -509,8 +507,7 @@ public class SolitaireView {
 			startfreeCellGame();
 		}
 	}
-	
-	
+
 
 	public static void main(String[] args) {
 
