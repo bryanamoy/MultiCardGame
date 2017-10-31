@@ -77,7 +77,11 @@ public class MainMenu extends Application {
 	private SolitaireView view;
 	private Stage stage;
 
-
+/**
+ * This method creates the user interface to the Main Menu using JavaFx.  Within this set up, the background image and media sound is set when the interface opens.
+ * The New Game button is created, listing the menu items for opening a Baker's Dozen game, Freecell game, or the option of quitting and closing the window.
+ * 
+ */
 	@Override
 	public void start(Stage mainWindow) throws Exception {
 
@@ -97,7 +101,7 @@ public class MainMenu extends Application {
 				MediaPlayer mediaPlayer = new MediaPlayer(sound);
 				mediaPlayer.setOnEndOfMedia(new Runnable() {
 					@Override public void run() {
-						mediaPlayer.seek(Duration.ZERO);
+//						mediaPlayer.seek(Duration.ZERO);
 					}
 				});
 				mediaPlayer.play();
@@ -108,7 +112,7 @@ public class MainMenu extends Application {
 		MenuItem bdMenuItm = new MenuItem("Baker's Dozen");
 		bdMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	mediaPlayer.stop();
+		    	
 		    	changeScene(view.startBakersDozenGame());
 		    }
 		});
@@ -116,7 +120,7 @@ public class MainMenu extends Application {
 		MenuItem fcMenuItm = new MenuItem("Freecell");
 		fcMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	mediaPlayer.stop();
+		    	
 		    	changeScene(view.startfreeCellGame());
 		    }
 		});
@@ -131,8 +135,8 @@ public class MainMenu extends Application {
 		MenuItem extras = new MenuItem("Extras");
 		extras.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	mediaPlayer.stop();
-		    	changeScene(view.startEE());
+		    	
+		    	
 		    }
 		});
 		
@@ -159,7 +163,12 @@ public class MainMenu extends Application {
 		mainWindow.show();	
 
 	}
-	
+	/**
+	 * When a game is selected, the scene of the window is changed to the display of that game.
+	 * 
+	 * @param pane
+	 * @return boolean value, false
+	 */
 	private Boolean changeScene(Pane pane){
 		stage.getScene().setRoot(pane);
 		if(pane == stage.getScene().getRoot()) {
@@ -167,7 +176,10 @@ public class MainMenu extends Application {
 		}
 		return false;
 	}
-
+/**
+ * This method enables the interface is start, by implicitly calling start.
+ * @param args
+ */
 	public static void main(String args[]){           
 		
 		launch(args);      
