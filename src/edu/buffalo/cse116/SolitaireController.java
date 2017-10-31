@@ -33,11 +33,23 @@ public class SolitaireController {
 	 * SolitaireView instance
 	 */
 	private SolitaireView view = new SolitaireView();
+	/**
+	 * Baker's Dozen game instance
+	 */
 	private BakersDozen bd;
+	/**
+	 * Freecell game instance
+	 */
 	private Freecell fc;
+	/**
+	 * The highlight effect used when clicking a card.
+	 */
 	private DropShadow ds = new DropShadow(20, Color.BLACK);
 	public Node whichClick;
-	
+	/**
+	 * Event Handler when selecting a card by mouse press
+	 * @param s
+	 */
 	public void selected(StackPane s){
 		HashMap<Card,ImageView> images = view.getCardImages();
 		EventHandler<MouseEvent> mouseEntered = new EventHandler<MouseEvent>() {
