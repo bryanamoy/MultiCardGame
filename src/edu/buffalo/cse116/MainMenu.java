@@ -84,7 +84,11 @@ public class MainMenu extends Application {
 	Stage stage;
 	BorderPane borderPane1;
 	BorderPane borderPane2;
-	
+	/**
+ * This method creates the user interface to the Main Menu using JavaFx.  Within this set up, the background image and media sound is set when the interface opens.
+ * The New Game button is created, listing the menu items for opening a Baker's Dozen game, Freecell game, or the option of quitting and closing the window.
+ * 
+ */
 	@Override
 	public void start(Stage mainWindow) throws Exception {
 
@@ -166,7 +170,12 @@ public class MainMenu extends Application {
 		mainWindow.show();	
 
 	}
-	
+	/**
+	 * When a game is selected, the scene of the window is changed to the display of that game.
+	 * 
+	 * @param pane
+	 * @return boolean value, false
+	 */
 	Boolean changeScene(Pane pane){
 		stage.getScene().setRoot(pane);
 		if(pane == stage.getScene().getRoot()) {
@@ -180,7 +189,10 @@ public class MainMenu extends Application {
 	}
 
 	
-	
+	/**
+ * This method enables the interface is start, by implicitly calling start.
+ * @param args
+ */
 	public static void main(String args[]){           
 		
 		launch(args);      
