@@ -71,10 +71,21 @@ import javafx.util.Duration;
  * 
  */
 public class MainMenu extends Application {
-
+	/**
+	 * The width setting of the window
+	 */
 	private double mainWidth = 900;
+	/**
+	 * The height setting of the window
+	 */
 	private double mainHeight = 500;
+	/**
+	 * SolitaireView instance
+	 */
 	private SolitaireView view;
+	/**
+	 * The Window for the interface
+	 */
 	private Stage stage;
 
 /**
