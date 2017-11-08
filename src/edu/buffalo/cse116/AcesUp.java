@@ -89,7 +89,7 @@ public class AcesUp extends Solitaire {
 				Card top = discarded.get(0);
 				homecellPiles_List.add(top);
 				discarded.remove(0);
-        checkdiscard = false;
+				checkdiscard = false;
 				return true;
 			}
 		} else if (p.equalsIgnoreCase("tableau")) {
@@ -105,8 +105,7 @@ public class AcesUp extends Solitaire {
 	}
 
 	public boolean removeFrom(String p, int pilenumber) {
-		
-		
+
 		if (p.equalsIgnoreCase("homecell")) {
 			return false;
 		} else if (p.equalsIgnoreCase("stock")) {
@@ -130,13 +129,12 @@ public class AcesUp extends Solitaire {
 			Card top = tableauPiles_List.get(pilenumber).get(size);
 			for (ArrayList<Card> pile : tableauPiles_List.values()) {
 				int topofpile = pile.size() - 1;
-				if (pile.get(topofpile).getSuit().equals(top.getSuit())
-						&& pile.get(topofpile).getRank().ordinal() > top.getRank().ordinal()) {
+				if (pile.get(topofpile).getSuit().equals(top.getSuit()) && pile.get(topofpile).getRank().getRank() < top.getRank().getRank()) {
 					discarded.add(top);
 					tableauPiles_List.get(pilenumber).remove(size);
 					checkdiscard = true;
 					return true;
-				} 
+				}
 			}
 		}
 
@@ -147,10 +145,9 @@ public class AcesUp extends Solitaire {
 	public static void main(String[] args) {
 		AcesUp n = new AcesUp();
 		n.initialSetup();
-		n.removeFrom("stock", 0);
-		n.removeFrom("stock", 0);
-		n.getTableauPiles_List().get(2).clear();
-		n.addto("tableau", 1, 2);
+		for(Rank c : Rank.values()){
+			System.out.println(c.ordinal());
+		}
 	
 	}
 
