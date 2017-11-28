@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class AcesUp extends Solitaire {
-	int sizeOfTableau; // Number of tableau piles
+	
 	private HashMap<Integer, ArrayList<Card>> tableauPiles_List; // Storage for
 																	// tableau
 																	// piles
@@ -41,8 +41,14 @@ public class AcesUp extends Solitaire {
 		this.stockPile_List = stockPile_List;
 	}
 
-	public int getSizeOfTableau() {
-		return sizeOfTableau;
+	public int getSizeOfTableau(int pile) {
+		int size = 0;
+		for (Integer i : getTableauPiles_List().keySet()){
+			if(i.equals(pile)){
+				size = getTableauPiles_List().get(pile).size();
+			}
+		}
+		return size;
 	}
 
 	private ArrayList<Card> deck = getDeck();
@@ -70,7 +76,6 @@ public class AcesUp extends Solitaire {
 			Arr.add(deck.get(random));
 			tableauPiles_List.put(i, Arr);
 			restofDeck.remove(random);
-			sizeOfTableau++;
 		}
 		stockPile_List.addAll(restofDeck);
 
@@ -152,3 +157,4 @@ public class AcesUp extends Solitaire {
 	}
 
 }
+
