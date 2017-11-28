@@ -66,6 +66,8 @@ public class AcesUp extends Solitaire {
 	protected void initialSetup() {
 		tableauPiles_List = new HashMap<Integer, ArrayList<Card>>();
 		stockPile_List = new ArrayList<Card>();
+		homecellPiles_List = new ArrayList<Card>();
+		
 		Random rand = new Random();
 		int random = 0;
 		ArrayList<Card> restofDeck = deck;
