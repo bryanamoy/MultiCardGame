@@ -136,7 +136,7 @@ public class AcesUp extends Solitaire {
 			Card top = tableauPiles_List.get(pilenumber).get(size);
 			for (ArrayList<Card> pile : tableauPiles_List.values()) {
 				int topofpile = pile.size() - 1;
-				if (pile.get(topofpile).getSuit().equals(top.getSuit()) && pile.get(topofpile).getRank().getRank() < top.getRank().getRank()) {
+				if (pile.get(topofpile).getSuit().equals(top.getSuit()) && pile.get(topofpile).getRank().getRank() > top.getRank().getRank()) {
 					discarded.add(top);
 					tableauPiles_List.get(pilenumber).remove(size);
 					checkdiscard = true;
@@ -152,11 +152,18 @@ public class AcesUp extends Solitaire {
 	public static void main(String[] args) {
 		AcesUp n = new AcesUp();
 		n.initialSetup();
-		for(Rank c : Rank.values()){
-			System.out.println(c.ordinal());
-		}
+		n.getTableauPiles_List().get(0).clear();
+		n.getTableauPiles_List().get(0).add(new Card(Suit.CLUBS,Rank.ACE));
+		n.getTableauPiles_List().get(1).clear();
+		n.getTableauPiles_List().get(1).add(new Card(Suit.CLUBS,Rank.EIGHT));
+		n.removeFrom("tableau", 0);
+		n.addto("homecell", 0, 0);
+		System.out.println(n.getHomecellPiles_List());
+		System.out.println(n.getSizeOfTableau(0));
+		System.out.println(n.getSizeOfTableau(1));
+		System.out.println(n.getSizeOfTableau(2));
+		System.out.println(n.getSizeOfTableau(3));
 	
 	}
 
 }
-
