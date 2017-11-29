@@ -15,6 +15,16 @@ public class AcesUp extends Solitaire {
 	private ArrayList<Card> stockPile_List; // Storage for
 											// stockpile
 	private ArrayList<Card> discarded;
+	
+	
+	public ArrayList<Card> getDiscarded() {
+		return discarded;
+	}
+
+	public void setDiscarded(ArrayList<Card> discarded) {
+		this.discarded = discarded;
+	}
+
 	private boolean checkdiscard;
 
 	public HashMap<Integer, ArrayList<Card>> getTableauPiles_List() {
