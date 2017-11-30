@@ -13,22 +13,26 @@ public class AcesUpHomecellTests {
 	Card spades = new Card(Suit.SPADES, Rank.EIGHT);
 	Card clubs = new Card(Suit.CLUBS, Rank.SEVEN);
 	ArrayList<Card> testCards = new ArrayList<Card>();
-	BakersDozen test = new BakersDozen();
 	
 	AcesUp auTest = new AcesUp(); //to be changed
 	
 	@Test
 	public void testEmptyHCPile() {
 		auTest.initialSetup();
-		assertEquals("Homecell pile should initiate with zero cards", 0, auTest.getHomecellPiles_List().get(0));
+		assertEquals("Homecell pile should initiate with zero cards", 0, auTest.getHomecellPiles_List().size());
 	}
 	
 	@Test
 	public void testAddSpecificCardLegalOrIllegalHCPile() {
 		auTest.initialSetup();
+		auTest.getTableauPiles_List().get(0).clear();
+		auTest.getTableauPiles_List().get(0).add(new Card(Suit.CLUBS,Rank.ACE));
 		
-		assertTrue("Should always be true", auTest.addto("homecell", 0, 0));
-		
+		auTest.getTableauPiles_List().get(1).clear();
+		auTest.getTableauPiles_List().get(1).add(new Card(Suit.CLUBS,Rank.EIGHT));
+		auTest.removeFrom("tableau", 0);
+		assertTrue(auTest.addto("homecell", 0, 0));
+		assertEquals("Should only be one card ",1,auTest.getHomecellPiles_List().size());
 	}
 	
 	@Test
@@ -41,17 +45,16 @@ public class AcesUpHomecellTests {
 	
 	@Test
 	public void testAddingCardIncreasesSizeAndTopCardHCPile() {
-		
 		auTest.initialSetup();
-
-		Card first = new Card(Suit.DIAMONDS, Rank.ACE);
-		Card second = new Card(Suit.DIAMONDS, Rank.TWO);
-		auTest.addToHomecell(first, 0);
-		auTest.addToHomecell(second, 0);
-		assertEquals("new top card", first, auTest.getHomecellPiles_List().get(0).get(0));
-		assertEquals("size of pile", 2, auTest.getHomecellPiles_List().get(0).size());
-
+		auTest.getTableauPiles_List().get(0).clear();
+		auTest.getTableauPiles_List().get(0).add(ace);
 		
+		auTest.getTableauPiles_List().get(1).clear();
+		auTest.getTableauPiles_List().get(1).add(clubs);
+		auTest.removeFrom("tableau", 0);
+		auTest.addto("homecell", 0, 0);
+		assertEquals("Should only be one card in homecell ",1,auTest.getHomecellPiles_List().size());
+		assertEquals("Should be a clubs of ace", ace.toString(),auTest.getHomecellPiles_List().get(0).toString());
 	}
 	
 }
