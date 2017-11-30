@@ -39,20 +39,18 @@ public class AcesUpStockPileTests {
 	}
 	
 	@Test
-	public void testComplex() {
+	public void testRemovefromStockPile() {
 		
 		auTest.initialSetup();
+		
+		auTest.removeFrom("stock", 0);
+		for(int i =0;i<4;i++){
+			assertEquals("Each tableau pile should have 2 cards",2,auTest.getTableauPiles_List().get(i).size());
+		}
+		auTest.getStockPile_List().clear();
+		boolean check = auTest.removeFrom("stock", 0);
+		assertFalse("If the stockpile is empty it should return false",check);
 
-		ArrayList<Card> complex = auTest.getStockPile_List();
-		assertEquals("Stock pile should initiate with 48 cards", 48, complex.size());
-		complex.add(ace);
-		complex.add(ace);
-		complex.add(ace);
-		complex.add(ace);
-		HashMap<Integer, ArrayList<Card>> complex2 = auTest.getTableauPiles_List();
-		// not finished;
-		
-		
 		
 	}
 	
