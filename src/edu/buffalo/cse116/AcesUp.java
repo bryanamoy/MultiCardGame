@@ -3,7 +3,13 @@ package edu.buffalo.cse116;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-
+/**
+* <h1>Aces Up Class</h1> 
+* Defines the Aces Up game functions
+* <p>
+* @author Johnathan Hercules
+* @since   2017-12-4
+*/               
 public class AcesUp extends Solitaire {
 
 	private HashMap<Integer, ArrayList<Card>> tableauPiles_List; // Storage for
@@ -49,7 +55,11 @@ public class AcesUp extends Solitaire {
 	public void setStockPile_List(ArrayList<Card> stockPile_List) {
 		this.stockPile_List = stockPile_List;
 	}
-
+/**
+ * Getter method to get the size of selected Tableau Pile
+ * @param pile The selected pile to get the size of the Tableau Pile
+ * @return size The size of the Tableau Pile
+ */
 	public int getSizeOfTableau(int pile) {
 		int size = 0;
 		for (Integer i : getTableauPiles_List().keySet()) {
@@ -70,7 +80,11 @@ public class AcesUp extends Solitaire {
 		super(4, 1, 1);
 
 	}
-
+/**
+ * The method for the initial setup for the game.  The game initially begins with 4 Tableau piles, 1 Homecell Pile, and 
+ * 1 Stock Pile. An arraylist is used to build the homecell pile and stock pile, while the tableau piles are built through 
+ * hashmap
+ */
 	@Override
 	protected void initialSetup() {
 		tableauPiles_List = new HashMap<Integer, ArrayList<Card>>();
@@ -93,7 +107,11 @@ public class AcesUp extends Solitaire {
 		discarded = new ArrayList<Card>();
 		checkdiscard = false;
 	}
-
+/**
+ * The getter method to retrieve the top card that can be selected
+ * @param pileNumber Variable representing the pile number where the selected card is currently at
+ * @return selected Variable representing the card that is being selected
+ */
 	public Card getCard(int pileNumber){
 		Card selected = null;
 		if(tableauPiles_List.get(pileNumber).isEmpty()){
@@ -107,7 +125,13 @@ public class AcesUp extends Solitaire {
 		}
 		return selected;
 	}
-
+/**
+ * The method for the function of adding a card to a pile
+ * @param p Variable for which type of pile the player is desiring to add to
+ * @param pilenumber Variable for the specific pile in each pile type
+ * @param piletoadd Variable to represent the pile the player wants to add a card
+ * @return True or False depending if the move is legal to add
+ */
 	public boolean addto(String p, int pilenumber, int piletoadd) {
 
 		int sizeofPile = getTableauPiles_List().get(pilenumber).size()-1;
@@ -132,7 +156,12 @@ public class AcesUp extends Solitaire {
 		}
 		return false;
 	}
-
+/**
+ * The method for the function of removing a card from a pile
+ * @param p Variable for which type of pile the player is desiring to remove from
+ * @param pilenumber Variable for the specific pile number for the type of pile
+ * @return True or False if the move is legal
+ */
 	public boolean removeFrom(String p, int pilenumber) {
 
 		if (p.equalsIgnoreCase("homecell")) {
