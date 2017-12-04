@@ -1,0 +1,40 @@
+Ace's Up Test Methods:
+Tableau Pile Test Methods:
+1.initialSetupTableauPile1()
+2.initialSetupTableauPile2()
+3.initialSetupTableauPile3()
+4.initialSetupTableauPile4()
+These four methods are for bullet point 1 under Tableau Pile Tests, showing that each of the four tableau pile initially hold 1 card
+5.initialSetup4TableauPiles()
+This method is for testing that the four Tableau Piles exist
+6.legalAdd()
+This method is for bullet point 2 under Tableau Pile Tests, testing if the card is legal to add to the desired Tableau Pile
+7.legalRemove()
+This method is for bullet point 3 under Tableau Pile Tests, testing if the card is legal to be removed from desired tableau pile
+8.addIncreaseSize()
+This method is for bullet point 4 under tableau pile tests, testing that the pile increases in size when cards are added and the
+top card is updated as the added card
+9.removeDecreaseSize()
+This method is for bullet point 5 under tableau pile tests, testing that the pile decreases in size when a card is removed 
+and the top card is updated
+Homecell Pile Test Methods:
+1.testEmptyHCPile()
+This method is for bullet point 1 under Homecell pile test, testing that the pile initially holds 0 cards
+2. testAddSpecificCardLegalOrIllegalHCPile()
+This method is for bullet point 2 under Homecell pile test, testing that it is always legal to add to the pile
+3. testRemovingTopCardAlwaysIllegalHCPile()
+This method is for bullet point 3 under Homecell pile test, testing that it is always illegal to remove from the pile 
+4. testAddingCardIncreasesSizeAndTopCardHCPile()
+This method is for bullet point 4 under Homecell pile test, testing that the size of the pile increases when a card is added
+and the top card is updated as the added card
+Stock Pile Test Methods:
+1.testStockPileInitial()
+This method is for bullet point 1 under stock pile test, testing that the pile initially holds 48 cards
+2.testAddingStockPileAlwaysIllegal()
+This method is for bullet point 2 under stock pile test, testing that it is always illegal to add to the pile
+3.testRemovingTopCardAlwaysLegalSPile()
+This method is for bullet point 3 under stock pile test, testing that is is always legal to remove from stock pile
+4.testRemovefromStockPile()
+This method is for bullet point 3 & 4, it tests that removing from stock pile can't happen when it is empty and 
+tests that 4 cards leave the stock pile by showing that every tableau pile increases in size by 1 each time when
+removing from the stock pile.
