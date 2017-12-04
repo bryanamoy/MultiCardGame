@@ -94,7 +94,22 @@ public class AcesUp extends Solitaire {
 		discarded = new ArrayList<Card>();
 		checkdiscard = false;
 	}
-
+	
+	
+	public Card getCard(int pileNumber){
+		Card selected = null;
+		if(tableauPiles_List.get(pileNumber).isEmpty()){
+			return null;
+		}
+		for(Integer i : tableauPiles_List.keySet()){
+			if(pileNumber == i){
+					int size = tableauPiles_List.get(pileNumber).size()-1;
+					selected = tableauPiles_List.get(i).get(size);
+			}
+		}
+		return selected;
+	}
+	
 	public boolean addto(String p, int pilenumber, int piletoadd) {
 
 		int sizeofPile = tableauPiles_List.get(pilenumber).size() - 1;
