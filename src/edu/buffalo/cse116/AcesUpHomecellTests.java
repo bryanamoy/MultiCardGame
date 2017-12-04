@@ -15,13 +15,17 @@ public class AcesUpHomecellTests {
 	ArrayList<Card> testCards = new ArrayList<Card>();
 	
 	AcesUp auTest = new AcesUp(); //to be changed
-	
+	/*
+	 * Testing that the Homecell pile is empty at the start of the game
+	 */
 	@Test
 	public void testEmptyHCPile() {
 		auTest.initialSetup();
 		assertEquals("Homecell pile should initiate with zero cards", 0, auTest.getHomecellPiles_List().size());
 	}
-	
+	/*
+	 * Testing that adding to the Homecell Pile is legal or illegal
+	 */
 	@Test
 	public void testAddSpecificCardLegalOrIllegalHCPile() {
 		auTest.initialSetup();
@@ -34,7 +38,10 @@ public class AcesUpHomecellTests {
 		assertTrue(auTest.addto("homecell", 0, 0));
 		assertEquals("Should only be one card ",1,auTest.getHomecellPiles_List().size());
 	}
-	
+	/*
+	 * Testing that removing from a homecell pile is legal or illegal.  It should always be illegal if 
+	 * trying to remove from the Homecell pile
+	 */
 	@Test
 	public void testRemovingTopCardAlwaysIllegalHCPile() {
 		
@@ -42,7 +49,9 @@ public class AcesUpHomecellTests {
 
 		assertFalse("Should always be false", auTest.removeFrom("homecell", 0));
 	}
-	
+	/*
+	 * Testing that adding to the Homecell Pile increases the size and that it updates the top card as the added card
+	 */
 	@Test
 	public void testAddingCardIncreasesSizeAndTopCardHCPile() {
 		auTest.initialSetup();
