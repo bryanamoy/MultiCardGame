@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class AcesUp extends Solitaire {
-	
+
 	private HashMap<Integer, ArrayList<Card>> tableauPiles_List; // Storage for
 																	// tableau
 																	// piles
@@ -15,8 +15,7 @@ public class AcesUp extends Solitaire {
 	private ArrayList<Card> stockPile_List; // Storage for
 											// stockpile
 	private ArrayList<Card> discarded;
-	
-	
+
 	public ArrayList<Card> getDiscarded() {
 		return discarded;
 	}
@@ -53,8 +52,8 @@ public class AcesUp extends Solitaire {
 
 	public int getSizeOfTableau(int pile) {
 		int size = 0;
-		for (Integer i : getTableauPiles_List().keySet()){
-			if(i.equals(pile)){
+		for (Integer i : getTableauPiles_List().keySet()) {
+			if (i.equals(pile)) {
 				size = getTableauPiles_List().get(pile).size();
 			}
 		}
@@ -77,7 +76,7 @@ public class AcesUp extends Solitaire {
 		tableauPiles_List = new HashMap<Integer, ArrayList<Card>>();
 		stockPile_List = new ArrayList<Card>();
 		homecellPiles_List = new ArrayList<Card>();
-		
+
 		Random rand = new Random();
 		int random = 0;
 		ArrayList<Card> restofDeck = deck;
@@ -94,8 +93,7 @@ public class AcesUp extends Solitaire {
 		discarded = new ArrayList<Card>();
 		checkdiscard = false;
 	}
-	
-	
+
 	public Card getCard(int pileNumber){
 		Card selected = null;
 		if(tableauPiles_List.get(pileNumber).isEmpty()){
@@ -109,11 +107,10 @@ public class AcesUp extends Solitaire {
 		}
 		return selected;
 	}
-	
+
 	public boolean addto(String p, int pilenumber, int piletoadd) {
 
-		int sizeofPile = tableauPiles_List.get(pilenumber).size() - 1;
-
+		int sizeofPile = getTableauPiles_List().get(pilenumber).size()-1;
 		if (p.equalsIgnoreCase("stock")) {
 			return false;
 		} else if (p.equalsIgnoreCase("homecell")) {
@@ -125,7 +122,7 @@ public class AcesUp extends Solitaire {
 				return true;
 			}
 		} else if (p.equalsIgnoreCase("tableau")) {
-			Card top = tableauPiles_List.get(pilenumber).get(sizeofPile);
+			Card top = getCard(pilenumber);
 			if (tableauPiles_List.get(piletoadd).isEmpty()) {
 				tableauPiles_List.get(piletoadd).add(top);
 				tableauPiles_List.get(pilenumber).remove(sizeofPile);
@@ -157,15 +154,20 @@ public class AcesUp extends Solitaire {
 
 			}
 		} else if (p.equalsIgnoreCase("tableau")) {
-			int size = tableauPiles_List.get(pilenumber).size() - 1;
-			Card top = tableauPiles_List.get(pilenumber).get(size);
-			for (ArrayList<Card> pile : tableauPiles_List.values()) {
-				int topofpile = pile.size() - 1;
-				if (pile.get(topofpile).getSuit().equals(top.getSuit()) && pile.get(topofpile).getRank().getRank() > top.getRank().getRank()) {
-					discarded.add(top);
-					tableauPiles_List.get(pilenumber).remove(size);
-					checkdiscard = true;
-					return true;
+			if (tableauPiles_List.get(pilenumber).isEmpty()) {
+				return false;
+			} else {
+				int size = tableauPiles_List.get(pilenumber).size() - 1;
+				Card top = getCard(pilenumber);
+				for (ArrayList<Card> pile : tableauPiles_List.values()) {
+					int topofpile = pile.size() - 1;
+					if (pile.get(topofpile).getSuit().equals(top.getSuit())
+							&& pile.get(topofpile).getRank().getRank() > top.getRank().getRank()) {
+						discarded.add(top);
+						tableauPiles_List.get(pilenumber).remove(size);
+						checkdiscard = true;
+						return true;
+					}
 				}
 			}
 		}
@@ -173,22 +175,11 @@ public class AcesUp extends Solitaire {
 		return false;
 
 	}
+	
+	
 
 	public static void main(String[] args) {
-		AcesUp n = new AcesUp();
-		n.initialSetup();
-		n.getTableauPiles_List().get(0).clear();
-		n.getTableauPiles_List().get(0).add(new Card(Suit.CLUBS,Rank.ACE));
-		n.getTableauPiles_List().get(1).clear();
-		n.getTableauPiles_List().get(1).add(new Card(Suit.CLUBS,Rank.EIGHT));
-		n.removeFrom("tableau", 0);
-		n.addto("homecell", 0, 0);
-		System.out.println(n.getHomecellPiles_List());
-		System.out.println(n.getSizeOfTableau(0));
-		System.out.println(n.getSizeOfTableau(1));
-		System.out.println(n.getSizeOfTableau(2));
-		System.out.println(n.getSizeOfTableau(3));
-	
+
 	}
 
 }
