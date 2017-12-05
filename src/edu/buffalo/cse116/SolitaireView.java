@@ -139,7 +139,8 @@ public class SolitaireView {
 	public void setStacksforBDHbox(ArrayList<StackPane> stacksforBDHbox) {
 		this.stacksforBDHbox = stacksforBDHbox;
 	}
-
+	private SolitaireController s;
+	
 	public SolitaireView() {
 
 	}
@@ -162,6 +163,7 @@ public class SolitaireView {
 			// cards and number of cards
 			bd.initialSetup();
 			cards = bd.getDeck();
+			s = new SolitaireController();
 			if (directoryListing != null) {
 				for (File child : directoryListing) {
 					String cardImageFile = child.getName().substring(0, child.getName().indexOf("."));
@@ -181,7 +183,7 @@ public class SolitaireView {
 
 						}
 				}
-
+				
 			}
 
 		}
@@ -310,10 +312,11 @@ public class SolitaireView {
 
 				List<ImageView> images = pics.subList(cursor, cursor + 4);
 				for (int ind = 0; ind < 4; ind++) {
-
+					
+					
 					n.getChildren().add(images.get(ind));
 				}
-
+				s.selected(n);
 				stacksforBD.add(n);
 			}
 			cursor += 4;
@@ -471,7 +474,7 @@ public class SolitaireView {
 				List<ImageView> images = pics.subList(cursor, cursor + 7);
 				for (int ind = 0; ind < 7; ind++) {
 					box.getChildren().add(images.get(ind));
-
+					s.selected(box);
 				}
 
 				stacksforFC.add(box);
@@ -481,9 +484,9 @@ public class SolitaireView {
 				List<ImageView> images = pics.subList(cursor, cursor + 6);
 				for (int ind = 0; ind < 6; ind++) {
 					box.getChildren().add(images.get(ind));
-
+					s.selected(box);
 				}
-
+			
 				stacksforFC.add(box);
 				cursor += 6;
 			}
@@ -569,9 +572,6 @@ public class SolitaireView {
 		window.setMargin(vbox, new Insets(100, 300, 0, 250));
 		window.setBackground(background);
 
-		vbox.getChildren().get(0)
-				.setOnMouseClicked(event -> vbox.getChildren().get(0).setEffect(new DropShadow(20, Color.BLACK)));
-
 		Media sound = new Media("http://www.mfiles.co.uk/mp3-downloads/gabriels-message-keyboard.mp3");
 		MediaPlayer mediaPlayer = new MediaPlayer(sound);
 		mediaPlayer.setOnEndOfMedia(new Runnable() {
@@ -619,7 +619,7 @@ public class SolitaireView {
 
 		stockpile.setOnMouseClicked(event -> {
 			aces.removeFrom("stock", 0);
-			update("remove");
+			update("removestack");
 		});
 
 		StackPane hcp = new StackPane();
@@ -631,20 +631,15 @@ public class SolitaireView {
 			alert.show();
 		});
 		
-		for (Node n : h.getChildren()){
-			n.setOnMousePressed(event ->{
-				n.setEffect(new DropShadow(20, Color.AQUA));
-			});
-			n.setOnMouseReleased(event ->{
-				n.setEffect(null);
-			});
+		for (int i =0;i<h.getChildren().size();i++){
+			s.selected((StackPane) h.getChildren().get(i));
 		}
 		
 		BackgroundFill fill = new BackgroundFill(Color.LIGHTGREEN, null, null);
 		Background background = new Background(fill);
 		window.setBackground(background);
 		window.setLeft(stockpile);
-		window.setMargin(stockpile, new Insets(20, 0, 0, 100));
+		window.setMargin(stockpile, new Insets(20, 0, 0, 50));
 		window.setTop(hcp);
 		window.setRight(h);
 
@@ -713,7 +708,7 @@ public class SolitaireView {
 		ArrayList<Card> stockp = aces.getStockPile_List(); 
 		ArrayList<ImageView> removed = new ArrayList<ImageView>();
 		
-		if(s.equals("remove") ){
+		if(s.equals("removestack") ){
 		int n = stockpile.getChildren().size() - 1;
 		while (n > stockp.size() - 1) {
 			removed.add((ImageView) stockpile.getChildren().get(n));
@@ -747,5 +742,7 @@ public class SolitaireView {
 	public static void main(String[] args) {
 
 	}
+
+}
 
 }
