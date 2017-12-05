@@ -8,6 +8,16 @@ public class AcesUpTableauTest {
 	Card ace = new Card(Suit.CLUBS, Rank.ACE);
 	Card spades = new Card(Suit.SPADES, Rank.EIGHT);
 	Card clubs = new Card(Suit.CLUBS, Rank.SEVEN);
+	
+	@Test
+	public void testGetCard(){
+		AcesUp au = new AcesUp();
+		au.initialSetup();
+		au.getTableauPiles_List().get(0).clear();
+		assertNull("Can't select an empty pile",au.getCard(0));
+		au.getTableauPiles_List().get(0).add(clubs);
+		assertEquals("Returns top card",clubs,au.getCard(0));
+	}
 /*
  * Tests for the single card in each Tableau Pile at the initial start of the game
  */
