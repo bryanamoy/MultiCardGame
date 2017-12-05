@@ -40,6 +40,11 @@ public class Card {
     public Rank getRank() {
         return this.rank;
     }
+    
+    
+    public String getImageFileName() {
+		return ("" + this.getSuit()) + ("" + this.getRank());
+	}
     /**
     *   Overrides the toString method
     */
@@ -49,4 +54,3 @@ public class Card {
     		return getSuit() + " of " + getRank();
     	}
 }
-    
