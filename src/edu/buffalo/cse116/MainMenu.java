@@ -127,11 +127,10 @@ public class MainMenu extends Application {
 		    }
 		});
 		
-		MenuItem auMenuItm = new MenuItem("Ace's Up");
-		auMenuItm.setOnAction(new EventHandler<ActionEvent>() {
+		MenuItem AcesMenuItm = new MenuItem("Aces's Up");
+		AcesMenuItm.setOnAction(new EventHandler<ActionEvent>() {
 		    @Override public void handle(ActionEvent e) {
-		    	mediaPlayer.stop();
-		    	changeScene(view.startacesUpGame());
+		    changeScene(view.startAcesGame());
 		    }
 		});
 		
@@ -152,7 +151,7 @@ public class MainMenu extends Application {
 		
 
 		Menu menu = new Menu("New Game");
-		menu.getItems().addAll(bdMenuItm, fcMenuItm, auMenuItm, quitMenuItm);
+		menu.getItems().addAll(bdMenuItm, fcMenuItm, AcesMenuItm, quitMenuItm);
 
 		Menu m = new Menu("Options");
 		MenuBar menuBar = new MenuBar(menu, m);
