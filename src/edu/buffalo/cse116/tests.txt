@@ -17,6 +17,8 @@ top card is updated as the added card
 9.removeDecreaseSize()
 This method is for bullet point 5 under tableau pile tests, testing that the pile decreases in size when a card is removed 
 and the top card is updated
+10.testGetCard()
+tests for getting the top card of the pile
 Homecell Pile Test Methods:
 1.testEmptyHCPile()
 This method is for bullet point 1 under Homecell pile test, testing that the pile initially holds 0 cards
